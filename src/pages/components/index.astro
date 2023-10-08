@@ -1,0 +1,23 @@
+---
+const components = await Astro.glob('../../pages/components/**/*.mdx')
+  .then((res) => res.map((component) => {
+    return {
+      frontmatter: component.frontmatter,
+      slug: component.url
+    }
+  }))
+---
+
+<div>
+  <h1>Components</h1>
+  {
+    components.map((component) => {
+      return (
+        <div>
+          <h2>{component.frontmatter.title}</h2>
+          <p>{component.frontmatter.description}</p>
+        </div>
+      )
+    })
+  }
+</div>

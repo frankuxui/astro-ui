@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+import Modal from '../components/ui/Modal.astro'
+import Button from '@components/ui/Button.astro'
+import Spinner from '@components/ui/Spinner.astro';
+---
+
+<Layout title='Welcome to Astro.'>
+  <main class='flex items-center justify-center flex-col max-w-7xl mx-auto py-20'>
+    <h1>Ui</h1>
+
+    <div class='flex items-center gap-4 mb-20'>
+      <Button variant='primary'>Primary</Button>
+      <Button variant='secondary'>Secondary</Button>
+      <Button variant='error'>Error</Button>
+    </div>
+
+    <Spinner
+      style={{
+        width: '45px',
+        height: '45px',
+        borderTopColor: 'blueviolet'
+      }}
+    />
+
+    <!-- Modal 1 -->
+
+    <Button data-toggle='modal-1' class='bg-green-600'>Open modal 1</Button>
+
+    <Modal id='modal-1' title='Modal title'>
+      <div slot='modal-body'>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+      <div slot='modal-footer' class='flex items-center gap-2'>
+        <button type='button' class='px-4 h-10 rounded-md flex items-center justify-center bg-gray-100 text-black' data-dismiss='modal'>Close</button>
+        <button type='button' class='px-4 h-10 rounded-md flex items-center justify-center bg-blue-600 text-white'>Save changes</button>
+      </div>
+
+    </Modal>
+
+    <!-- Modal 2 -->
+
+    <button data-toggle='modal-2' class='px-4 h-10 rounded-md flex items-center justify-center bg-blue-600 text-white'>Open modal 2</button>
+
+    <Modal id='modal-2'>
+      <div slot='modal-content'>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit sed malesuada...
+      </div>
+    </Modal>
+  </main>
+</Layout>

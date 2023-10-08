@@ -1,0 +1,144 @@
+---
+layout: "../../layouts/Docs.astro"
+title: "Spinner"
+description: "Los spinner son elementos de la interfaz de usuario que los usuarios pueden hacer clic para proporcionar entrada. Los spinner típicamente aparecen en las formas y cuadros de diálogo, pero también se pueden colocar en barras de herramientas, barras de título y paneles."
+slug: "spinner"
+---
+import Example from '../../components/Example.astro'
+import Spinner from '../../components/ui/Spinner.astro'
+
+## Usage
+
+Este es un spinner básico.
+
+<Example>
+  <Spinner />
+</Example>
+
+```astro
+<Spinner />
+```
+
+## Sizes
+
+Los spinner pueden tener diferentes tamaños. El tamaño predeterminado es `md`. Los tamaños disponibles son: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl` y `5xl`.
+
+<Example>
+<div class="flex items-center gap-4">
+  <Spinner size='xs' />
+  <Spinner size='sm' />
+  <Spinner size='md' />
+  <Spinner size='lg' />
+  <Spinner size='xl' />
+  <Spinner size='2xl' />
+  <Spinner size='3xl' />
+  <Spinner size='4xl' />
+  <Spinner size='5xl' />
+</div>
+</Example>
+
+```astro
+<Spinner size='xs' />
+<Spinner size='sm' />
+<Spinner size='md' />
+<Spinner size='lg' />
+<Spinner size='xl' />
+<Spinner size='2xl' />
+<Spinner size='3xl' />
+<Spinner size='4xl' />
+<Spinner size='5xl' />
+```
+
+## Variants
+
+Los spinner pueden tener diferentes variantes. La variante predeterminada es `primary`. Las variantes disponibles son: `primary`, `secondary`, `light` y `dark`.
+
+<Example>
+<div class="flex items-center gap-4">
+  <Spinner variant='primary' />
+  <Spinner variant='secondary' />
+  <Spinner variant='dark' />
+</div>
+</Example>
+
+```astro
+<Spinner variant='primary' />
+<Spinner variant='secondary' />
+<Spinner variant='dark' />
+```
+
+### Light variant
+
+<Example isDark>
+<Spinner variant='light' />
+</Example>
+
+```astro
+<Spinner variant='light' />
+```
+
+## Custom colors
+
+<Example>
+<div class="flex items-center gap-4">
+  <Spinner 
+    style={{ 
+      width: '45px', 
+      height: '45px',
+      borderTopColor: 'blueviolet',
+    }} 
+  />
+  <Spinner 
+    style={{ 
+      width: '60px', 
+      height: '60px',
+      borderWidth: '6px',
+      borderTopColor: 'red',
+    }} 
+  />
+</div>
+</Example>
+
+```astro
+<Spinner 
+  style={{ 
+    width: '45px', 
+    height: '45px', 
+    borderTopColor: 'blueviolet' 
+  }} 
+/>
+
+<Spinner 
+  style={{ 
+    width: '60px', 
+    height: '60px', 
+    borderWidth: '6px', borderTopColor: 'red' 
+  }} 
+/>
+```
+
+
+## Custom sizes
+
+<Example>
+<div class="flex items-center gap-4">
+  <Spinner 
+    style={{ 
+      width: '24px', 
+      height: '24px',
+    }} 
+  />
+  <Spinner 
+    style={{ 
+      width: '45px', 
+      height: '45px',
+    }} 
+  />
+</div>
+</Example>
+
+```astro
+<Spinner style={{ width: '24px', height: '24px' }} />
+
+<Spinner style={{ width: '45px', height: '45px' }} />
+```

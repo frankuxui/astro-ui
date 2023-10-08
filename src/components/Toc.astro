@@ -1,0 +1,146 @@
+---
+---
+
+<script>
+  const headings = Array.from(document.querySelectorAll('h2, h3, h4, h5, h6')).map(heading => {
+    const slug = heading.id
+    const text = heading.textContent
+    const tag = heading.tagName.toLowerCase()
+    heading.classList.add('toc-heading')
+    return { slug, text, tag }
+  })
+
+  headings.forEach(heading => {
+    const el = document.querySelector(`#${heading.slug}`)
+    if (el) {
+      const anchor = document.createElement('a')
+      anchor.href = `#${heading.slug}`
+      anchor.addEventListener('click', event => {
+        event.preventDefault()
+        const el = document.querySelector(`#${heading.slug}`)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      })
+      anchor.classList.add('toc-heading-anchor')
+      anchor.textContent = '#'
+      anchor.ariaLabel = 'anchor'
+      el.appendChild(anchor)
+    }
+  })
+
+  const toc = document.querySelector('.toc-content') as HTMLUListElement
+  headings.forEach(heading => {
+    const li = document.createElement('li') as HTMLLIElement
+    const a = document.createElement('a') as HTMLAnchorElement
+    a.href = `#${heading.slug}`
+    a.addEventListener('click', event => {
+      event.preventDefault()
+      const el = document.querySelector(`#${heading.slug}`)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+      }
+    })
+    a.textContent = heading.text
+    li.appendChild(a)
+    toc.appendChild(li)
+
+    if (heading.tag === 'h2') {
+      li.classList.add('ml-0')
+    } else if (heading.tag === 'h3') {
+      li.classList.add('ml-4')
+    } else if (heading.tag === 'h4') {
+      li.classList.add('ml-8')
+    } else if (heading.tag === 'h5') {
+      li.classList.add('ml-12')
+    } else if (heading.tag === 'h6') {
+      li.classList.add('ml-16')
+    }
+  })
+
+  // Obrserva o scroll da página e adiciona a classe 'toc-active' no item do TOC
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id')
+      const tocItem = document.querySelector(`.toc-content a[href="#${id}"]`)
+      if (entry.isIntersecting) {
+        tocItem?.classList.add('toc-active')
+      } else {
+        tocItem?.classList.remove('toc-active')
+      }
+    })
+  }, {
+    rootMargin: '0px 0px -80% 0px'
+  })
+
+  headings.forEach(heading => {
+    const el = document.querySelector(`#${heading.slug}`)
+    if (el) {
+      observer.observe(el)
+    }
+  })
+</script>
+
+<div class='toc'>
+  <ul class='toc-content flex flex-col mt-24' />
+</div>
+
+<style is:inline>
+
+  /** Headings */
+
+  .toc-heading {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .toc-heading:hover .toc-heading-anchor {
+    opacity: 1;
+  }
+
+  .toc-heading-anchor {
+    display: block;
+    color: #5717ed;
+    text-decoration: none;
+    transition: color 0.2s;
+    outline: transparent solid 2px;
+    outline-offset: 2px;
+    opacity: 0;
+    margin-left: 0.375rem;
+  }
+
+  /** Toc */
+
+  .toc-content {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .toc-content::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  .toc-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  .toc-content::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  .toc-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  .toc-content a {
+    display: block;
+    padding: 0.5rem 0;
+    color: #555;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .toc-content a:hover {
+    color: #000;
+  }
+  .toc-content a.toc-active {
+    color: #0a0318;
+    font-weight: bold;
+  }
+</style>

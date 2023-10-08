@@ -1,0 +1,67 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='description' content='Astro description' />
+    <meta name='viewport' content='width=device-width' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='generator' content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --font-family: 'Roboto', sans-serif;
+    --font-size: 1rem;
+    --bg: white;
+
+    --primary: 67 56 202;
+    --primary-hover: 55 48 163;
+    --secondary: 75 85 99;
+    --secondary-hover: 55 65 81;
+    --error: 225 29 72;
+    --error-hover: 190 18 60;
+    --tertiary: 243 244 246;
+    --tertiary-hover: 209 213 219;
+  }
+
+  body {
+    background-color: var(--bg);
+    font-family: var(--font-family);
+  }
+
+  pre {
+    margin-top: 1rem !important;
+    background-image: none;
+    background-color: #1d1b25 !important;
+    font-family: SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    font-size: 0.875rem;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    white-space: pre-wrap;
+    padding: 1.5rem;
+    display: block;
+    border-radius: 0.75rem;
+  }
+
+</style>

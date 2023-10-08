@@ -1,0 +1,157 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Variant = 'primary' | 'secondary' | 'light' | 'dark'
+type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
+
+export interface Props extends HTMLAttributes<'div'> {
+  variant?: Variant
+  size?: Sizes
+}
+
+const {
+  size = 'md',
+  variant = 'primary',
+  ...attrs
+} = Astro.props
+
+---
+
+<div
+  class:list={{
+    spinner: true,
+    'spinner-xs': size === 'xs',
+    'spinner-sm': size === 'sm',
+    'spinner-md': size === 'md',
+    'spinner-lg': size === 'lg',
+    'spinner-xl': size === 'xl',
+    'spinner-2xl': size === '2xl',
+    'spinner-3xl': size === '3xl',
+    'spinner-4xl': size === '4xl',
+    'spinner-5xl': size === '5xl',
+
+    'spinner-primary': variant === 'primary',
+    'spinner-secondary': variant === 'secondary',
+    'spinner-light': variant === 'light',
+    'spinner-dark': variant === 'dark'
+
+  }}
+  {...attrs}
+>
+  <span class='sr-only'>Loading...</span>
+</div>
+
+<style>
+
+  .spinner {
+    --border-radius: 9999px;
+    --border-width: 2px;
+    --border-color: #0000001b;
+
+    --primary: rgba(67 56 202 / 1);
+    --secondary: rgba(75 85 99 / 1);
+    --light: #f9fafb;
+    --dark: #1f2937;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  .spinner {
+    display: inline-block;
+    flex: none;
+    border: var(--border-width) solid currentColor;
+    border-color: var(--border-color);
+    border-radius: var(--border-radius);
+    animation: spin 1s linear infinite;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /** Sizes */
+
+  .spinner-xs {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .spinner-sm {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .spinner-md {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .spinner-lg {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .spinner-xl {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .spinner-2xl {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .spinner-3xl {
+    width: 3rem;
+    height: 3rem;
+    border-width: 3px;
+  }
+
+  .spinner-4xl {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-width: 3px;
+  }
+
+  .spinner-5xl {
+    width: 4rem;
+    height: 4rem;
+    border-width: 3px;
+  }
+
+  /** Variants */
+
+  .spinner-primary {
+    border-top-color: var(--primary);
+  }
+
+  .spinner-secondary {
+    border-top-color: var(--secondary);
+  }
+
+  .spinner-light {
+    border-color: rgba(255, 255, 255, 0.263);
+    border-top-color: var(--light);
+  }
+
+  .spinner-dark {
+    border-color: rgba(0 0 0 / 0.1);
+    border-top-color: var(--dark);
+  }
+
+</style>

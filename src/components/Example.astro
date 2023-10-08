@@ -1,0 +1,15 @@
+---
+const {
+  isDark = false
+} = Astro.props
+---
+
+<div
+  class='mt-6 border relative border-slate-200 rounded-lg pt-16 px-6 pb-5 after:top-4 after:left-6 after:text-slate-400 after:text-sm after:z-[1] after:absolute after:content-["EXAMPLE"] dark:border-slate-800'
+  class:list={{
+    'bg-white': !isDark,
+    'bg-slate-950': isDark
+  }}
+>
+  <slot />
+</div>

@@ -1,0 +1,366 @@
+---
+
+interface Props {
+  id: string
+  placement?: 'top-start' | 'top-center' | 'top-end' | 'center' | 'center-start' | 'center-end' | 'bottom-start' | 'bottom-center' | 'bottom-end'
+  title?: string
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl' | 'full'
+  staticBackdrop?: boolean
+  initialOpen?: boolean
+  scrollBehavior?: 'inside' | 'outside'
+}
+
+const sizes = {
+  xs: '20rem',
+  sm: '24rem',
+  md: '32rem',
+  lg: '40rem',
+  xl: '48rem',
+  '2xl': '56rem',
+  '3xl': '64rem',
+  '4xl': '72rem',
+  '5xl': '80rem',
+  '6xl': '88rem',
+  '7xl': '96rem',
+  '8xl': '104rem',
+  '9xl': '112rem',
+  full: '100%'
+}
+
+const {
+  id,
+  placement = 'top-center',
+  title,
+  size = 'md',
+  staticBackdrop = false,
+  initialOpen = false,
+  scrollBehavior = 'inside'
+} = Astro.props
+
+---
+
+<script>
+  const arrayTarget = document.querySelectorAll < HTMLButtonElement > ('[data-toggle]')
+
+  //
+  // Static backdrop
+
+  function getStaticClass (modal: HTMLElement) {
+    modal.classList.add('modal-static')
+    setTimeout(() => {
+      modal.classList.remove('modal-static')
+    }, 100)
+  }
+
+  //
+  // Get show class
+
+  function getShow (modal: HTMLElement) {
+    modal.style.display = 'flex'
+    setTimeout(() => {
+      modal.classList.add('show')
+    }, 100)
+    modal.setAttribute('aria-hidden', 'false')
+    document.body.style.overflow = 'hidden'
+  }
+
+  //
+  // Remove show class
+
+  function getRemove (modal: HTMLElement) {
+    modal.classList.remove('show')
+    setTimeout(() => {
+      modal.style.display = 'none'
+    }, 200)
+    modal.setAttribute('aria-hidden', 'true')
+    document.body.style.overflow = ''
+  }
+
+  //
+  // Function on dismissing modal by button close
+
+  const getDismiss = (buttonClose: HTMLButtonElement, modal: HTMLElement) => {
+    buttonClose.addEventListener('click', () => {
+      getRemove(modal)
+    })
+  }
+
+  arrayTarget.forEach((target) => {
+    const modal = document.querySelector < HTMLElement > (`[data-modal="${target.dataset.toggle}"]`) as HTMLElement
+    const modalChildrens: Array < HTMLElement > = Array.from(modal.children) as Array < HTMLElement >
+    const backdrop = modalChildrens.find((children) => children.classList.contains('modal-backdrop'))
+    const isStaticBackdrop = modal.dataset.staticBackdrop === 'true'
+    const dismissingButtons = document.querySelectorAll < HTMLButtonElement > ('[data-dismiss]')
+
+    //
+    // Initial open modal
+
+    if (modal.dataset.initialOpen === 'true') {
+      getShow(modal)
+    }
+
+    // Dismiss modal
+    dismissingButtons.forEach((dissmiss) => {
+      getDismiss(dissmiss, modal)
+    })
+
+    // Open modal
+    target.addEventListener('click', () => {
+      getShow(modal)
+    })
+
+    // Close modal with backdrop
+    modal.addEventListener('click', (event) => {
+      if (isStaticBackdrop && event.target === backdrop) {
+        getStaticClass(modal)
+      } else if (event.target === backdrop) {
+        getRemove(modal)
+      }
+    })
+
+    // Close modal with escape key
+    document.addEventListener('keydown', (event) => {
+      if (isStaticBackdrop && event.key === 'Escape') {
+        getStaticClass(modal)
+      } else if (event.key === 'Escape') {
+        getRemove(modal)
+      }
+    })
+  })
+</script>
+
+<div
+  role='dialog'
+  class='modal fade'
+  data-modal={`${id}`}
+  aria-hidden='true'
+  style={{ display: 'none' }}
+  class:list={{
+    [`modal-${placement}`]: true,
+    [`modal-${size}`]: true,
+    [`modal-scroll-${scrollBehavior}`]: true,
+    show: initialOpen
+
+  }}
+  tabindex='-1'
+  data-static-backdrop={staticBackdrop.toString()}
+  data-initial-open={initialOpen.toString()}
+>
+  <div class='modal-backdrop' tabindex='-1' />
+
+  <div class='modal-content' aria-labelledby='modal-title' aria-describedby='modal-body'>
+    <slot name='modal-content'>
+      <div class='modal-header'>
+        <slot name='modal-header'>
+          <h5 class='modal-title'>{title}</h5>
+          <button type='button' class='btn-modal-close' data-dismiss='modal' aria-label='Close'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='#000000'
+              stroke-width='2'
+              stroke-linecap='round'
+              stroke-linejoin='round'>
+              <line x1='18' y1='6' x2='6' y2='18'></line>
+              <line x1='6' y1='6' x2='18' y2='18'></line>
+            </svg>
+          </button>
+        </slot>
+      </div>
+      <div class='modal-body'>
+        <slot name='modal-body' />
+      </div>
+      <div class='modal-footer'>
+        <slot name='modal-footer' />
+      </div>
+    </slot>
+  </div>
+</div>
+
+<style
+  define:vars={{
+    size: sizes[size]
+  }}
+>
+
+  @media (min-width: 576px) {
+    .modal-content {
+      max-width: var(--size);
+    }
+  }
+
+  /** Positions */
+
+  .modal.modal-top-center {
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .modal.modal-top-start {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .modal.modal-top-end {
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+  .modal.modal-center {
+    align-items: center;
+    justify-content: center;
+  }
+  .modal.modal-center-start {
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .modal.modal-center-end {
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .modal.modal-bottom-center {
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .modal.modal-bottom-start {
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+  .modal.modal-bottom-end {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100vw;
+    height: 100dvh;
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  .modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+  }
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: white;
+    width: 100%;
+    margin: 0;
+    border-radius: .5rem;
+    transform: scale(1.1);
+    transition: visibility .25s ease-out, opacity .25s ease-out, transform .25s ease-out;
+  }
+  @media (min-width: 576px) {
+    .modal-content {
+      margin: 4rem 0;
+    }
+  }
+  .modal.fade .modal-content {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+  }
+  .modal.show .modal-content{
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+
+  .modal.modal-static .modal-content {
+    transform: scale(1.02);
+  }
+
+  /** Modal header */
+
+  .modal-header {
+    display: flex;
+    padding: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e9ecef;
+  }
+  .modal-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .btn-modal-close {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color .25s ease-out;
+  }
+  .btn-modal-close:hover {
+    background-color: #e7e8ea;
+  }
+
+  /** Modal body */
+
+  .modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1.5rem;
+  }
+
+  /** Modal footer */
+
+  .modal-footer {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    border-top: 1px solid #e9ecef;
+  }
+
+  /** Overflow scroll */
+
+  .modal.modal-scroll-outside {
+    overflow-y: auto;
+  }
+  .modal.modal-scroll-outside .modal-content{
+    max-height: auto;
+    height: auto;
+  }
+  .modal.modal-scroll-inside {
+    overflow: hidden;
+  }
+  .modal.modal-scroll-inside .modal-content {
+    overflow: hidden;
+  }
+  @media (min-width: 576px) {
+    .modal.modal-scroll-inside .modal-content{
+      max-height: 100%;
+      max-height: calc(100vh - 4rem);
+      height: auto;
+    }
+  }
+  .modal.modal-scroll-inside .modal-body{
+    overflow-y: auto;
+  }
+
+</style>

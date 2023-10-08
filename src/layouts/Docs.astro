@@ -1,0 +1,220 @@
+---
+
+import Base from './Base.astro'
+import Toc from '../components/Toc.astro'
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+  }
+  content: {
+    astro: {
+      headers: {
+        slug: string;
+        text: string;
+      }[]
+    }
+  }
+
+}
+
+interface Pagination {
+  previous: {
+    frontmatter: {
+      slug: string;
+      title: string;
+    }
+  }
+  next: {
+    frontmatter: {
+      slug: string;
+      title: string;
+    }
+  }
+}
+
+const { frontmatter } = Astro.props
+const pathname = Astro.url.pathname
+const url = pathname.split('/').slice(-1)[0]
+const components = await Astro.glob('../pages/components/*.mdx')
+
+const pagination = components.reduce((acc, component, index) => {
+  if (component.frontmatter.slug === url) {
+    return {
+      previous: components[index - 1],
+      next: components[index + 1]
+    }
+  }
+  return acc
+}, {})
+
+const { previous, next } = pagination as Pagination
+console.log(previous)
+---
+
+<Base title={frontmatter.title}>
+
+  <nav class='sticky top-0 z-20 w-full flex h-16 items-center justify-end gap-2 bg-white/30 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
+    <div class='flex w-full items-center justify-start max-w-[90rem] mx-auto'>
+      <a href='/' class='flex items-center hover:opacity-75 '>
+        <span class='text-xl font-poppins font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-blue-600 '>
+        Astro ui
+        </span>
+      </a>
+    </div>
+  </nav>
+
+  <div class='mx-auto flex max-w-[90rem]'>
+
+    <aside class='nextra-sidebar-container flex flex-col md:top-16 md:shrink-0 motion-reduce:transform-none transform-gpu transition-all ease-in-out print:hidden md:w-64 md:sticky md:self-start max-md:[transform:translate3d(0,-100%,0)]'>
+      <div class='overflow-y-auto overflow-x-hidden grow md:h-[calc(100vh_-_4rem_-_3.75rem)] nextra-scrollbar'>
+        <div class='transform-gpu overflow-hidden transition-all ease-in-out motion-reduce:transition-none'>
+          <div class='transition-opacity duration-500 ease-in-out motion-reduce:transition-none opacity-100'>
+            <ul class='flex flex-col gap-1 max-md:hidden mt-10'>
+              {
+                components.map((component) => (
+                  <li class='block'>
+                    <a href={component.frontmatter.slug}
+                      class='block cursor-pointer px-4 py-2 text-gray-700 rounded-md hover:text-black'
+                      class:list={{ 'text-black font-medium bg-neutral-50': url === component.frontmatter.slug }}
+                    >
+                      <span>{component.frontmatter.title}</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <nav class='order-last hidden w-64 shrink-0 xl:block print:hidden px-4'>
+      <div class='nextra-scrollbar sticky top-16 overflow-y-auto pr-4 pt-6 text-sm [hyphens:auto] max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] ltr:-mr-4 rtl:-ml-4'>
+        <p class='mb-4 font-medium tracking-tight'>En esta página</p>
+        <Toc />
+      </div>
+    </nav>
+
+    <article class='w-full break-words nextra-content flex min-h-[calc(100vh_-_h-16)] min-w-0 justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]'>
+      <main class='w-full min-w-0 max-w-6xl px-6 pt-4 md:px-12'>
+        <ul class='breadcrumbs flex items-center justify-start gap-2 text-slate-800'>
+          <li><a href='/'>Home</a></li>
+          <li>/</li>
+          <li><a href='/components'>Components</a></li>
+          <li>/</li>
+          <li class='text-gray-400'>{frontmatter.title}</li>
+        </ul>
+
+        <div class='mt-8'>
+          <h1>{frontmatter.title}</h1>
+          <p class='mt-2 text-lg text-slate-600'>{frontmatter.description}</p>
+          <slot />
+        </div>
+
+        <div
+          class='grid grid-cols-2 mt-16 rounded-lg border divide-x overflow-hidden shadow-sm border-gray-200'
+          class:list={{ 'grid-cols-1': previous === undefined || next === undefined }}
+        >
+          {previous !== undefined && (
+            <a
+              href={`/components/${previous?.frontmatter.slug}`}
+              class='flex flex-col space-y-2 transition-all duration-200 items-start p-8 hover:bg-gray-50'
+            >
+              <span class='pl-2 text-gray-600'>Previous</span>
+              <span class='flex items-center font-medium text-primary text-lg'>
+                <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M15 18l-6-6 6-6'/></svg>
+                <span>{previous?.frontmatter.title}</span>
+              </span>
+            </a>
+          )}
+
+          {next !== undefined && (
+            <a
+              href={`/components/${next?.frontmatter.slug}`}
+              class='flex flex-col space-y-2 transition-all duration-200 items-end p-8 hover:bg-gray-50'
+            >
+              <span class='pr-2 text-gray-600'> Next </span>
+              <span class='flex items-center font-medium text-primary text-lg'>
+                <span>{next?.frontmatter.title}</span>
+                <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M9 18l6-6-6-6'/></svg>
+              </span>
+            </a>
+          )}
+
+        </div>
+
+        <div class='py-20'>
+          <a href='/' class='flex items-center hover:opacity-75 '>
+            <span class='text-xl font-poppins font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-blue-600 '>
+            Astro ui
+            </span>
+          </a>
+          <p class='text-sm text-gray-500'>
+            &copy; {new Date().getFullYear()} Astro UI. All rights reserved.
+          </p>
+        </div>
+
+      </main>
+    </article>
+
+  </div>
+</Base>
+
+<style is:global >
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+  h1 {
+    @apply mt-16 mb-4 text-3xl sm:text-4xl font-medium;
+    letter-spacing: -0.025em;
+    scroll-margin-block: 6.875rem;
+  }
+  h2[id] {
+    @apply mt-16 mb-4 text-2xl sm:text-3xl font-medium;
+    letter-spacing: -0.025em;
+    scroll-margin-block: 6.875rem;
+  }
+  h3[id] {
+    @apply mt-16 mb-4 text-xl sm:text-2xl font-medium;
+    letter-spacing: -0.025em;
+    scroll-margin-block: 6.875rem;
+  }
+  h4[id] {
+    @apply mt-16 mb-4 text-lg sm:text-xl font-medium;
+    letter-spacing: -0.025em;
+    scroll-margin-block: 6.875rem;
+  }
+  h5[id] {
+    @apply mt-16 mb-4 text-base sm:text-lg font-medium;
+    letter-spacing: -0.025em;
+    scroll-margin-block: 6.875rem;
+  }
+  h6[id] {
+    @apply mt-16 mb-4 text-base sm:text-lg font-medium;
+    letter-spacing: -0.025em;
+    scroll-margin-block: 6.875rem;
+  }
+  p {
+    @apply mt-4 mb-4 text-sm sm:text-base;
+  }
+  p>code {
+    @apply px-1.5 rounded-sm bg-cyan-100 text-cyan-800;
+  }
+
+  table {
+    @apply mt-12 w-full border-collapse border border-gray-200;
+  }
+  table>thead {
+    @apply bg-gray-50;
+  }
+
+  table>thead>tr>th {
+    @apply px-4 py-3 text-left text-sm font-medium text-black border-b border-gray-200;
+  }
+  table>tbody>tr>td {
+    @apply px-4 py-2 text-left text-sm text-gray-900 border-b border-gray-200;
+  }
+  table>tbody>tr>td>code {
+    @apply rounded-sm text-violet-600;
+  }
+
+</style>
