@@ -49,7 +49,7 @@ const pagination = components.reduce((acc, component, index) => {
 }, {})
 
 const { previous, next } = pagination as Pagination
-console.log(previous)
+
 ---
 
 <Base title={frontmatter.title}>
@@ -107,8 +107,10 @@ console.log(previous)
         </ul>
 
         <div class='mt-8'>
-          <h1>{frontmatter.title}</h1>
-          <p class='mt-2 text-lg text-slate-600'>{frontmatter.description}</p>
+          <div class='w-full p-8 rounded-lg bg-gray-50 bg-gradient-to-tr from-[#f7f7f9] via-[#fdfdff] to-[#f7f3ff]'>
+            <h1 class='mt-0'>{frontmatter.title}</h1>
+            <p class='mt-2 text-lg text-slate-600'>{frontmatter.description}</p>
+          </div>
           <slot />
         </div>
 
