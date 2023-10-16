@@ -92,7 +92,7 @@ const { previous, next } = pagination as Pagination
     <nav class='order-last hidden w-64 shrink-0 xl:block print:hidden px-4'>
       <div class='nextra-scrollbar sticky top-16 overflow-y-auto pr-4 pt-6 text-sm [hyphens:auto] max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] ltr:-mr-4 rtl:-ml-4'>
         <p class='mb-4 font-medium tracking-tight'>En esta página</p>
-        <Toc />
+        <Toc client:load />
       </div>
     </nav>
 
@@ -122,7 +122,7 @@ const { previous, next } = pagination as Pagination
         >
           {previous !== undefined && (
             <a
-              href={`/components/${previous?.frontmatter.slug}`}
+              href={`/components/${previous?.frontmatter?.slug}`}
               class='flex flex-col space-y-2 transition-all duration-200 items-start p-8 hover:bg-gray-50'
             >
               <span class='pl-2 text-gray-600'>Previous</span>
@@ -130,7 +130,7 @@ const { previous, next } = pagination as Pagination
                 <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'>
                   <path d='M15 18l-6-6 6-6'/>
                 </svg>
-                <span>{previous?.frontmatter.title}</span>
+                <span>{previous?.frontmatter?.title}</span>
               </span>
             </a>
           )}
@@ -142,7 +142,7 @@ const { previous, next } = pagination as Pagination
             >
               <span class='pr-2 text-gray-600'> Next </span>
               <span class='flex items-center font-medium text-primary text-lg'>
-                <span>{next?.frontmatter.title}</span>
+                <span>{next?.frontmatter?.title}</span>
                 <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M9 18l6-6-6-6'/></svg>
               </span>
             </a>
