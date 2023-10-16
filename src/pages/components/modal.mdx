@@ -8,54 +8,190 @@ import Example from '../../components/Example.astro'
 import Button from '../../components/ui/Button.astro'
 import Modal from '../../components/ui/Modal.astro'
 
+## Example
+
+<Example class='modal-example-docs'>
+  <Modal>
+    <h2 slot='modal-title' class='modal-title'>Modal title</h2>
+    <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='modal-footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+</Example>
+
+```astro
+<Modal>
+  <h2 slot='modal-title' class='modal-title'>Modal title</h2>
+  <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  <Button slot='modal-footer' type='button' variant='secondary'>Close</Button>
+  <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+</Modal>
+```
+
 ## Usage
 
 <Example>
   <Button data-toggle='modal-example'>Example</Button>
-  <Modal id='modal-example' title='Modal title'>
-    <div slot='modal-body'>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div slot='modal-footer' class='flex items-center gap-2'>
-      <button type='button' class='px-4 h-10 rounded-md flex items-center justify-center bg-gray-100 text-black' data-dismiss='modal'>Close</button>
-      <button type='button' class='px-4 h-10 rounded-md flex items-center justify-center bg-blue-600 text-white'>Save changes</button>
-    </div>
+  <Modal id='modal-example'>
+    <h2 slot='modal-title' class='modal-title'>Modal title</h2>
+    <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='modal-footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
   </Modal>
 </Example>
 
-```js
+```astro
 <Button data-toggle='modal-example'>Example</Button>
-<Modal id='modal-example' title='Modal title'>
-  <div slot='modal-body'>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-  </div>
-  <div slot='modal-footer' class='flex items-center gap-2'>
-    <button type='button' class='px-4 h-10 rounded-md flex items-center justify-center bg-gray-100 text-black' data-dismiss='modal'>Close</button>
-    <button type='button' class='px-4 h-10 rounded-md flex items-center justify-center bg-blue-600 text-white'>Save changes</button>
-  </div>
+<Modal id='modal-example'>
+  <h2 slot='modal-title' class='modal-title'>Modal title</h2>
+  <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  <Button slot='modal-footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+  <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+</Modal>
+```
+
+## Placements
+
+Los modales se pueden mostrar en diferentes posiciones. Por defecto, la posición es `top-center` y las posiciones disponibles son `top-start`, `top-center`, `top-end`, `center-start`, `center`, `center-end`, `bottom-start`, `bottom-center` y `bottom-end`. Para cambiar la posición, se debe usar la propiedad `placement`.
+
+<Example>
+  <Button data-toggle='modal-example-positions'>Buttom start</Button>
+  <Modal id='modal-example-positions' placement='bottom-start'>
+    <h2 slot='modal-title' class='modal-title'>Modal bottom start</h2>
+    <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='modal-footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+</Example>
+
+```astro
+<Button data-toggle='modal-example-positions'>Buttom start</Button>
+<Modal id='modal-example-positions' placement='bottom-start'>
+  <h2 slot='modal-title' class='modal-title'>Modal bottom start</h2>
+  <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  <Button slot='modal-footer' type='button' variant='secondary'>Close</Button>
+  <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+</Modal>
+```
+
+## Static backdrop
+
+Los modales se pueden mostrar con un fondo estático. Para cambiar el modo, se debe usar la propiedad `staticBackdrop`.
+
+<Example>
+  <Button data-toggle='modal-example-static'>Static backdrop</Button>
+  <Modal id='modal-example-static' staticBackdrop>
+    <h2 slot='modal-title' class='modal-title'>Modal static backdrop</h2>
+    <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='modal-footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+</Example>
+  
+```astro
+<Button data-toggle='modal-example-static'>Static backdrop</Button>
+<Modal id='modal-example-static' staticBackdrop>
+  <h2 slot='modal-title' class='modal-title'>Modal static backdrop</h2>
+  <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  <Button slot='modal-footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+  <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
 </Modal>
 ```
 
 
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+## Modal content
 
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+Este ejemplo es fundamental para si queremos personalizar el contenido del modal. En este caso, el modal no tiene un `modal-body`, ni un `modal-header` ni un `modal-footer`. En su lugar, tiene un `modal-content` que es el que contiene todo el contenido del modal.
 
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+Una sugerencia para aplicar estilos es el uso de [Tailwind CSS](https://tailwindcss.com/).
 
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+<Example class='modal-example-docs'>
+  <Modal>
+    <div slot='modal-content'>
+      <h2 class='modal-title'>Modal title</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+      <Button type='button' variant='secondary'>Close</Button>
+      <Button type='button' variant='primary'>Save changes</Button>
+    </div>
+  </Modal>
+</Example>
 
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+```astro
+<Modal>
+  <div slot='modal-content' class='custom-tailwind-class'>
+    <h2 class='modal-title'>Modal title</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button type='button' variant='secondary'>Close</Button>
+    <Button type='button' variant='primary'>Save changes</Button>
+  </div>
+</Modal>
+```
 
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+### Custom content
 
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+Personalizando el modal con usando [Tailwind CSS](https://tailwindcss.com/).
 
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+<Example class='modal-example-docs'>
+  <Modal>
+    <div slot='modal-content' class='flex flex-col gap-4'>
+      <div class='w-full flex justify-between items-center p-4'>
+        <h2 class='modal-title'>Custom modal</h2>
+        <button class='flex-none' data-dismiss='modal' >
+          <svg xmlns="http://www.w3.org/2000/svg" 
+          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+        </button>
+      </div>
+      <div class='px-4'>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+      </div>
+      <div class='flex justify-end gap-2 w-full p-4'>
+        <button type='button' data-dismiss='modal' class='px-4 h-10 rounded-md flex items-center justify-center border border-gray-300 text-black'>Close</button>
+        <button type='button' class='px-4 h-10 rounded-md flex items-center justify-center bg-blue-700 text-white'>Save changes</button>
+      </div>
+    </div>
+  </Modal>
+</Example>
 
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+<Example>
+  <Button data-toggle='custom-modal'>Open custom modal</Button>
+  <Modal id='custom-modal'>
+    <div slot='modal-content' class='flex flex-col gap-4'>
+      <div class='w-full flex justify-between items-center p-4'>
+        <h2 class='modal-title'>Custom modal</h2>
+        <button class='flex-none' data-dismiss='modal'>
+          <svg xmlns="http://www.w3.org/2000/svg" 
+          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+        </button>
+      </div>
+      <div class='px-4'>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+      </div>
+      <div class='flex justify-end gap-2 w-full p-4'>
+        <button type='button' data-dismiss='modal' class='px-4 h-10 rounded-md flex items-center justify-center border border-gray-300 text-black'>Close</button>
+        <button type='button' class='px-4 h-10 rounded-md flex items-center justify-center bg-blue-700 text-white'>Save changes</button>
+      </div>
+    </div>
+  </Modal>
+</Example>
 
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-
+```astro
+<Button data-toggle='custom-modal'>Open custom modal</Button>
+<Modal id='custom-modal'>
+  <div slot='modal-content' class='flex flex-col gap-4'>
+    <div class='w-full flex justify-between items-center p-4'>
+      <h2 class='modal-title'>Custom modal</h2>
+      <button class='flex-none' data-dismiss='modal'>
+        <svg xmlns="http://www.w3.org/2000/svg" 
+        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+      </button>
+    </div>
+    <div class='px-4'>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    </div>
+    <div class='flex justify-end gap-2 w-full p-4'>
+      <button type='button' data-dismiss='modal' class='px-4 h-10 rounded-md flex items-center justify-center border border-gray-300 text-black'>Close</button>
+      <button type='button' class='px-4 h-10 rounded-md flex items-center justify-center bg-blue-700 text-white'>Save changes</button>
+    </div>
+  </div>
+</Modal>
+```

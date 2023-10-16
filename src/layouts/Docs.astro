@@ -92,7 +92,7 @@ const { previous, next } = pagination as Pagination
     <nav class='order-last hidden w-64 shrink-0 xl:block print:hidden px-4'>
       <div class='nextra-scrollbar sticky top-16 overflow-y-auto pr-4 pt-6 text-sm [hyphens:auto] max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] ltr:-mr-4 rtl:-ml-4'>
         <p class='mb-4 font-medium tracking-tight'>En esta página</p>
-        <Toc />
+        <Toc client:visible/>
       </div>
     </nav>
 
@@ -108,10 +108,12 @@ const { previous, next } = pagination as Pagination
 
         <div class='mt-8'>
           <div class='w-full p-8 rounded-lg bg-gray-50 bg-gradient-to-tr from-[#f7f7f9] via-[#fdfdff] to-[#f7f3ff]'>
-            <h1 class='mt-0'>{frontmatter.title}</h1>
+            <h1 class='mb-4 text-3xl sm:text-4xl font-medium'>{frontmatter.title}</h1>
             <p class='mt-2 text-lg text-slate-600'>{frontmatter.description}</p>
           </div>
-          <slot />
+          <div id='is-toc' class='documentation-content'>
+            <slot />
+          </div>
         </div>
 
         <div
@@ -125,7 +127,9 @@ const { previous, next } = pagination as Pagination
             >
               <span class='pl-2 text-gray-600'>Previous</span>
               <span class='flex items-center font-medium text-primary text-lg'>
-                <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M15 18l-6-6 6-6'/></svg>
+                <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'>
+                  <path d='M15 18l-6-6 6-6'/>
+                </svg>
                 <span>{previous?.frontmatter.title}</span>
               </span>
             </a>
@@ -165,58 +169,89 @@ const { previous, next } = pagination as Pagination
 
 <style is:global >
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
-  h1 {
+
+  .documentation-content pre {
+    margin-top: 1rem !important;
+    background-image: none;
+    background-color: #1d1b25 !important;
+    font-family: SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    font-size: 0.875rem;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    white-space: pre-wrap;
+    padding: 1.5rem;
+    display: block;
+    border-radius: 0.75rem;
+  }
+
+  .documentation-content h1[id] {
     @apply mt-16 mb-4 text-3xl sm:text-4xl font-medium;
     letter-spacing: -0.025em;
     scroll-margin-block: 6.875rem;
   }
-  h2[id] {
+  .documentation-content h2[id] {
     @apply mt-16 mb-4 text-2xl sm:text-3xl font-medium;
     letter-spacing: -0.025em;
     scroll-margin-block: 6.875rem;
   }
-  h3[id] {
+  .documentation-content h3[id] {
     @apply mt-16 mb-4 text-xl sm:text-2xl font-medium;
     letter-spacing: -0.025em;
     scroll-margin-block: 6.875rem;
   }
-  h4[id] {
+  .documentation-content h4[id] {
     @apply mt-16 mb-4 text-lg sm:text-xl font-medium;
     letter-spacing: -0.025em;
     scroll-margin-block: 6.875rem;
   }
-  h5[id] {
+  .documentation-content h5[id] {
     @apply mt-16 mb-4 text-base sm:text-lg font-medium;
     letter-spacing: -0.025em;
     scroll-margin-block: 6.875rem;
   }
-  h6[id] {
+  .documentation-content h6[id] {
     @apply mt-16 mb-4 text-base sm:text-lg font-medium;
     letter-spacing: -0.025em;
     scroll-margin-block: 6.875rem;
   }
-  p {
+  .documentation-content p {
     @apply mt-4 mb-4 text-sm sm:text-base;
   }
-  p>code {
+  .documentation-content p>code, .documentation-content li>code {
     @apply px-1.5 rounded-sm bg-cyan-100 text-cyan-800;
   }
 
-  table {
+  .documentation-content p>a {
+    @apply font-medium underline text-blue-700;
+  }
+  .documentation-content table {
     @apply mt-12 w-full border-collapse border border-gray-200;
   }
-  table>thead {
+  .documentation-content table>thead {
     @apply bg-gray-50;
   }
 
-  table>thead>tr>th {
+  .documentation-content table>thead>tr>th {
     @apply px-4 py-3 text-left text-sm font-medium text-black border-b border-gray-200;
   }
-  table>tbody>tr>td {
+  .documentation-content table>tbody>tr>td {
     @apply px-4 py-2 text-left text-sm text-gray-900 border-b border-gray-200;
   }
-  table>tbody>tr>td>code {
+  .documentation-content table>tbody>tr>td>code {
     @apply rounded-sm text-violet-600;
+  }
+
+  /** Lists */
+
+  .documentation-content:not(.example-doc) > ul {
+    @apply mt-4 mb-4 list-disc list-inside;
+  }
+  .documentation-content:not(.example-doc) > ul li, .documentation-content:not(.example-doc) > ol li {
+    @apply mt-4;
+  }
+  .documentation-content ol {
+    @apply mt-4 mb-4 list-decimal list-inside;
   }
 
 </style>

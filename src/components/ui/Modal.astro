@@ -3,7 +3,6 @@
 interface Props {
   id: string
   placement?: 'top-start' | 'top-center' | 'top-end' | 'center' | 'center-start' | 'center-end' | 'bottom-start' | 'bottom-center' | 'bottom-end'
-  title?: string
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl' | 'full'
   staticBackdrop?: boolean
   initialOpen?: boolean
@@ -30,7 +29,6 @@ const sizes = {
 const {
   id,
   placement = 'top-center',
-  title,
   size = 'md',
   staticBackdrop = false,
   initialOpen = false,
@@ -39,7 +37,7 @@ const {
 
 ---
 
-<script>
+<script >
   const arrayTarget = document.querySelectorAll < HTMLButtonElement > ('[data-toggle]')
 
   //
@@ -62,6 +60,7 @@ const {
     }, 100)
     modal.setAttribute('aria-hidden', 'false')
     document.body.style.overflow = 'hidden'
+    document.body.classList.add('modal-open')
   }
 
   //
@@ -74,6 +73,7 @@ const {
     }, 200)
     modal.setAttribute('aria-hidden', 'true')
     document.body.style.overflow = ''
+    document.body.classList.remove('modal-open')
   }
 
   //
@@ -121,6 +121,8 @@ const {
     // Close modal with escape key
     document.addEventListener('keydown', (event) => {
       if (isStaticBackdrop && event.key === 'Escape') {
+        document.body.style.overflow = 'hidden'
+        document.body.classList.add('modal-open')
         getStaticClass(modal)
       } else if (event.key === 'Escape') {
         getRemove(modal)
@@ -148,43 +150,57 @@ const {
 >
   <div class='modal-backdrop' tabindex='-1' />
 
-  <div class='modal-content' aria-labelledby='modal-title' aria-describedby='modal-body'>
+  <article class='modal-content' aria-labelledby='modal-title' aria-describedby='modal-body'>
+
     <slot name='modal-content'>
-      <div class='modal-header'>
-        <slot name='modal-header'>
-          <h5 class='modal-title'>{title}</h5>
-          <button type='button' class='btn-modal-close' data-dismiss='modal' aria-label='Close'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='24'
-              height='24'
-              viewBox='0 0 24 24'
-              fill='none'
-              stroke='#000000'
-              stroke-width='2'
-              stroke-linecap='round'
-              stroke-linejoin='round'>
-              <line x1='18' y1='6' x2='6' y2='18'></line>
-              <line x1='6' y1='6' x2='18' y2='18'></line>
-            </svg>
-          </button>
+
+      <header class='modal-header'>
+
+        <slot name='modal-title'>
+          <h2 class='modal-title'>
+            <slot name='modal-title' />
+          </h2>
         </slot>
-      </div>
-      <div class='modal-body'>
+
+        <button type='button' class='btn-modal-close' data-dismiss='modal' aria-label='Close'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='#000000'
+            stroke-width='2'
+            stroke-linecap='round'
+            stroke-linejoin='round'>
+            <line x1='18' y1='6' x2='6' y2='18'></line>
+            <line x1='6' y1='6' x2='18' y2='18'></line>
+          </svg>
+        </button>
+      </header>
+
+      <main class='modal-body'>
         <slot name='modal-body' />
-      </div>
-      <div class='modal-footer'>
+      </main>
+
+      <footer class='modal-footer'>
         <slot name='modal-footer' />
-      </div>
+      </footer>
+
     </slot>
-  </div>
+  </article>
 </div>
 
 <style
+  is:global
   define:vars={{
     size: sizes[size]
   }}
 >
+
+  body.modal-open {
+    overflow: hidden;
+  }
 
   @media (min-width: 576px) {
     .modal-content {
@@ -286,7 +302,7 @@ const {
 
   /** Modal header */
 
-  .modal-header {
+  .modal-header{
     display: flex;
     padding: 1.5rem;
     align-items: center;
@@ -331,6 +347,7 @@ const {
     align-items: center;
     justify-content: flex-end;
     padding: 1.5rem;
+    gap: .5rem;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;

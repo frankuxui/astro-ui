@@ -1,0 +1,90 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Size = 'xs' | 'sm' | 'md'
+type Variant = 'success' | 'error'
+
+interface Props extends HTMLAttributes<'div'> {
+  message?: string;
+  size?: Size;
+  type?: Variant;
+}
+
+const {
+  message,
+  size = 'md',
+  type = 'success',
+  ...attrs
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    'astro-ui-alert',
+
+    type === 'success' && 'astro-ui-alert-success',
+    type === 'error' && 'astro-ui-alert-error',
+
+    size === 'xs' && 'astro-ui-alert-xs',
+    size === 'sm' && 'astro-ui-alert-sm',
+    size === 'md' && 'astro-ui-alert-md'
+  ]}
+  {...attrs}
+>
+  {message && <div>{message}</div>}
+  <slot />
+</div>
+
+<script>
+</script>
+
+<style is:global>
+  .astro-ui-alert {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    border-radius: 0.375rem;
+  }
+
+  /** Variants */
+
+  .astro-ui-alert-success {
+    background-color: rgb(205, 239, 217);
+    color: #000;
+  }
+
+  .astro-ui-alert-error {
+    background-color: rgb(241, 210, 222);
+    color: #000;
+  }
+
+  /** Sizes */
+
+  .astro-ui-alert-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .astro-ui-alert-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .astro-ui-alert-md {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+</style>

@@ -1,15 +1,79 @@
 ---
-const {
-  isDark = false
-} = Astro.props
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'div'> {
+  isDark?: boolean
+  class?: string
+}
+
+const { isDark = false, ...attrs } = Astro.props
 ---
 
 <div
-  class='mt-6 border relative border-slate-200 rounded-lg pt-16 px-6 pb-5 after:top-4 after:left-6 after:text-slate-400 after:text-sm after:z-[1] after:absolute after:content-["EXAMPLE"] dark:border-slate-800'
   class:list={{
+    'example-doc': true,
     'bg-white': !isDark,
-    'bg-slate-950': isDark
+    'bg-slate-950': isDark,
+    [attrs.class as string]: true
   }}
+  {...attrs}
 >
   <slot />
 </div>
+
+<style is:global>
+
+  .example-doc {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 1.25rem;
+    padding-top: 4rem;
+    border-width: 1px;
+    background-color: white;
+    border-radius: 0.5rem;
+    margin-top: 1.5rem;
+    position: relative;
+  }
+  .example-doc::after {
+    top: 1rem;
+    left: 1.5rem;
+    content: "EXAMPLE";
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6d7785;
+    position: absolute;
+    z-index: 1;
+  }
+  .example-doc p {
+    margin: 0;
+  }
+
+  /** Modal example */
+  .modal-example-docs {
+    background-color: #d8dade !important;
+  }
+  .modal-example-docs .modal {
+    position: inherit !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: transparent !important;
+    z-index: 1 !important;
+  }
+  .modal-example-docs .modal .modal-backdrop {
+    position: inherit !important;
+    display: none !important;
+    opacity: 0 !important;
+  }
+  .modal-example-docs .modal .modal-content{
+    position: relative !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    max-height: none !important;
+    height: auto !important;
+    margin: 0 !important;
+  }
+
+</style>

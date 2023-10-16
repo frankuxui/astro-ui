@@ -1,8 +1,8 @@
 ---
 ---
 
-<script>
-  const headings = Array.from(document.querySelectorAll('h2, h3, h4, h5, h6')).map(heading => {
+<script >
+  const headings = Array.from(document.querySelectorAll('h2[id], h3[id], h4[id], h5[id], h6[id]')).map(heading => {
     const slug = heading.id
     const text = heading.textContent
     const tag = heading.tagName.toLowerCase()
@@ -29,10 +29,10 @@
     }
   })
 
-  const toc = document.querySelector('.toc-content') as HTMLUListElement
+  const toc = document.querySelector('.toc-content')
   headings.forEach(heading => {
-    const li = document.createElement('li') as HTMLLIElement
-    const a = document.createElement('a') as HTMLAnchorElement
+    const li = document.createElement('li')
+    const a = document.createElement('a')
     a.href = `#${heading.slug}`
     a.addEventListener('click', event => {
       event.preventDefault()
@@ -43,7 +43,7 @@
     })
     a.textContent = heading.text
     li.appendChild(a)
-    toc.appendChild(li)
+    toc?.appendChild(li)
 
     if (heading.tag === 'h2') {
       li.classList.add('ml-0')
@@ -82,7 +82,7 @@
   })
 </script>
 
-<div class='toc'>
+<div class='toc' >
   <ul class='toc-content flex flex-col mt-24' />
 </div>
 

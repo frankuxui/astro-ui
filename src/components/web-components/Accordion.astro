@@ -1,0 +1,118 @@
+---
+
+---
+
+<script>
+class AccordionComponent extends HTMLElement {
+  constructor () {
+    super()
+    this.render()
+  }
+
+  static get styles () {
+    return `
+      :host {
+        display: block;
+        width: 100%;
+      }
+
+      ::slotted(.accordion-panel){
+        height: 0px;
+        overflow: hidden;
+        transition: all 0.25s ease-out;
+      }
+    `
+  }
+
+  get accordion () {
+    return this
+  }
+
+  get Items () {
+    const items = Array.from(this.accordion.querySelectorAll('.accordion-item')).map((e, index) => {
+      return {
+        id: `accordion-item-${index}`,
+        isOpen: (e as HTMLElement).dataset.open === 'true',
+        trigger: e,
+        panel: e.querySelector('.accordion-panel')
+
+      }
+    })
+
+    return items
+  }
+
+  get trigger () {
+    return this.accordion.querySelectorAll('.accordion-trigger')
+  }
+
+  get panel () {
+    return this.accordion.querySelectorAll('.accordion-panel')
+  }
+
+  get alwaysOpen () {
+    return this.accordion.dataset.alwaysOpen === 'true'
+  }
+
+  toggle (item, panel) {
+    if (item.isOpen) {
+      panel.classList.add('show')
+      panel.style.height = `${panel.scrollHeight}px`
+      panel.style.visibility = 'visible'
+      panel.style.opacity = '1'
+    } else {
+      panel.classList.remove('show')
+      panel.style.height = '0px'
+      panel.style.visibility = 'hidden'
+      panel.style.opacity = '0'
+    }
+  }
+
+  connectedCallback () {
+    this.trigger.forEach((e, index) => {
+      const trigger = e as HTMLElement
+
+      trigger.addEventListener('click', () => {
+        if (this.alwaysOpen) {
+          const itemIndex = this.Items[index]
+          itemIndex.isOpen = !itemIndex.isOpen
+          const item = itemIndex.trigger as HTMLElement
+          item.dataset.open = itemIndex.isOpen.toString()
+
+          const panel = itemIndex.panel as HTMLElement
+          this.toggle(itemIndex, panel)
+        } else {
+          this.Items.forEach((e, i) => {
+            if (i === index) {
+              e.isOpen = !e.isOpen
+              const item = e.trigger as HTMLElement
+              setTimeout(() => {
+                item.dataset.open = e.isOpen.toString()
+              }, 100)
+            } else {
+              e.isOpen = false
+              const item = e.trigger as HTMLElement
+              setTimeout(() => {
+                item.dataset.open = e.isOpen.toString()
+              }, 100)
+            }
+          })
+        }
+      })
+    })
+  }
+
+  render () {
+    const shadowRoot = this.attachShadow({ mode: 'open' })
+
+    shadowRoot.innerHTML += `
+      <style>
+        ${AccordionComponent.styles}
+      </style>
+      <slot></slot>
+    `
+  }
+}
+
+customElements.define('accordion-component', AccordionComponent)
+</script>

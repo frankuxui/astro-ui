@@ -1,0 +1,116 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Size = 'xs' | 'sm' | 'md'
+type Variant = 'primary' | 'secondary' | 'success' | 'error' | 'light' | 'dark'
+
+interface Props extends HTMLAttributes <'span'> {
+  size?: Size
+  variant?: Variant
+  pill?: boolean
+  class?: string
+}
+
+const {
+  size = 'sm',
+  variant = 'primary',
+  pill = false,
+  ...attrs
+} = Astro.props
+---
+
+<span class:list={[
+  'astroui-badge',
+
+  size === 'xs' && 'astroui-badge-xs',
+  size === 'sm' && 'astroui-badge-sm',
+  size === 'md' && 'astroui-badge-md',
+
+  variant === 'primary' && 'astroui-badge-primary',
+  variant === 'secondary' && 'astroui-badge-secondary',
+  variant === 'success' && 'astroui-badge-success',
+  variant === 'error' && 'astroui-badge-error',
+  variant === 'light' && 'astroui-badge-light',
+  variant === 'dark' && 'astroui-badge-dark',
+
+  pill && 'astroui-badge-pill',
+
+  attrs.class
+]}>
+  <slot></slot>
+</span>
+
+<style>
+
+  .astroui-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+  }
+
+  /** Sizes */
+
+  .astroui-badge.astroui-badge-xs {
+    font-size: 11px;
+    line-height: .75rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    height: 20px;
+  }
+
+  .astroui-badge.astroui-badge-sm {
+    font-size: 0.875rem;
+    line-height: 1rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    height: 1.75rem;
+  }
+
+  .astroui-badge.astroui-badge-md {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    height: 2rem;
+  }
+
+  /** Variants */
+
+  .astroui-badge.astroui-badge-primary {
+    color: #fff;
+    background-color: rgb(109 40 217 / 1);
+  }
+
+  .astroui-badge.astroui-badge-secondary {
+    color: #000;
+    background-color: rgb(219, 232, 239);
+  }
+
+  .astroui-badge.astroui-badge-success {
+    color: #fff;
+    background-color: #05b867;
+  }
+
+  .astroui-badge.astroui-badge-error {
+    color: #fff;
+    background-color: rgb(210 15 86 / 1);
+  }
+
+  .astroui-badge.astroui-badge-light {
+    color: rgb(9, 9, 27);
+    background-color: #f8f9fa;
+  }
+
+  .astroui-badge.astroui-badge-dark {
+    color: #fff;
+    background-color: rgb(9, 9, 27);
+  }
+
+  /** Pill */
+
+  .astroui-badge.astroui-badge-pill {
+    border-radius: 9999px;
+  }
+
+</style>

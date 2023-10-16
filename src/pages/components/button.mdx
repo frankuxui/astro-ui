@@ -23,7 +23,7 @@ This is a basic button.
 ## Principal buttons
 
 <Example>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-4 flex-wrap">
   <Button variant='primary'>Primary</Button>
   <Button variant='secondary'>Secondary</Button>
 </div>
@@ -39,11 +39,10 @@ This is a basic button.
 Estas variantes de colores permiten personalizar el aspecto visual de los botones para que se adapten al diseño general de la aplicación o sitio web, o para transmitir ciertos significados o intenciones a los usuarios.
 
 <Example>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-4 flex-wrap">
   <Button variant='primary'>Primary</Button>
   <Button variant='secondary'>Secondary</Button>
   <Button variant='error'>Error</Button>
-  <Button variant='dark'>Dark</Button>
 </div>
 </Example>
 
@@ -51,26 +50,24 @@ Estas variantes de colores permiten personalizar el aspecto visual de los botone
 <Button variant='primary'>Primary</Button>
 <Button variant='secondary'>Secondary</Button>
 <Button variant='error'>Error</Button>
-<Button variant='dark'>Dark</Button>
 ```
 
 ### Light variant
 
 <Example isDark>
-<Button variant='light'>Primary</Button>
+  <Button variant='light'>Primary</Button>
 </Example>
 
 ```astro
 <Button variant='light'>Primary</Button>
 ```
 
-
 ## Sizes
 
 Los botones pueden tener diferentes tamaños. El tamaño predeterminado es `md`. Los tamaños disponibles son: `xs`, `sm`, `md`, `lg` y `xl`.
 
 <Example>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-4 flex-wrap">
   <Button size='xs'>Extra Small</Button>
   <Button size='sm'>Small</Button>
   <Button size='md'>Medium</Button>
@@ -92,11 +89,10 @@ Los botones pueden tener diferentes tamaños. El tamaño predeterminado es `md`.
 Los botones de píldoras son botones redondeados que se pueden usar para atraer la atención del usuario a una acción específica.
 
 <Example>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-4 flex-wrap">
   <Button pill variant='primary'>Primary</Button>
   <Button pill variant='secondary'>Secondary</Button>
   <Button pill variant='error'>Error</Button>
-  <Button pill variant='dark'>Dark</Button>
 </div>
 </Example>
 
@@ -104,7 +100,6 @@ Los botones de píldoras son botones redondeados que se pueden usar para atraer 
 <Button pill variant='primary'>Primary</Button>
 <Button pill variant='secondary'>Secondary</Button>
 <Button pill variant='error'>Error</Button>
-<Button pill variant='dark'>Dark</Button>
 ```
 
 ## Full Width
@@ -148,11 +143,10 @@ Los botones pueden tener diferentes estados. Los estados disponibles son: `disab
 ### Disabled
 
 <Example>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-4 flex-wrap">
   <Button disabled variant='primary'>Primary</Button>
   <Button disabled variant='secondary'>Secondary</Button>
   <Button disabled variant='error'>Error</Button>
-  <Button disabled variant='dark'>Dark</Button>
 </div>
 </Example>
 
@@ -160,7 +154,6 @@ Los botones pueden tener diferentes estados. Los estados disponibles son: `disab
 <Button disabled variant='primary'>Primary</Button>
 <Button disabled variant='secondary'>Secondary</Button>
 <Button disabled variant='error'>Error</Button>
-<Button disabled variant='dark'>Dark</Button>
 ```
 
 ### Loading
@@ -168,11 +161,10 @@ Los botones pueden tener diferentes estados. Los estados disponibles son: `disab
 Los botones de carga se pueden usar cuando se realiza una acción que lleva tiempo completarla. Esto ayuda a los usuarios a comprender que la acción se está procesando.
 
 <Example>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-4 flex-wrap">
   <Button isLoading variant='primary'>Loading...</Button>
   <Button isLoading variant='secondary'>Loading...</Button>
   <Button isLoading variant='error'>Loading...</Button>
-  <Button isLoading variant='dark'>Loading...</Button>
 </div>
 </Example>
 
@@ -180,7 +172,6 @@ Los botones de carga se pueden usar cuando se realiza una acción que lleva tiem
 <Button isLoading variant='primary'>Loading...</Button>
 <Button isLoading variant='secondary'>Loading...</Button>
 <Button isLoading variant='error'>Loading...</Button>
-<Button isLoading variant='dark'>Loading...</Button>
 ```
 
 ## With spinner
@@ -188,7 +179,7 @@ Los botones de carga se pueden usar cuando se realiza una acción que lleva tiem
 Los botones de carga se pueden usar cuando se realiza una acción que lleva tiempo completarla. Esto ayuda a los usuarios a comprender que la acción se está procesando.
 
 <Example>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-4 flex-wrap">
   <Button isLoading variant='primary'>
     <span>Loading</span>
     <Spinner variant='light' size='sm'/>
@@ -198,10 +189,6 @@ Los botones de carga se pueden usar cuando se realiza una acción que lleva tiem
     <Spinner variant='dark' size='sm'/>
   </Button>
   <Button isLoading variant='error'>
-    <span>Loading</span>
-    <Spinner variant='light' size='sm'/>
-  </Button>
-  <Button isLoading variant='dark'>
     <span>Loading</span>
     <Spinner variant='light' size='sm'/>
   </Button>
@@ -220,11 +207,6 @@ Los botones de carga se pueden usar cuando se realiza una acción que lleva tiem
 </Button>
 
 <Button isLoading variant='error'>
-  <span>Loading</span>
-  <Spinner variant='light' size='sm'/>
-</Button>
-
-<Button isLoading variant='dark'>
   <span>Loading</span>
   <Spinner variant='light' size='sm'/>
 </Button>
@@ -286,7 +268,7 @@ Los botones de iconos se pueden usar cuando se desea que el botón contenga solo
 
 | Prop | Type | default | Description |
 | ---- | ---- | ------- | ----------- |
-| variant | String | primary | Variante del botón. Las variantes disponibles son: `primary`, `secondary`, `error`, `dark` y `light`. |
+| variant | String | primary | Variante del botón. Las variantes disponibles son: `primary`, `secondary`, `error` y `light`. |
 | size | String | md | Tamaño del botón. Los tamaños disponibles son: `xs`, `sm`, `md`, `lg` y `xl`. |
 | pill | Boolean | false | Si el botón debe ser redondeado. |
 | isLoading | Boolean | false | Si el botón está cargando. |

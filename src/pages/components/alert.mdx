@@ -1,9 +1,71 @@
 ---
 layout: "../../layouts/Docs.astro"
 title: "Alert"
-description: "Alert component"
+description: "Alerta se refiere a una ventana emergente que se muestra en el navegador web para notificar al usuario sobre algún evento o mensaje importante. Es una forma común de mostrar mensajes informativos, advertencias o errores en una página web."
 slug: "alert"
 ---
 import Example from '../../components/Example.astro'
+import Alert from '../../components/ui/Alert.astro'
 
-# {frontmatter.title}
+## Usage
+
+<Example>
+  <Alert> This is a alert </Alert>
+</Example>
+
+```astro
+<Alert> This is a alert </Alert>
+```
+
+## Custom children
+
+<Example>
+  <Alert message='This is a alert' />
+</Example>
+
+```astro
+<Alert message='This is a alert' />
+```
+
+
+## Variants
+
+Las variantes de alertas se refieren a diferentes estilos o tipos de alertas que se pueden utilizar para resaltar distintos tipos de mensajes o información en una página web. Estas variantes suelen tener diferentes colores, íconos o elementos visuales para representar diferentes estados o categorías.
+
+- La variante `success` se utiliza para mostrar mensajes de éxito o confirmación en una página web. Se utiliza para informar a los usuarios que una operación, acción o proceso se ha completado correctamente.
+- La variante `error` se utiliza para mostrar mensajes de error en una página web. Se utiliza para informar a los usuarios que una operación, acción o proceso no se ha completado correctamente.
+
+<Example>
+  <div class="flex flex-col gap-4">
+    <Alert type='success'>A simple success alert—check it out!</Alert>
+    <Alert type='error'>A simple error alert—check it out!</Alert>
+  </div>
+</Example>
+
+```astro
+<Alert type='success'>A simple success alert—check it out!</Alert>
+<Alert type='error'>A simple error alert—check it out!</Alert>
+```
+
+
+## Sizes
+
+Las propiedades de tamaño `size` en una alerta se utilizan para ajustar el tamaño de la alerta en función de tus necesidades de diseño y presentación. Estas propiedades te permiten controlar visualmente el aspecto y la legibilidad de las alertas en tu página web.
+
+- `xs` - Extra small
+- `sm` - Small
+- `md` - Medium
+
+<Example>
+  <div class="flex flex-col gap-4">
+    <Alert size='xs'>A simple xs alert—check it out!</Alert>
+    <Alert size='sm'>A simple sm alert—check it out!</Alert>
+    <Alert size='md'>A simple md alert—check it out!</Alert>
+  </div>
+</Example>
+
+```astro
+<Alert size='xs'>A simple xs alert—check it out!</Alert>
+<Alert size='sm'>A simple sm alert—check it out!</Alert>
+<Alert size='md'>A simple md alert—check it out!</Alert>
+```

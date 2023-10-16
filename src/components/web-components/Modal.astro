@@ -1,0 +1,225 @@
+---
+import Button from '@components/ui/Button.astro'
+
+---
+
+<script>
+  type Placement = 'top-start' | 'top-center' | 'top-end' | 'center' | 'center-start' | 'center-end' | 'bottom-start' | 'bottom-center' | 'bottom-end'
+  class ModalComponent extends HTMLElement {
+    constructor () {
+      super()
+      this.render()
+    }
+
+    static get observedAttributes () {
+      return ['open']
+    }
+
+    modal () {
+      return this.shadowRoot?.querySelector('.modal')
+    }
+
+    // Open the modal
+
+    open () {
+      this.setAttribute('open', '')
+      this.style.display = 'flex'
+      this.setAttribute('aria-hidden', `${!this.isOpen}`)
+      document.body.classList.add('modal-open')
+      setTimeout(() => {
+        this.modal()?.classList.add('show')
+      }, 100)
+    }
+
+    // Close the modal
+
+    close () {
+      this.removeAttribute('open')
+      this.modal()?.classList.remove('show')
+      this.setAttribute('aria-hidden', `${!this.isOpen}`)
+      document.body.classList.remove('modal-open')
+      setTimeout(() => {
+        this.style.display = 'none'
+      }, 200)
+    }
+
+    // Check if the modal is open
+
+    get isOpen () {
+      return this.hasAttribute('open')
+    }
+
+    // trigger the modal
+
+    toggle () {
+      if (this.isOpen) {
+        this.close()
+      } else {
+        this.open()
+      }
+    }
+
+    //
+    // Open modal on click toggle button
+
+    connectedCallback () {
+      const toggleButtons = document.querySelectorAll('[data-toggle="modal"]')
+      toggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          this.open()
+        })
+      })
+
+      const dismissButtons = document.querySelectorAll('[data-dismiss="modal"]')
+      dismissButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          this.close()
+        })
+      })
+
+      this.addEventListener('click', (event) => {
+        if (event.target === this) {
+          this.close()
+        }
+      })
+    }
+
+    //
+    // Get placement of the modal
+
+    get placement () {
+      return this.getAttribute('data-placement') ?? 'top-center' as Placement
+    }
+
+    static get styles () {
+      return `
+      <style>
+        .modal-open {
+          overflow: hidden;
+        }
+
+        .modal {
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 9999;
+          width: 100vw;
+          height: 100dvh;
+          background-color: rgba(0, 0, 0, .5);
+          display: flex;
+          flex-direction: column;
+          padding: 1.5rem;
+        }
+
+        .modal-backdrop {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: -1;
+          width: 100%;
+          height: 100%;
+        }
+
+        .modal-content {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          background-color: white;
+          width: 100%;
+          margin: 0;
+          border-radius: .5rem;
+          transform: scale(1.1);
+          transition: visibility .25s ease-out, opacity .25s ease-out, transform .25s ease-out;
+        }
+        @media (min-width: 576px) {
+          .modal-content {
+            max-width: 32rem;
+            margin: 4rem 0;
+          }
+        }
+        .modal.fade .modal-content {
+          opacity: 0;
+          visibility: hidden;
+          transform: scale(1.1);
+        }
+        .modal.show .modal-content{
+          opacity: 1;
+          visibility: visible;
+          transform: scale(1);
+        }
+
+        .modal.modal-top-center {
+          align-items: center;
+          justify-content: flex-start;
+        }
+        .modal.modal-top-start {
+          align-items: flex-start;
+          justify-content: flex-start;
+        }
+        .modal.modal-top-end {
+          align-items: flex-end;
+          justify-content: flex-start;
+        }
+        .modal.modal-center {
+          align-items: center;
+          justify-content: center;
+        }
+        .modal.modal-center-start {
+          align-items: flex-start;
+          justify-content: center;
+        }
+        .modal.modal-center-end {
+          align-items: flex-end;
+          justify-content: center;
+        }
+        .modal.modal-bottom-center {
+          align-items: center;
+          justify-content: flex-end;
+        }
+        .modal.modal-bottom-start {
+          align-items: flex-start;
+          justify-content: flex-end;
+        }
+        .modal.modal-bottom-end {
+          align-items: flex-end;
+          justify-content: flex-end;
+        }
+
+        </style>
+        `
+    }
+
+    render () {
+      const shadowRoot = this.attachShadow({ mode: 'open' })
+      this.style.display = 'none'
+      this.setAttribute('role', 'dialog')
+
+      shadowRoot.innerHTML = `
+        ${ModalComponent.styles}
+        <div class='modal fade modal-${this.placement}'>
+          <div class='modal-backdrop'></div>
+          <article class='modal-content' aria-labelledby='modal-title' aria-describedby='modal-body'>
+            <slot></slot>
+          </article>
+        </div>
+      `
+    }
+  }
+
+  customElements.define('modal-component', ModalComponent)
+</script>
+
+<modal-component style='display: none' data-placement='top-center'>
+  <header class='modal-header text-lg p-6'>
+    <h2 class='font-bold text-xl'>Modal Title</h2>
+  </header>
+  <main class='modal-body px-6'>
+    <p class='text-gray-700'>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+    </p>
+  </main>
+  <footer class='modal-footer p-6 flex justify-end gap-4'>
+    <Button type='button' variant='secondary' data-dismiss='modal'>Close</Button>
+    <Button type='button'>Save changes</Button>
+  </footer>
+</modal-component>
