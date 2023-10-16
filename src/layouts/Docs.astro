@@ -76,7 +76,7 @@ const { previous, next } = pagination as Pagination
                   <li class='block'>
                     <a href={component.frontmatter.slug}
                       class='block cursor-pointer px-4 py-2 text-gray-700 rounded-md hover:text-black'
-                      class:list={{ 'text-black font-medium bg-neutral-50': url === component.frontmatter.slug }}
+                      class:list={{ 'text-black font-medium bg-neutral-50': url === component?.frontmatter?.slug }}
                     >
                       <span>{component.frontmatter.title}</span>
                     </a>
