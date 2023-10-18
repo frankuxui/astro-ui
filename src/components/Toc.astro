@@ -1,7 +1,104 @@
 ---
+const url = Astro.url.pathname.split('/')
+const path = url[url.length - 1]
+const file = path.split('.')[0]
+const component = await Astro.glob('../pages/components/*.mdx')
+const headings = component.filter(c => c.url?.includes(file))
+
+const h = headings.map(heading => {
+  return heading.getHeadings().map(h => {
+    return {
+      slug: h.slug,
+      text: h.text,
+      tag: `h${h.depth}`
+    }
+  })
+}).flat()
+
 ---
 
 <script >
+
+  const tocContent = document?.querySelector('.toc-content')
+
+  tocContent?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', event => {
+      event.preventDefault()
+      const el = document.querySelector(`#${a.hash.slice(1)}`)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+      }
+
+      // Toggle class 'toc-active' no item do TOC
+
+      const tocItems = document.querySelectorAll('.toc-content a')
+      tocItems.forEach(item => {
+        item.classList.remove('toc-active')
+      })
+      a.classList.add('toc-active')
+    })
+  }) 
+  
+    
+  
+
+  const headings = Array.from(document.querySelectorAll('h2[id], h3[id], h4[id], h5[id], h6[id]')).map(heading => {
+    const slug = heading.id
+    const text = heading.textContent
+    const tag = heading.tagName.toLowerCase()
+    heading.classList.add('toc-heading')
+    return { slug, text, tag }
+  })
+  
+  window.addEventListener('DOMContentLoaded', () => {
+    headings.forEach(heading => {
+      const el = document.querySelector(`#${heading.slug}`)
+      if (el) {
+        const anchor = document.createElement('a')
+        anchor.href = `#${heading.slug}`
+        anchor.addEventListener('click', event => {
+          event.preventDefault()
+          const el = document.querySelector(`#${heading.slug}`)
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' })
+          }
+        })
+        anchor.classList.add('toc-heading-anchor')
+        anchor.textContent = '#'
+        anchor.ariaLabel = 'anchor'
+        el.appendChild(anchor)
+      }
+    })
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id')
+        const tocItem = document.querySelector(`.toc-content a[href="#${id}"]`)
+        if (entry.isIntersecting) {
+          tocItem?.classList.add('toc-active')
+        } else {
+          tocItem?.classList.remove('toc-active')
+        }
+      })
+    }, {
+      rootMargin: '0px 0px -80% 0px'
+    })
+
+    headings.forEach(heading => {
+      const el = document.querySelector(`#${heading.slug}`)
+      if (el) {
+        observer.observe(el)
+      }
+    })
+  })
+
+  // console.log(headings)
+
+  
+  /* 
+  
+  Toc pure javascript 👇
+
   const headings = Array.from(document.querySelectorAll('h2[id], h3[id], h4[id], h5[id], h6[id]')).map(heading => {
     const slug = heading.id
     const text = heading.textContent
@@ -79,12 +176,39 @@
     if (el) {
       observer.observe(el)
     }
-  })
+  }) */
+
+  
 </script>
+
+<!-- 
+  Toc pure javascript
 
 <div class='toc' >
   <ul class='toc-content flex flex-col mt-24' />
+</div> 
+-->
+
+<div class='toc'>
+  <ul class='toc-content flex flex-col mt-24'>
+    {h.map(heading => (
+      <li 
+        class:list={[
+          'toc-heading',
+          heading.tag === 'h2' && 'ml-0',
+          heading.tag === 'h3' && 'ml-4',
+          heading.tag === 'h4' && 'ml-8',
+          heading.tag === 'h5' && 'ml-12',
+          heading.tag === 'h6' && 'ml-16'
+        ]}
+      >
+        <a href={`#${heading.slug}`}>
+          {heading.text}
+        </a>
+      </li>
+    ))}
 </div>
+
 
 <style is:inline>
 
@@ -144,3 +268,4 @@
     font-weight: bold;
   }
 </style>
+

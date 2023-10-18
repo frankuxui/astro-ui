@@ -21,7 +21,7 @@ const { isDark = false, ...attrs } = Astro.props
   <slot />
 </div>
 
-<style>
+<style is:global>
 
   .example-doc {
     padding-left: 1.5rem;
@@ -49,10 +49,10 @@ const { isDark = false, ...attrs } = Astro.props
   }
 
   /** Modal example */
-  .modal-example-docs {
+  .example-doc.modal-example-docs {
     background-color: #d8dade !important;
   }
-  .modal-example-docs .modal {
+  .example-doc.modal-example-docs .modal {
     position: inherit !important;
     display: block !important;
     width: 100% !important;
@@ -60,12 +60,12 @@ const { isDark = false, ...attrs } = Astro.props
     background-color: transparent !important;
     z-index: 1 !important;
   }
-  .modal-example-docs .modal .modal-backdrop {
+  .example-doc.modal-example-docs .modal .modal-backdrop {
     position: inherit !important;
     display: none !important;
     opacity: 0 !important;
   }
-  .modal-example-docs .modal .modal-content{
+  .example-doc.modal-example-docs .modal .modal-content{
     position: relative !important;
     display: block !important;
     opacity: 1 !important;
