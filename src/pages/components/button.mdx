@@ -119,7 +119,7 @@ Botones que ocupan todo el ancho del contenedor. Esto es útil cuando se desea q
 </div>
 ```
 
-### Width cols
+### Grid cols
 
 <Example>
 <div class="grid grid-cols-3 gap-4">
@@ -263,6 +263,28 @@ Los botones de iconos se pueden usar cuando se desea que el botón contenga solo
     <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
   </svg>
 </Button>
+```
+
+## Reset styles
+
+Para restablecer o deshacer los estilos de los botones, simplemente añade la clase `inline` al botón. Esta acción anulará las propiedades `variant` y `size` del botón, permitiendo que se adapte de manera óptima a tus necesidades y estilos altamente personalizados.
+
+<Example>
+  <Button inline>Button</Button>
+</Example>
+
+```astro
+<Button inline>Button</Button>
+```
+
+## Custom button
+
+<Example>
+  <Button inline class='h-10 rounded-md px-6 flex items-center justify-center bg-green-600 text-white'>Custom button</Button>
+</Example>
+
+```astro
+<Button inline class='h-10 rounded-md px-6 flex items-center justify-center bg-green-600 text-white'>Custom button</Button>
 ```
 
 ## Props

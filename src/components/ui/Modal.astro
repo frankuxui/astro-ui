@@ -45,6 +45,8 @@ const {
 
   function getStaticClass (modal: HTMLElement) {
     modal.classList.add('modal-static')
+    document.body.style.overflow = 'hidden'
+    document.body.classList.add('modal-open')
     setTimeout(() => {
       modal.classList.remove('modal-static')
     }, 100)
@@ -120,11 +122,11 @@ const {
 
     // Close modal with escape key
     document.addEventListener('keydown', (event) => {
-      if (isStaticBackdrop && event.key === 'Escape') {
-        document.body.style.overflow = 'hidden'
-        document.body.classList.add('modal-open')
-        getStaticClass(modal)
-      } else if (event.key === 'Escape') {
+      if (isStaticBackdrop ) {
+        if (event.key === 'Escape' && modal.classList.contains('show')) {
+          getStaticClass(modal)
+        }
+      } else if (event.key === 'Escape' && modal.classList.contains('show')) {
         getRemove(modal)
       }
     })

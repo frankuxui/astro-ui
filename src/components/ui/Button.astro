@@ -1,5 +1,5 @@
 ---
-import type { HTMLAttributes } from 'astro/types'
+import type { HTMLAttributes, CSSProperty } from 'astro/types'
 
 type Variants = 'primary' | 'secondary' | 'error' | 'light' | 'dark'
 type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
@@ -8,12 +8,13 @@ interface Props extends HTMLAttributes<'button'> {
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
   class?: string
-  style?: string
+  style?: CSSProperty
   children?: string
   variant?: Variants
   size?: Sizes
   pill?: boolean
   isLoading?: boolean
+  inline?: boolean
 }
 
 const {
@@ -24,7 +25,7 @@ const {
   size = 'md',
   pill = false,
   isLoading = false,
-  class: className,
+  inline = false,
   ...attrs
 } = Astro.props
 
@@ -35,23 +36,24 @@ const {
   disabled={disabled}
   style={style}
   class:list={[
-    'astroui-btn',
-    size === 'xs' && 'astroui-btn-xs',
-    size === 'sm' && 'astroui-btn-sm',
-    size === 'md' && 'astroui-btn-md',
-    size === 'lg' && 'astroui-btn-lg',
-    size === 'xl' && 'astroui-btn-xl',
+    !inline && 'astroui-button',
+    !inline && size === 'xs' && 'astroui-button-xs',
+    !inline && size === 'sm' && 'astroui-button-sm',
+    !inline && size === 'md' && 'astroui-button-md',
+    !inline && size === 'lg' && 'astroui-button-lg',
+    !inline && size === 'xl' && 'astroui-button-xl',
 
-    variant === 'primary' && 'astroui-btn-primary',
-    variant === 'secondary' && 'astroui-btn-secondary',
-    variant === 'error' && 'astroui-btn-error',
-    variant === 'light' && 'astroui-btn-light',
-    variant === 'dark' && 'astroui-btn-dark',
+    !inline && variant === 'primary' && 'astroui-button-primary',
+    !inline && variant === 'secondary' && 'astroui-button-secondary',
+    !inline && variant === 'error' && 'astroui-button-error',
+    !inline && variant === 'light' && 'astroui-button-light',
+    !inline && variant === 'dark' && 'astroui-button-dark',
 
-    pill && 'astroui-btn-pill',
+    pill && 'astroui-button-pill',
     isLoading && 'pointer-events-none opacity-75',
     disabled && 'opacity-40 pointer-events-none',
-    className
+
+    attrs.class,
   ]}
   {...attrs}
 >
@@ -63,7 +65,11 @@ const {
 
 
 <style is:global>
-  .astroui-btn {
+
+  :root {
+    --astroui-button-primary: rgb(91 33 182 / 1);
+  }
+  .astroui-button {
     appearance: none;
     display: flex;
     align-items: center;
@@ -80,94 +86,94 @@ const {
 
   /* Focus */
 
-  .astroui-btn:focus {
+  .astroui-button:focus {
     border-color: rgb(91 33 182 / 1);
     box-shadow: 0 0 #0000, 0 0 0 calc(2px + 0px) rgb(91 33 182 / 1), 0 0 #0000;
   }
 
   /* Primary */
-  .astroui-btn-primary {
+  .astroui-button-primary {
     background-color: rgb(109 40 217 / 1);
     color: rgb(255 255 255 / 1);
   }
-  .astroui-btn-primary:hover {
+  .astroui-button-primary:hover {
     background-color: rgb(91 33 182 / 1);
   }
 
   /* Secondary */
-  .astroui-btn-secondary {
+  .astroui-button-secondary {
     color: rgb(31 41 55 / 1);
     border-color: rgb(209 213 219 / 1);
     background-color: rgb(255 255 255 / 1);
     box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 0.05);
   }
-  .astroui-btn-secondary:hover {
+  .astroui-button-secondary:hover {
     border-color: rgb(156 163 175 / 1);
     background-color: rgb(249 250 251 / 1);
   }
 
   /* Error */
 
-  .astroui-btn-error {
+  .astroui-button-error {
     background-color: rgb(210 15 86 / 1);
     color: rgb(255 255 255 / 1);
   }
-  .astroui-btn-error:hover {
+  .astroui-button-error:hover {
     background-color: rgb(173, 4, 66);
   }
-  .astroui-btn-error:focus {
+  .astroui-button-error:focus {
     border-color: rgb(210 15 86 / 1);
     box-shadow: 0 0 #0000, 0 0 0 calc(2px + 0px) rgb(210 15 86 / 1), 0 0 #0000;
   }
 
   /* Light */
 
-  .astroui-btn-light {
+  .astroui-button-light {
     color: rgb(31 41 55 / 1);
     border-color: rgb(209 213 219 / 1);
     background-color: rgb(255 255 255 / 1);
     box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 0.05);
   }
-  .astroui-btn-light:hover {
+  .astroui-button-light:hover {
     border-color: rgb(156 163 175 / 1);
     background-color: rgb(249 250 251 / 1);
   }
-  .astroui-btn-light:focus {
+  .astroui-button-light:focus {
     border-color: rgb(209 213 219 / 1);
     box-shadow: 0 0 #0000, 0 0 0 calc(2px + 0px) rgb(209 213 219 / 1), 0 0 #0000;
   }
 
   /** Sizes */
 
-  .astroui-btn-xs {
+  .astroui-button-xs {
     height: 1.5rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     font-size: 0.75rem;
     line-height: 1rem;
   }
-  .astroui-btn-sm {
+  .astroui-button-sm {
     height: 1.75rem;
     padding-left: 0.75rem;
     padding-right: 0.75rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
-  .astroui-btn-md {
+  .astroui-button-md {
     height: 2.25rem;
     padding-left: 1rem;
     padding-right: 1rem;
     font-size: 1rem;
     line-height: 1.5rem;
   }
-  .astroui-btn-lg {
+  .astroui-button-lg {
     height: 2.75rem;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
     font-size: 1rem;
     line-height: 1.5rem;
   }
-  .astroui-btn-xl {
+  .astroui-button-xl {
     height: 3rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -177,7 +183,7 @@ const {
 
   /** Pill */
 
-  .astroui-btn-pill {
+  .astroui-button-pill {
     border-radius: 9999px;
   }
 

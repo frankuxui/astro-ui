@@ -1,0 +1,136 @@
+---
+layout: "../../layouts/Docs.astro"
+title: "Popover"
+description: "Popover component"
+slug: "popover"
+toc: true
+---
+import Example from '../../components/Example.astro'
+import Button from '../../components/ui/Button.astro'
+import Popover from '../../components/ui/Popover.astro'
+
+## Example
+
+<Example class='example-popover-docs'>
+  <Popover id='popover-example-docs' style={{ display: 'block' }}>
+    <h3 slot='title'>Popover header</h3>
+    <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+    <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+  </Popover>
+</Example>
+
+## Usage
+
+Para el funcionamiento del popover, debe agregar la prop `data-toggle` al elemento que activará el popover. El valor de la prop `data-toggle` debe ser el id del popover. Si esto no se cumple, el popover no funcionará.
+
+<Example>
+  <Button data-toggle='popover-example'>Popover toggle</Button>
+  <Popover id='popover-example' placement='top'>
+    <h3 slot='title'>Popover header</h3>
+    <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+    <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+  </Popover>
+</Example>
+
+## Initial open
+
+Para inicializar el popover abierto, agregue la prop `initialOpen`. Esto es útil para mostrar un popover en la carga de la página o en respuesta a una acción del usuario.
+
+<Example>
+  <Button data-toggle='popover-example-2'>Popover toggle</Button>
+  <Popover id='popover-example-2' initialOpen placement='top' divider>
+    <h3 slot='title'>Popover header</h3>
+    <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+    <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+  </Popover>
+</Example>
+
+## Placement
+
+Los popover pueden tener diferentes posiciones. La posición predeterminada es `top`. Las posiciones disponibles son: `top`, `top-start`, `top-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end`, `right`, `right-start` y `right-end`. Puede usar la prop `placement` para establecer la posición.
+
+<Example>
+  <div class="flex items-center gap-4 flex-wrap">
+    <Button data-toggle='popover-example-3'>Top</Button>
+    <Popover id='popover-example-3' placement='top'>
+      <h3 slot='title'>Popover header</h3>
+      <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+      <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+    </Popover>
+    <Button data-toggle='popover-example-4'>Top start</Button>
+    <Popover id='popover-example-4' placement='top-start'>
+      <h3 slot='title'>Popover header</h3>
+      <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+      <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+    </Popover>
+    <Button data-toggle='popover-example-5'>Top end</Button>
+    <Popover id='popover-example-5' placement='top-end'>
+      <h3 slot='title'>Popover header</h3>
+      <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+      <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+    </Popover>
+    <Button data-toggle='popover-example-6'>Bottom</Button>
+    <Popover id='popover-example-6' placement='bottom'>
+      <h3 slot='title'>Popover header</h3>
+      <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+      <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+    </Popover>
+    <Button data-toggle='popover-example-7'>Bottom start</Button>
+    <Popover id='popover-example-7' placement='bottom-start'>
+      <h3 slot='title'>Popover header</h3>
+      <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+      <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+    </Popover>
+    <Button data-toggle='popover-example-8'>Bottom end</Button>
+    <Popover id='popover-example-8' placement='bottom-end'>
+      <h3 slot='title'>Popover header</h3>
+      <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+      <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+    </Popover>
+    <Button data-toggle='popover-example-9'>left</Button>
+    <Popover id='popover-example-9' placement='left'>
+      <h3 slot='title'>Popover header</h3>
+      <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+      <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+    </Popover>
+    <Button data-toggle='popover-example-10'>Left start</Button>
+    <Popover id='popover-example-10' placement='left-start'>
+      <h3 slot='title'>Popover header</h3>
+      <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+      <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+    </Popover>
+    <Button data-toggle='popover-example-11'>Left end</Button>
+    <Popover id='popover-example-11' placement='left-end'>
+      <h3 slot='title'>Popover header</h3>
+      <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+      <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+    </Popover>
+    <Button data-toggle='popover-example-12'>Right</Button>
+    <Popover id='popover-example-12' placement='right'>
+      <h3 slot='title'>Popover header</h3>
+      <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+      <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+    </Popover>
+    <Button data-toggle='popover-example-13'>Right start</Button>
+    <Popover id='popover-example-13' placement='right-start'>
+      <h3 slot='title'>Popover header</h3>
+      <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+      <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+    </Popover>
+    <Button data-toggle='popover-example-14'>Right end</Button>
+    <Popover id='popover-example-14' placement='right-end'>
+      <h3 slot='title'>Popover header</h3>
+      <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+      <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+    </Popover>
+  </div>
+</Example>
+
+```astro
+<Button data-toggle='popover-example'>Right end</Button>
+<Popover id='popover-example' placement='right-end'>
+  <h3 slot='title'>Popover header</h3>
+  <p slot='body' class="!m-0 text-sm text-gray-500">This is a popover body.</p>
+  <p slot='footer' class="!m-0 text-sm text-gray-500">Popover footer.</p>
+</Popover>
+```

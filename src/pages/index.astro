@@ -4,10 +4,10 @@ import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout title='Welcome to Astro.'>
-  <main id='bg-animated' class='flex justify-between items-center flex-col mx-auto py-20 h-full min-h-screen bg-gradient'>
+  <main class='flex justify-between items-center flex-col mx-auto py-20 h-full min-h-screen'>
     <div class='flex flex-col gap-4'>
       <h1 class='tx text-4xl sm:text-5xl md:text-6xl font-black text-center'>Astro ui.</h1>
-      <p class='tx text-center text-2xl mb-8'>A collection of components for Astro.</p>
+      <p class='text-white text-center text-2xl mb-8'>A collection of components for Astro.</p>
     </div>
     <a class='rounded-full py-3 px-4 transition-all duration-300 hover:bg-white bg-white/70 backdrop-blur-sm' href='/components'>
       <span class='text-center text-black font-medium '>Click here to see the components.</span>
@@ -161,55 +161,7 @@ import Layout from '../layouts/Layout.astro'
     text-fill-color: transparent;
     -webkit-text-fill-color: transparent;
   }
-
-  @keyframes animationGradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  .bg-gradient {
-    background: linear-gradient(90deg, #f2ff002c, #38004948);
-    background-size: 400% 400%;
-    animation: animationGradient 15s ease infinite;
-  }
-  .bg-gradient-1 {
-    background-color: rgb(99, 102, 241);
-    background-image: radial-gradient(at 16% 38%, rgb(134, 239, 172) 0, transparent 59%), radial-gradient(at 83% 72%, rgb(229, 231, 235) 0, transparent 33%), radial-gradient(at 93% 40%, rgb(254, 243, 199) 0, transparent 88%), radial-gradient(at 44% 66%, rgb(55, 48, 163) 0, transparent 45%), radial-gradient(at 56% 97%, rgb(229, 231, 235) 0, transparent 44%), radial-gradient(at 54% 17%, rgb(161, 161, 170) 0, transparent 92%);
-    background-size: 400% 400%;
-    animation: animationGradient 15s ease infinite;
-  }
-  .bg-gradient-2 {
-    background-color: rgb(224, 242, 254);
-    background-image: radial-gradient(at 25% 40%, rgb(253, 186, 116) 0, transparent 95%), radial-gradient(at 14% 74%, rgb(49, 46, 129) 0, transparent 77%), radial-gradient(at 60% 29%, rgb(250, 204, 21) 0, transparent 74%), radial-gradient(at 86% 70%, rgb(6, 182, 212) 0, transparent 58%), radial-gradient(at 94% 60%, rgb(192, 38, 211) 0, transparent 24%), radial-gradient(at 60% 94%, rgb(250, 232, 255) 0, transparent 49%);
-    background-size: 400% 400%;
-    animation: animationGradient 15s ease infinite;
-  }
-  .bg-gradient-3 {
-    background-color: rgb(185, 28, 28);
-    background-image: radial-gradient(at 31% 62%, rgb(212, 212, 216) 0, transparent 72%), radial-gradient(at 95% 23%, rgb(110, 231, 183) 0, transparent 75%), radial-gradient(at 89% 39%, rgb(20, 184, 166) 0, transparent 93%), radial-gradient(at 98% 5%, rgb(251, 191, 36) 0, transparent 51%), radial-gradient(at 40% 18%, rgb(87, 83, 78) 0, transparent 45%), radial-gradient(at 85% 69%, rgb(191, 219, 254) 0, transparent 83%);
-    background-size: 400% 400%;
-    animation: animationGradient 15s ease infinite;
-  }
-  .bg-gradient-4 {
-    background-color: rgb(71, 85, 105);
-    background-image: radial-gradient(at 53% 36%, rgb(250, 232, 255) 0, transparent 84%), radial-gradient(at 26% 96%, rgb(190, 24, 93) 0, transparent 58%), radial-gradient(at 11% 19%, rgb(255, 228, 230) 0, transparent 93%), radial-gradient(at 74% 80%, rgb(253, 164, 175) 0, transparent 22%), radial-gradient(at 91% 26%, rgb(22, 163, 74) 0, transparent 98%), radial-gradient(at 51% 28%, rgb(255, 255, 255) 0, transparent 91%);
-    background-size: 400% 400%;
-    animation: animationGradient 15s ease infinite;
-  }
-  .bg-gradient-5 {
-    background-color: rgb(2, 132, 199);
-    background-image: radial-gradient(at 94% 56%, rgb(252, 165, 165) 0, transparent 48%), radial-gradient(at 34% 21%, rgb(236, 252, 203) 0, transparent 85%), radial-gradient(at 32% 42%, rgb(63, 63, 70) 0, transparent 37%), radial-gradient(at 61% 52%, rgb(136, 19, 55) 0, transparent 30%), radial-gradient(at 89% 80%, rgb(129, 140, 248) 0, transparent 97%), radial-gradient(at 60% 24%, rgb(254, 243, 199) 0, transparent 77%);
-    background-size: 400% 400%;
-    animation: animationGradient 15s ease infinite;
-  }
-
+  
   .lj-ic {
     display: flex;
     align-items: center;
@@ -225,22 +177,3 @@ import Layout from '../layouts/Layout.astro'
   }
 </style>
 
-<script is:inline>
-  // Create aleatory background with class bg-gradient
-
-  const bgAnimated = document.getElementById('bg-animated')
-
-  window.addEventListener('load', () => {
-    const classList = [
-      'bg-gradient',
-      'bg-gradient-1',
-      'bg-gradient-2',
-      'bg-gradient-3',
-      'bg-gradient-4',
-      'bg-gradient-5'
-    ]
-
-    const random = Math.floor(Math.random() * classList.length)
-    bgAnimated.classList.add(classList[random])
-  })
-</script>

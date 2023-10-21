@@ -1,0 +1,394 @@
+---
+import type { HTMLAttributes, CSSProperty } from 'astro/types'
+
+interface Props extends HTMLAttributes<'div'> {
+  id: string
+  initialOpen?: boolean
+  placement?: 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end'
+  divider?: boolean
+}
+
+const {
+  id,
+  initialOpen = false,
+  placement = 'top',
+  divider = false
+} = Astro.props
+---
+
+<div 
+  class="astroui-popover fade"
+  id={id}
+  role="dialog"
+  aria-hidden={initialOpen ? 'false' : 'true'}
+  data-placement={placement}
+  class:list={{
+    'astroui-popover-show': initialOpen
+  }}
+  style={{
+    display: initialOpen ? 'block' : 'none'
+  }}
+  >
+  <article 
+    class="astroui-popover-content"
+    class:list={{
+      'astroui-popover-divider': divider,
+    }}
+    >
+    <header class="astroui-popover-header">
+      <slot name="title"></slot>
+      <button type='button' class='astroui-popover-close' data-dismiss='popover' aria-label='Close'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='22'
+          height='22'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='#000000'
+          stroke-width='2'
+          stroke-linecap='round'
+          stroke-linejoin='round'>
+          <line x1='18' y1='6' x2='6' y2='18'></line>
+          <line x1='6' y1='6' x2='18' y2='18'></line>
+        </svg>
+      </button>
+    </header>
+    <main class="astroui-popover-body">
+      <slot name="body"></slot>
+    </main>
+    <footer class="astroui-popover-footer">
+      <slot name="footer"></slot>
+    </footer>
+  </article>
+</div>
+
+<script define:vars={{id, initialOpen, placement}}>
+  const popover = document.querySelectorAll(`#${id}`)
+  const trigger = document.querySelectorAll(`[data-toggle="${id}"]`)
+  
+  //
+  // Check if the popover is open
+  
+  function isShow(popover) {
+    return popover.getAttribute('aria-hidden') === 'false'
+  }
+  
+  //
+  // Show the popover
+
+  function getShow(popover) {
+    popover.style.display = 'block'
+    popover.setAttribute('aria-hidden', 'false')
+    setTimeout(() => {
+      popover.classList.add('astroui-popover-show')
+    }, 100)
+  }
+
+  //
+  // Hide the popover
+
+  function getHide(popover) {
+    popover.classList.remove('astroui-popover-show')
+    popover.setAttribute('aria-hidden', 'true')
+    setTimeout(() => {
+      popover.style.display = 'none'
+    }, 100)
+  }
+
+  //
+  // Toggle the popover
+
+  function getToggle(popover) {
+    if (isShow(popover)) {
+      getHide(popover)
+    } else {
+      getShow(popover)
+    }
+  }
+
+  //
+  // Function on dismissing popover by button close
+
+  function onDismiss(popover) {
+    const closeButton = popover.querySelector('[data-dismiss="popover"]')
+    closeButton.addEventListener('click', () => {
+      getHide(popover)
+    })
+  }
+  
+  //
+  // Get placement
+
+  function getPlacement(popover) {
+    const trigger = document.querySelector(`[data-toggle="${popover.id}"]`)
+    const top = trigger?.offsetTop
+    const left = trigger?.offsetLeft
+    const triggerWidth = trigger?.offsetWidth
+    const triggerHeight = trigger?.offsetHeight
+    const popoverWidth = popover?.offsetWidth
+    const popoverHeight = popover?.offsetHeight
+    const placement = popover?.dataset.placement || 'top'
+
+    const gap = 5
+
+    const position = {
+      top,
+      left
+    }
+    
+    if (placement === 'top') {
+      position.top = top - popoverHeight - gap
+      position.left = left + triggerWidth / 2 - popoverWidth / 2
+    }
+
+    if (placement === 'top-start') {
+      position.top = top - popoverHeight - gap
+      position.left = left
+    }
+
+    if (placement === 'top-end') {
+      position.top = top - popoverHeight - gap
+      position.left = left + triggerWidth - popoverWidth
+    }
+
+    if (placement === 'bottom') {
+      position.top = top + triggerHeight + gap
+      position.left = left + triggerWidth / 2 - popoverWidth / 2
+    }
+
+    if (placement === 'bottom-start') {
+      position.top = top + triggerHeight + gap
+      position.left = left
+    }
+
+    if (placement === 'bottom-end') {
+      position.top = top + triggerHeight + gap
+      position.left = left + triggerWidth - popoverWidth
+    }
+
+    if (placement === 'left') {
+      position.top = top + triggerHeight / 2 - popoverHeight / 2
+      position.left = left - popoverWidth - gap
+    }
+
+    if (placement === 'left-start') {
+      position.top = top
+      position.left = left - popoverWidth - gap
+    }
+
+    if (placement === 'left-end') {
+      position.top = top + triggerHeight - popoverHeight
+      position.left = left - popoverWidth - gap
+    }
+
+    if (placement === 'right') {
+      position.top = top + triggerHeight / 2 - popoverHeight / 2
+      position.left = left + triggerWidth + gap
+    }
+
+    if (placement === 'right-start') {
+      position.top = top
+      position.left = left + triggerWidth + gap
+    }
+
+    if (placement === 'right-end') {
+      position.top = top + triggerHeight - popoverHeight
+      position.left = left + triggerWidth + gap
+    }
+
+    popover.style.transform = `translate3d(${position.left}px, ${position.top}px, 0)`
+    popover.style.inset = '0px auto auto 0px'
+  }
+
+  //
+  // Initial states
+
+  popover.forEach((popover) => {
+    if (initialOpen) {
+      popover.style.display = 'block'
+      popover.setAttribute('aria-hidden', 'false')
+      popover.classList.add('astroui-popover-show')
+      getPlacement(popover)
+    } else {
+      popover.style.display = 'none'
+      popover.setAttribute('aria-hidden', 'true')
+      popover.classList.remove('astroui-popover-show')
+    }
+
+    onDismiss(popover)
+  })
+
+  //
+  // Hide the popover when pressing the escape key
+
+  function hideOnEscKey(popover) {
+    const escKeyListener = (event) => {
+      if (event.key === 'Escape' && isShow(popover)) {
+        getHide(popover)
+        removeKeyListener()
+      }
+    }
+
+    const removeKeyListener = () => {
+      document.removeEventListener('keydown', escKeyListener)
+    }
+
+    document.addEventListener('keydown', escKeyListener)
+  }
+
+  //
+  // Hide the popover when clicking the close button
+
+  function hideOnCloseButton(popover) {
+    const closeButton = popover.querySelector('[data-dismiss="popover"]')
+
+    closeButton.addEventListener('click', () => {
+      getHide(popover)
+    })
+  }
+
+  //
+  // Hide the popover when clicking outside
+
+  function hideOnOutsideClick(popover, trigger) {
+    const targets = [popover, trigger]
+    const outsideClickListener = (event) => {
+      if (!targets.some((target) => target.contains(event.target)) && isShow(popover)) {
+        getHide(popover)
+        removeClickListener()
+      }
+    }
+
+    const removeClickListener = () => {
+      document.removeEventListener('click', outsideClickListener)
+    }
+    document.addEventListener('click', outsideClickListener)
+  }
+
+  
+
+  //
+  // Event listeners
+
+  
+  trigger.forEach((trigger) => {
+    const popover = document.querySelector(`#${trigger.dataset.toggle}`)
+    const element = document.querySelector(`[data-toggle="${popover.id}"]`)
+    element.addEventListener('click', () => {
+      getToggle(popover)
+      hideOnEscKey(popover)
+      hideOnCloseButton(popover)
+      getPlacement(popover)
+    })
+    hideOnOutsideClick(popover, trigger)
+  })
+
+    
+</script>
+
+<style is:global>
+  .astroui-popover {
+    position: absolute;
+    z-index: 100;
+    max-width: max-content;
+  }
+
+  /** Popover content */
+
+  @keyframes contentAnimation {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    75% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .astroui-popover .astroui-popover-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    width: 18rem;
+    animation: contentAnimation 0.2s ease-in-out;
+  }
+  .astroui-popover.fade .astroui-popover-content{
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.9);
+  }
+  .astroui-popover.astroui-popover-show .astroui-popover-content{
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+
+  /** Popover divider */
+
+  .astroui-popover-content.astroui-popover-divider > :not([hidden]) ~ :not([hidden]) {
+    --divide-y-reverse: 0;
+    border-top-width: calc(1px * calc(1 - var(--divide-y-reverse)));
+    border-bottom-width: calc(1px * var(--divide-y-reverse));
+  }
+
+  /** Popover header */
+
+  .astroui-popover .astroui-popover-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+  .astroui-popover :where(.astroui-popover-title, h1, h2, h3, h4, h5, h6) {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 1.125rem; 
+    font-weight: 500;
+    max-width: calc(100% - 2rem);
+  }
+
+  /** Popover body */
+
+  .astroui-popover .astroui-popover-body {
+    padding: 1rem;
+  }
+
+  /** Popover footer */
+
+  .astroui-popover .astroui-popover-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1rem;
+  }
+
+  /** Popover close button */
+
+  .astroui-popover-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: #00000000;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .astroui-popover-close:hover {
+    background-color: #00000010;
+  }
+
+</style>

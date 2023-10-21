@@ -11,7 +11,7 @@ import Modal from '../../components/ui/Modal.astro'
 
 ## Example
 
-<Example class='modal-example-docs'>
+<Example class='example-modal-docs'>
   <Modal>
     <h2 slot='modal-title' class='modal-title'>Modal title</h2>
     <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
@@ -30,6 +30,8 @@ import Modal from '../../components/ui/Modal.astro'
 ```
 
 ## Usage
+
+Para dar funcionalidad a los modales, se debe usar el atributo `data-toggle` en un elemento que desencadene el modal. El valor del atributo `data-toggle` debe ser el `id` del modal que se quiere mostrar.
 
 <Example>
   <Button data-toggle='modal-example'>Example</Button>
@@ -56,13 +58,82 @@ import Modal from '../../components/ui/Modal.astro'
 Los modales se pueden mostrar en diferentes posiciones. Por defecto, la posición es `top-center` y las posiciones disponibles son `top-start`, `top-center`, `top-end`, `center-start`, `center`, `center-end`, `bottom-start`, `bottom-center` y `bottom-end`. Para cambiar la posición, se debe usar la propiedad `placement`.
 
 <Example>
-  <Button data-toggle='modal-example-positions'>Buttom start</Button>
-  <Modal id='modal-example-positions' placement='bottom-start'>
+  <div class="flex items-center gap-4 flex-wrap">
+    <Button data-toggle='modal-top-start'>Top start</Button>
+    <Button data-toggle='modal-top-center'>Top center</Button>
+    <Button data-toggle='modal-top-end'>Top end</Button>
+    <Button data-toggle='modal-center-start'>Center start</Button>
+    <Button data-toggle='modal-center'>Center</Button>
+    <Button data-toggle='modal-center-end'>Center end</Button>
+    <Button data-toggle='modal-bottom-start'>Bottom start</Button>
+    <Button data-toggle='modal-bottom-center'>Bottom center</Button>
+    <Button data-toggle='modal-bottom-end'>Bottom end</Button>
+  </div>
+
+
+  <Modal id='modal-top-start' placement='top-start'>
+    <h2 slot='modal-title' class='modal-title'>Modal top start</h2>
+    <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='modal-footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-top-center' placement='top-center'>
+    <h2 slot='modal-title' class='modal-title'>Modal top center</h2>
+    <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='modal-footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-top-end' placement='top-end'>
+    <h2 slot='modal-title' class='modal-title'>Modal top end</h2>
+    <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='modal-footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-center-start' placement='center-start'>
+    <h2 slot='modal-title' class='modal-title'>Modal center start</h2>
+    <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='modal-footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-center' placement='center'>
+    <h2 slot='modal-title' class='modal-title'>Modal center</h2>
+    <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='modal-footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-center-end' placement='center-end'>
+    <h2 slot='modal-title' class='modal-title'>Modal center end</h2>
+    <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='modal-footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-bottom-start' placement='bottom-start'>
     <h2 slot='modal-title' class='modal-title'>Modal bottom start</h2>
     <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
     <Button slot='modal-footer' type='button' variant='secondary'>Close</Button>
     <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
   </Modal>
+
+  <Modal id='modal-bottom-center' placement='bottom-center'>
+    <h2 slot='modal-title' class='modal-title'>Modal bottom center</h2>
+    <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='modal-footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-bottom-end' placement='bottom-end'>
+    <h2 slot='modal-title' class='modal-title'>Modal bottom end</h2>
+    <p slot='modal-body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='modal-footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='modal-footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
 </Example>
 
 ```astro
@@ -106,7 +177,7 @@ Este ejemplo es fundamental para si queremos personalizar el contenido del modal
 
 Una sugerencia para aplicar estilos es el uso de [Tailwind CSS](https://tailwindcss.com/).
 
-<Example class='modal-example-docs'>
+<Example class='example-modal-docs'>
   <Modal>
     <div slot='modal-content'>
       <h2 class='modal-title'>Modal title</h2>
@@ -132,7 +203,7 @@ Una sugerencia para aplicar estilos es el uso de [Tailwind CSS](https://tailwind
 
 Personalizando el modal con usando [Tailwind CSS](https://tailwindcss.com/).
 
-<Example class='modal-example-docs'>
+<Example class='example-modal-docs'>
   <Modal>
     <div slot='modal-content' class='flex flex-col gap-4'>
       <div class='w-full flex justify-between items-center p-4'>

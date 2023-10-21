@@ -1,10 +1,148 @@
 ---
 layout: "../../layouts/Docs.astro"
 title: "Stats"
-description: "Stats component"
+description: "Los stats son elementos de la interfaz de usuario que visualizar datos numericos. Típicamente aparecen en graficos, pero también se pueden colocar en barras de herramientas, barras de título y paneles."
 slug: "stats"
 toc: true
 ---
 import Example from '../../components/Example.astro'
+import Stats from '../../components/ui/Stats.astro'
 
-# {frontmatter.title}
+## Usage
+
+<Example>
+  <Stats>67.81%</Stats>
+</Example>
+
+```astro
+<Stats>67.81%</Stats>
+```
+
+## Variants
+
+Los stats pueden tener diferentes variantes. La variante predeterminada es `primary`. Las variantes disponibles son: `primary`, `secondary`, `success`, `error`, `light` y `dark`.
+
+<Example>
+<div class="flex items-center gap-4 flex-wrap">
+  <Stats variant='primary'>67.81%</Stats>
+  <Stats variant='secondary'>67.81%</Stats>
+  <Stats variant='success'>67.81%</Stats>
+  <Stats variant='error'>67.81%</Stats>
+  <Stats variant='dark'>67.81%</Stats>
+</div>
+</Example>
+
+```astro
+<Stats variant='primary'>67.81%</Stats>
+<Stats variant='secondary'>67.81%</Stats>
+<Stats variant='success'>67.81%</Stats>
+<Stats variant='error'>67.81%</Stats>
+<Stats variant='dark'>67.81%</Stats>
+```
+
+### Light
+
+<Example isDark>
+  <Stats variant='light'>67.81%</Stats>
+</Example>
+
+```astro
+<Stats variant='light'>67.81%</Stats>
+```
+
+## No fill
+
+<Example>
+  <div class="flex items-center gap-4 flex-wrap">
+    <Stats variant='primary' fill={false}>67.81%</Stats>
+    <Stats variant='secondary' fill={false}>67.81%</Stats>
+    <Stats variant='success' fill={false}>67.81%</Stats>
+    <Stats variant='error' fill={false}>67.81%</Stats>
+    <Stats variant='dark' fill={false}>67.81%</Stats>
+  </div>
+</Example>
+
+```astro
+<Stats variant='primary' fill={false}>67.81%</Stats>
+<Stats variant='secondary' fill={false}>67.81%</Stats>
+<Stats variant='success' fill={false}>67.81%</Stats>
+<Stats variant='error' fill={false}>67.81%</Stats>
+<Stats variant='dark' fill={false}>67.81%</Stats>
+```
+
+### No fill light
+
+<Example isDark>
+  <Stats variant='light' fill={false}>67.81%</Stats>
+</Example>
+
+```astro
+<Stats variant='light' fill={false}>67.81%</Stats>
+```
+
+## Sizes
+
+Los stats pueden tener diferentes tamaños. El tamaño predeterminado es `md`. Los tamaños disponibles son: `xs`, `sm`, `md`, `lg` y `xl`.
+
+<Example>
+  <div class="flex items-center gap-4 flex-wrap">
+    <Stats size='xs'>67.81%</Stats>
+    <Stats size='sm'>67.81%</Stats>
+    <Stats size='md'>67.81%</Stats>
+    <Stats size='lg'>67.81%</Stats>
+    <Stats size='xl'>67.81%</Stats>
+  </div>
+</Example>
+
+```astro
+<Stats size='xs'>67.81%</Stats>
+<Stats size='sm'>67.81%</Stats>
+<Stats size='md'>67.81%</Stats>
+<Stats size='lg'>67.81%</Stats>
+<Stats size='xl'>67.81%</Stats>
+```
+
+## Remove icon
+
+<Example>
+  <div class="flex items-center gap-4 flex-wrap">
+    <Stats icon={false}>67.81%</Stats>
+  </div>
+</Example>
+
+```astro
+<Stats icon={false}>67.81%</Stats>
+```
+
+## Custom icon
+
+<Example>
+  <div class="flex items-center gap-4 flex-wrap">
+    <Stats>
+      <span slot='icon'>🖐️</span>
+      <span>67.81%</span>
+    </Stats>
+  </div>
+</Example>
+
+```astro
+<Stats>
+  <span slot='icon'>🖐️</span>
+  <span>67.81%</span>
+</Stats>
+```
+
+## Example
+
+<Example>
+<h1 class='flex items-center justify-center font-bold text-3xl sm:text-5xl gap-2'><span>Web trends</span> <Stats class='mt-2'>+2.5%</Stats></h1>
+</Example>
+
+```astro
+<h1 class='flex items-center justify-center font-bold text-3xl sm:text-5xl gap-2'>
+  Astron trends 
+  <Stats class='mt-2'>
+    +2.5%
+  </Stats>
+</h1>
+```

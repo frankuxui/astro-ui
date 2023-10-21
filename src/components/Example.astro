@@ -10,12 +10,11 @@ const { isDark = false, ...attrs } = Astro.props
 ---
 
 <div
-  class:list={{
-    'example-doc': true,
-    'bg-white': !isDark,
-    'bg-slate-950': isDark,
-    [attrs.class as string]: true
-  }}
+  class:list={[
+    'example-docs',
+    isDark ? 'bg-slate-950' : 'bg-white',
+    attrs.class
+  ]}
   {...attrs}
 >
   <slot />
@@ -23,7 +22,7 @@ const { isDark = false, ...attrs } = Astro.props
 
 <style is:global>
 
-  .example-doc {
+  .example-docs {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     padding-bottom: 1.25rem;
@@ -34,7 +33,7 @@ const { isDark = false, ...attrs } = Astro.props
     margin-top: 1.5rem;
     position: relative;
   }
-  .example-doc::after {
+  .example-docs::after {
     top: 1rem;
     left: 1.5rem;
     content: "EXAMPLE";
@@ -44,15 +43,15 @@ const { isDark = false, ...attrs } = Astro.props
     position: absolute;
     z-index: 1;
   }
-  .example-doc p {
+  .example-docs p {
     margin: 0;
   }
 
   /** Modal example */
-  .example-doc.modal-example-docs {
+  .example-docs.example-modal-docs {
     background-color: #d8dade !important;
   }
-  .example-doc.modal-example-docs .modal {
+  .example-docs.example-modal-docs .modal {
     position: inherit !important;
     display: block !important;
     width: 100% !important;
@@ -60,12 +59,12 @@ const { isDark = false, ...attrs } = Astro.props
     background-color: transparent !important;
     z-index: 1 !important;
   }
-  .example-doc.modal-example-docs .modal .modal-backdrop {
+  .example-docs.example-modal-docs .modal .modal-backdrop {
     position: inherit !important;
     display: none !important;
     opacity: 0 !important;
   }
-  .example-doc.modal-example-docs .modal .modal-content{
+  .example-doc.example-modal-docs .modal .modal-content{
     position: relative !important;
     display: block !important;
     opacity: 1 !important;
@@ -74,6 +73,21 @@ const { isDark = false, ...attrs } = Astro.props
     max-height: none !important;
     height: auto !important;
     margin: 0 !important;
+  }
+
+  /** Popover */
+
+  .example-docs.example-popover-docs .astroui-popover {
+    position: relative !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+  .example-docs.example-popover-docs .astroui-popover .astroui-popover-content {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
   }
 
 </style>
