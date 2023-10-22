@@ -51,7 +51,7 @@ const { isDark = false, ...attrs } = Astro.props
   .example-docs.example-modal-docs {
     background-color: #d8dade !important;
   }
-  .example-docs.example-modal-docs .modal {
+  .example-docs.example-modal-docs .astroui-modal {
     position: inherit !important;
     display: block !important;
     width: 100% !important;
@@ -59,12 +59,16 @@ const { isDark = false, ...attrs } = Astro.props
     background-color: transparent !important;
     z-index: 1 !important;
   }
-  .example-docs.example-modal-docs .modal .modal-backdrop {
+  .example-docs.example-modal-docs .astroui-modal .astroui-modal-backdrop {
     position: inherit !important;
     display: none !important;
     opacity: 0 !important;
   }
-  .example-doc.example-modal-docs .modal .modal-content{
+  .example-docs.example-modal-docs .astroui-modal.fade .astroui-modal-content {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .example-doc.example-modal-docs .astroui-modal .astroui-modal-content{
     position: relative !important;
     display: block !important;
     opacity: 1 !important;
@@ -73,6 +77,11 @@ const { isDark = false, ...attrs } = Astro.props
     max-height: none !important;
     height: auto !important;
     margin: 0 !important;
+  }
+  @media (min-width: 576px){
+    .example-docs.example-modal-docs .astroui-modal .astroui-modal-content {
+      margin: 0 !important;
+    }
   }
 
   /** Popover */

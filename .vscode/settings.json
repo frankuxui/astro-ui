@@ -40,6 +40,13 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
   "files.associations": {
     "*.mdx": "markdown"
   }

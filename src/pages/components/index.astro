@@ -1,23 +1,123 @@
 ---
-const components = await Astro.glob('../../pages/components/**/*.mdx')
-  .then((res) => res.map((component) => {
-    return {
-      frontmatter: component.frontmatter,
-      slug: component.url
-    }
-  }))
+import Layout from '../../layouts/Layout.astro'
+
+const pathname = Astro.url.pathname
+const url = pathname.split('/').slice(-1)[0]
+const components = await Astro.glob('../components/*.mdx')
+
+
+
+
+
+
+
+
+
+
 ---
 
-<div>
-  <h1>Components</h1>
-  {
-    components.map((component) => {
-      return (
-        <div>
-          <h2>{component.frontmatter.title}</h2>
-          <p>{component.frontmatter.description}</p>
+<Layout title='Astro UI' >
+  <nav class='sticky top-0 z-[120] w-full flex h-16 items-center justify-end gap-2 px-6 bg-white/30 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
+    <div class='flex w-full items-center justify-start max-w-[90rem] mx-auto'>
+      <a href='/' class='flex items-center hover:opacity-75 md:pl-4'>
+        <span class='text-xl font-poppins font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-blue-600 '>
+        Astro ui
+        </span>
+      </a>
+    </div>
+  </nav>
+
+  <div class='mx-auto flex max-w-[90rem]'>
+
+    <aside class='hidden md:flex flex-col md:top-16 md:shrink-0 md:w-52 md:sticky md:self-start h-screen'>
+      <div class='overflow-y-auto overflow-x-hidden grow'>
+        <div class='transform-gpu overflow-hidden transition-all ease-in-out motion-reduce:transition-none'>
+          <div class='mt-6'>
+            <h3 class='px-4 pb-2 text-sm font-medium text-gray-500 uppercase tracking-wider'>Components</h3>
+            <ul class='flex flex-col gap-1 max-md:hidden mt-4'>
+              {
+                components.map((component) => (
+                  <li class='block'>
+                    <a href={component.frontmatter.slug}
+                      class='block cursor-pointer px-4 py-2 text-gray-700 rounded-md hover:text-black'
+                      class:list={{ 
+                        'text-black font-medium bg-neutral-50': url === component?.frontmatter?.slug,
+                        'flex items-center justify-between': url !== component?.frontmatter?.soon,
+                      }}
+                    >
+                      <span>{component.frontmatter.title}</span>
+                      {component?.frontmatter?.soon && <span class='px-2 h-5 flex items-center justify-center rounded text-xs bg-green-100 text-green-800'>Soon</span>}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
         </div>
-      )
-    })
-  }
-</div>
+      </div>
+    </aside>
+
+    <nav class='order-last hidden w-64 shrink-0 xl:block print:hidden px-4'>
+      <div class='sticky top-16 overflow-y-auto pr-4 pt-6 text-sm ltr:-mr-4 rtl:-ml-4'>
+        <p class='mb-4 font-medium tracking-tight'>En esta página</p>
+        <p class="text-gray-500">Listado de componentes de interfaz de usuario para el desarrollo de aplicaciones web.</p>
+      </div>
+    </nav>
+
+
+
+
+
+
+
+    <article class='w-full break-words flex min-h-[calc(100vh_-_4rem)] min-w-0 justify-center pb-8'>
+      <main class='w-full min-w-0 max-w-6xl pt-4 md:px-6'>
+        <div class='mt-8'>
+          <div class="px-0 md:pl-4 md:pr-12">
+            <div class='relative w-full p-8 md:rounded-lg overflow-hidden bg-gray-50 bg-gradient-to-tr from-[#f7f7f9] via-[#fdfdff] to-[#f7f3ff]'>
+              <div class="z-0 absolute inset-x-0 h-full ewdf top-0"></div>
+              <div class="z-0 absolute h-full top-0 left-0 bg-gradient-to-r from-white/90 to-white/10 w-1/2"></div>
+              <div class="relative z-[1]">
+                <h1 class='mb-4 text-3xl sm:text-4xl font-medium'>Components</h1>
+                <p class='mt-2 text-lg text-slate-600'>
+                  Listado de componentes de interfaz de usuario para el desarrollo de aplicaciones web.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class='px-6 md:px-12 mt-8'>
+            <div class="grid grid-cols-4 gap-4">
+              {
+                components.map((component) => (
+                  <a 
+                    href={`/${component.frontmatter.slug}`} 
+                    class='w-full flex flex-col rounded-2xl bg-gray-100'
+                  >
+                    <h2 class='mb-4 text-lg sm:text-xl font-medium'>{component.frontmatter.title}</h2>
+                    <p class='mt-2 text-base truncate text-slate-600'>
+                      {component.frontmatter.description}
+                    </p>
+                  </a>
+                ))
+              }
+            </a>
+          </div>
+        </div>
+
+        
+        <div class='py-20 mx-6 md:mx-12'>
+          <a href='/' class='flex items-center hover:opacity-75 '>
+            <span class='text-xl font-poppins font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-blue-600 '>
+            Astro ui
+            </span>
+          </a>
+          <p class='text-sm text-gray-500'>
+            &copy; {new Date().getFullYear()} Astro UI. All rights reserved.
+          </p>
+        </div>
+
+      </main>
+    </article>
+
+  </div>
+</Layout>

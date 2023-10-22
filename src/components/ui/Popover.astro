@@ -28,12 +28,14 @@ const {
   style={{
     display: initialOpen ? 'block' : 'none'
   }}
+  transition:animate="fade"
   >
   <article 
     class="astroui-popover-content"
     class:list={{
       'astroui-popover-divider': divider,
     }}
+    transition:animate="fade"
     >
     <header class="astroui-popover-header">
       <slot name="title"></slot>
@@ -79,9 +81,7 @@ const {
   function getShow(popover) {
     popover.style.display = 'block'
     popover.setAttribute('aria-hidden', 'false')
-    setTimeout(() => {
-      popover.classList.add('astroui-popover-show')
-    }, 100)
+    popover.classList.add('astroui-popover-show')
   }
 
   //
@@ -90,9 +90,7 @@ const {
   function getHide(popover) {
     popover.classList.remove('astroui-popover-show')
     popover.setAttribute('aria-hidden', 'true')
-    setTimeout(() => {
-      popover.style.display = 'none'
-    }, 100)
+    popover.style.display = 'none'
   }
 
   //
@@ -250,21 +248,18 @@ const {
   //
   // Hide the popover when clicking outside
 
-  function hideOnOutsideClick(popover, trigger) {
-    const targets = [popover, trigger]
-    const outsideClickListener = (event) => {
-      if (!targets.some((target) => target.contains(event.target)) && isShow(popover)) {
-        getHide(popover)
-        removeClickListener()
-      }
+  function hideOnOutsideClick(popover, trigger, event) {
+    if (!popover?.contains(event.target) && !trigger?.contains(event.target) && isShow(popover)) {
+      getHide(popover)
     }
-
-    const removeClickListener = () => {
-      document.removeEventListener('click', outsideClickListener)
-    }
-    document.addEventListener('click', outsideClickListener)
   }
 
+  document.addEventListener('click', (event) => {
+    popover.forEach((popover) => {
+      const trigger = document.querySelector(`[data-toggle="${popover.id}"]`)
+      hideOnOutsideClick(popover, trigger, event)
+    })
+  })
   
 
   //
@@ -280,9 +275,9 @@ const {
       hideOnCloseButton(popover)
       getPlacement(popover)
     })
-    hideOnOutsideClick(popover, trigger)
   })
 
+  
     
 </script>
 
@@ -298,15 +293,9 @@ const {
   @keyframes contentAnimation {
     0% {
       opacity: 0;
-      transform: scale(0.9);
-    }
-    75% {
-      opacity: 1;
-      transform: scale(1.05);
     }
     100% {
       opacity: 1;
-      transform: scale(1);
     }
   }
 
@@ -324,12 +313,10 @@ const {
   .astroui-popover.fade .astroui-popover-content{
     opacity: 0;
     visibility: hidden;
-    transform: scale(0.9);
   }
   .astroui-popover.astroui-popover-show .astroui-popover-content{
     opacity: 1;
     visibility: visible;
-    transform: scale(1);
   }
 
   /** Popover divider */

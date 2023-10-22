@@ -63,9 +63,9 @@ const headings = components.map(component => {
 
 <Base title={frontmatter.title}>
 
-  <nav class='sticky top-0 z-[120] w-full flex h-16 items-center justify-end gap-2 bg-white/30 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
+  <nav class='sticky top-0 z-[120] w-full flex h-16 items-center justify-end gap-2 px-6 bg-white/30 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
     <div class='flex w-full items-center justify-start max-w-[90rem] mx-auto'>
-      <a href='/' class='flex items-center hover:opacity-75 '>
+      <a href='/' class='flex items-center hover:opacity-75 md:pl-4'>
         <span class='text-xl font-poppins font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-blue-600 '>
         Astro ui
         </span>
@@ -75,19 +75,24 @@ const headings = components.map(component => {
 
   <div class='mx-auto flex max-w-[90rem]'>
 
-    <aside class='nextra-sidebar-container flex flex-col md:top-16 md:shrink-0 motion-reduce:transform-none transform-gpu transition-all ease-in-out print:hidden md:w-64 md:sticky md:self-start max-md:[transform:translate3d(0,-100%,0)]'>
-      <div class='overflow-y-auto overflow-x-hidden grow md:h-[calc(100vh_-_4rem_-_3.75rem)] nextra-scrollbar'>
+    <aside class='hidden md:flex flex-col md:top-16 md:shrink-0 md:w-52 md:sticky md:self-start h-screen'>
+      <div class='overflow-y-auto overflow-x-hidden grow'>
         <div class='transform-gpu overflow-hidden transition-all ease-in-out motion-reduce:transition-none'>
-          <div class='transition-opacity duration-500 ease-in-out motion-reduce:transition-none opacity-100'>
-            <ul class='flex flex-col gap-1 max-md:hidden mt-10'>
+          <div class='mt-6'>
+            <h3 class='px-4 pb-2 text-sm font-medium text-gray-500 uppercase tracking-wider'>Components</h3>
+            <ul class='flex flex-col gap-1 max-md:hidden mt-4'>
               {
                 components.map((component) => (
                   <li class='block'>
                     <a href={component.frontmatter.slug}
                       class='block cursor-pointer px-4 py-2 text-gray-700 rounded-md hover:text-black'
-                      class:list={{ 'text-black font-medium bg-neutral-50': url === component?.frontmatter?.slug }}
+                      class:list={{ 
+                        'text-black font-medium bg-neutral-50': url === component?.frontmatter?.slug,
+                        'flex items-center justify-between': url !== component?.frontmatter?.soon,
+                      }}
                     >
                       <span>{component.frontmatter.title}</span>
+                      {component?.frontmatter?.soon && <span class='px-2 h-5 flex items-center justify-center rounded text-xs bg-green-100 text-green-800'>Soon</span>}
                     </a>
                   </li>
                 ))
@@ -99,42 +104,36 @@ const headings = components.map(component => {
     </aside>
 
     <nav class='order-last hidden w-64 shrink-0 xl:block print:hidden px-4'>
-      <div class='nextra-scrollbar sticky top-16 overflow-y-auto pr-4 pt-6 text-sm ltr:-mr-4 rtl:-ml-4'>
+      <div class='sticky top-16 overflow-y-auto pr-4 pt-6 text-sm ltr:-mr-4 rtl:-ml-4'>
         <p class='mb-4 font-medium tracking-tight'>En esta página</p>
         {frontmatter.toc && <Toc  />}
       </div>
     </nav>
 
-    <article class='w-full break-words nextra-content flex min-h-[calc(100vh_-_h-16)] min-w-0 justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]'>
-      <main class='w-full min-w-0 max-w-6xl px-6 pt-4 md:px-12'>
-        <ul class='breadcrumbs flex items-center justify-start gap-2 text-slate-800'>
-          <li><a href='/'>Home</a></li>
-          <li>/</li>
-          <li><a href='/components'>Components</a></li>
-          <li>/</li>
-          <li class='text-gray-400'>{frontmatter.title}</li>
-        </ul>
-
+    <article class='w-full break-words flex min-h-[calc(100vh_-_4rem)] min-w-0 justify-center pb-8'>
+      <main class='w-full min-w-0 max-w-6xl pt-4 md:px-6'>
         <div class='mt-8'>
           <!-- <div class='w-full p-8 rounded-lg bg-gray-50 bg-gradient-to-tr from-[#f7f7f9] via-[#fdfdff] to-[#f7f3ff]'>
             <h1 class='mb-4 text-3xl sm:text-4xl font-medium'>{frontmatter.title}</h1>
             <p class='mt-2 text-lg text-slate-600'>{frontmatter.description}</p>
           </div> -->
-          <div class='relative w-full p-8 rounded-lg overflow-hidden bg-gray-50 bg-gradient-to-tr from-[#f7f7f9] via-[#fdfdff] to-[#f7f3ff]'>
-            <div class="z-0 absolute inset-x-0 h-full ewdf top-0"></div>
-            <div class="z-0 absolute h-full top-0 left-0 bg-gradient-to-r from-white/90 to-white/10 w-1/2"></div>
-            <div class="relative z-[1]">
-              <h1 class='mb-4 text-3xl sm:text-4xl font-medium'>{frontmatter.title}</h1>
-              <p class='mt-2 text-lg text-slate-600'>{frontmatter.description}</p>
+          <div class="px-0 md:pl-4 md:pr-12">
+            <div class='relative w-full p-8 md:rounded-lg overflow-hidden bg-gray-50 bg-gradient-to-tr from-[#f7f7f9] via-[#fdfdff] to-[#f7f3ff]'>
+              <div class="z-0 absolute inset-x-0 h-full ewdf top-0"></div>
+              <div class="z-0 absolute h-full top-0 left-0 bg-gradient-to-r from-white/90 to-white/10 w-1/2"></div>
+              <div class="relative z-[1]">
+                <h1 class='mb-4 text-3xl sm:text-4xl font-medium'>{frontmatter.title}</h1>
+                <p class='mt-2 text-lg text-slate-600'>{frontmatter.description}</p>
+              </div>
             </div>
           </div>
-          <div id='is-toc' class='documentation-content'>
+          <div id='is-toc' class='documentation-content px-6 md:px-12'>
             <slot />
           </div>
         </div>
 
         <div
-          class='grid mt-16 rounded-lg border divide-x overflow-hidden shadow-sm border-gray-200'
+          class='mx-6 md:mx-12 grid mt-16 rounded-lg border divide-x overflow-hidden shadow-sm border-gray-200'
           class:list={[ 
             previous === undefined || next === undefined ? 'grid-cols-1' : 'grid-cols-2'
           ]}
@@ -169,7 +168,7 @@ const headings = components.map(component => {
 
         </div>
 
-        <div class='py-20'>
+        <div class='py-20 mx-6 md:mx-12'>
           <a href='/' class='flex items-center hover:opacity-75 '>
             <span class='text-xl font-poppins font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-blue-600 '>
             Astro ui
@@ -240,6 +239,9 @@ const headings = components.map(component => {
   .documentation-content p {
     @apply mt-4 mb-4 text-sm sm:text-base;
   }
+  .documentation-content .example-docs p {
+    @apply m-0;
+  }
   .documentation-content p>code, .documentation-content li>code {
     @apply px-1.5 rounded-sm bg-cyan-100 text-cyan-800;
   }
@@ -266,10 +268,10 @@ const headings = components.map(component => {
 
   /** Lists */
 
-  .documentation-content:not(.example-doc) > ul {
+  .documentation-content:not(.example-docs) > ul {
     @apply mt-4 mb-4 list-disc list-inside;
   }
-  .documentation-content:not(.example-doc) > ul li, .documentation-content:not(.example-doc) > ol li {
+  .documentation-content:not(.example-docs) > ul li, .documentation-content:not(.example-docs) > ol li {
     @apply mt-4;
   }
   .documentation-content ol {

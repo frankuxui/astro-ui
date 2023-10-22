@@ -7,6 +7,8 @@ interface Props {
   staticBackdrop?: boolean
   initialOpen?: boolean
   scrollBehavior?: 'inside' | 'outside'
+  showButtonClose?: boolean
+  border?: boolean
 }
 
 const sizes = {
@@ -32,166 +34,179 @@ const {
   size = 'md',
   staticBackdrop = false,
   initialOpen = false,
-  scrollBehavior = 'inside'
+  scrollBehavior = 'inside',
+  showButtonClose = true,
+  border = true
 } = Astro.props
 
 ---
 
-<script>
-  const arrayTarget = document.querySelectorAll < HTMLButtonElement > ('[data-toggle]')
+<div
+  role='dialog'
+  class='astroui-modal fade'
+  id={id}
+  aria-hidden='true'
+  style={{ display: 'none' }}
+  class:list={{
+    [`astroui-modal-${placement}`]: true,
+    [`astroui-modal-${size}`]: true,
+    [`astroui-modal-scroll-${scrollBehavior}`]: true,
+    'astroui-modal-border': border,
+    show: initialOpen
 
-  //
+  }}
+  tabindex='-1'
+>
+  <div class='astroui-modal-backdrop' tabindex='-1' />
+
+  <article class='astroui-modal-content' aria-labelledby='modal-title' aria-describedby='modal-body'>
+
+    <slot name='content'>
+
+      <header class='astroui-modal-header'>
+
+        <slot name='title'>
+          <h2 class='astroui-modal-title'>
+            <slot name='title' />
+          </h2>
+        </slot>
+
+        {showButtonClose && (
+          <button type='button' class='astroui-modal-close' data-dismiss='modal' aria-label='Close'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='22'
+              height='22'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='#000000'
+              stroke-width='2'
+              stroke-linecap='round'
+              stroke-linejoin='round'>
+              <line x1='18' y1='6' x2='6' y2='18'></line>
+              <line x1='6' y1='6' x2='18' y2='18'></line>
+            </svg>
+          </button>
+        )}
+      </header>
+
+      <main class='astroui-modal-body'>
+        <slot name='body' />
+      </main>
+
+      <footer class='astroui-modal-footer'>
+        <slot name='footer' />
+      </footer>
+
+    </slot>
+  </article>
+</div>
+
+
+<script define:vars={{ id, initialOpen, staticBackdrop }}>
+
+  const trigger = document.querySelectorAll(`[data-modal-toggle="${id}"]`)
+  const buttonClose = document.querySelectorAll(`#${id} [data-dismiss="modal"]`)
+  const modal = document.querySelectorAll(`#${id}`)
+  
   // Static backdrop
 
-  function getStaticClass (modal: HTMLElement) {
-    modal.classList.add('modal-static')
+  function getStaticClass (modal) {
+    modal.classList.add('astroui-modal-static')
     document.body.style.overflow = 'hidden'
-    document.body.classList.add('modal-open')
+    document.body.classList.add('astroui-modal-open')
     setTimeout(() => {
-      modal.classList.remove('modal-static')
+      modal.classList.remove('astroui-modal-static')
     }, 100)
   }
 
-  //
-  // Get show class
+  // Show modal
 
-  function getShow (modal: HTMLElement) {
+  function showModal (modal) {
     modal.style.display = 'flex'
     setTimeout(() => {
       modal.classList.add('show')
     }, 100)
     modal.setAttribute('aria-hidden', 'false')
     document.body.style.overflow = 'hidden'
-    document.body.classList.add('modal-open')
+    document.body.classList.add('astroui-modal-open')
   }
 
-  //
-  // Remove show class
+  // Remove modal
 
-  function getRemove (modal: HTMLElement) {
+  function dismissModal (modal) {
     modal.classList.remove('show')
     setTimeout(() => {
       modal.style.display = 'none'
     }, 200)
     modal.setAttribute('aria-hidden', 'true')
     document.body.style.overflow = ''
-    document.body.classList.remove('modal-open')
+    document.body.classList.remove('astroui-modal-open')
   }
 
   //
   // Function on dismissing modal by button close
 
-  const getDismiss = (buttonClose: HTMLButtonElement, modal: HTMLElement) => {
+  const getDismiss = (buttonClose, modal) => {
     buttonClose.addEventListener('click', () => {
-      getRemove(modal)
+      dismissModal(modal)
     })
   }
 
-  arrayTarget.forEach((target) => {
-    const modal = document.querySelector < HTMLElement > (`[data-modal="${target.dataset.toggle}"]`) as HTMLElement
-    const modalChildrens: Array < HTMLElement > = Array.from(modal.children) as Array < HTMLElement >
-    const backdrop = modalChildrens.find((children) => children.classList.contains('modal-backdrop'))
-    const isStaticBackdrop = modal.dataset.staticBackdrop === 'true'
-    const dismissingButtons = document.querySelectorAll < HTMLButtonElement > ('[data-dismiss]')
+  //
+  // Close modal by all buttons close
 
-    //
-    // Initial open modal
-
-    if (modal.dataset.initialOpen === 'true') {
-      getShow(modal)
-    }
-
-    // Dismiss modal
-    dismissingButtons.forEach((dissmiss) => {
-      getDismiss(dissmiss, modal)
+  modal.forEach((modal) => {
+    buttonClose.forEach((buttonClose) => {
+      getDismiss(buttonClose, modal)
     })
+  })
+    
+  
+  // Event listeners
+  
+  trigger.forEach((trigger) => {
+    const modal = document.querySelector(`#${trigger.dataset.modalToggle}`)
+    const backdrop = document.querySelector(`#${trigger.dataset.modalToggle} .astroui-modal-backdrop`)
 
+    // Initial open modal
+  
+    if (modal.dataset.initialOpen) {
+      showModal(modal)
+    }
+    
     // Open modal
-    target.addEventListener('click', () => {
-      getShow(modal)
+
+    trigger.addEventListener('click', () => {
+      showModal(modal)
     })
 
     // Close modal with backdrop
+
     modal.addEventListener('click', (event) => {
-      if (isStaticBackdrop && event.target === backdrop) {
+      if (staticBackdrop && event.target === backdrop) {
         getStaticClass(modal)
       } else if (event.target === backdrop) {
-        getRemove(modal)
+        dismissModal(modal)
       }
     })
+    
+    // Close modal with press escape
 
-    // Close modal with escape key
     document.addEventListener('keydown', (event) => {
-      if (isStaticBackdrop ) {
+      if (staticBackdrop ) {
         if (event.key === 'Escape' && modal.classList.contains('show')) {
           getStaticClass(modal)
         }
       } else if (event.key === 'Escape' && modal.classList.contains('show')) {
-        getRemove(modal)
+        dismissModal(modal)
       }
     })
+
   })
+
+
 </script>
-
-<div
-  role='dialog'
-  class='modal fade'
-  data-modal={`${id}`}
-  aria-hidden='true'
-  style={{ display: 'none' }}
-  class:list={{
-    [`modal-${placement}`]: true,
-    [`modal-${size}`]: true,
-    [`modal-scroll-${scrollBehavior}`]: true,
-    show: initialOpen
-
-  }}
-  tabindex='-1'
-  data-static-backdrop={staticBackdrop.toString()}
-  data-initial-open={initialOpen.toString()}
->
-  <div class='modal-backdrop' tabindex='-1' />
-
-  <article class='modal-content' aria-labelledby='modal-title' aria-describedby='modal-body'>
-
-    <slot name='modal-content'>
-
-      <header class='modal-header'>
-
-        <slot name='modal-title'>
-          <h2 class='modal-title'>
-            <slot name='modal-title' />
-          </h2>
-        </slot>
-
-        <button type='button' class='btn-modal-close' data-dismiss='modal' aria-label='Close'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='#000000'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'>
-            <line x1='18' y1='6' x2='6' y2='18'></line>
-            <line x1='6' y1='6' x2='18' y2='18'></line>
-          </svg>
-        </button>
-      </header>
-
-      <main class='modal-body'>
-        <slot name='modal-body' />
-      </main>
-
-      <footer class='modal-footer'>
-        <slot name='modal-footer' />
-      </footer>
-
-    </slot>
-  </article>
-</div>
 
 <style
   is:global
@@ -205,51 +220,51 @@ const {
   }
 
   @media (min-width: 576px) {
-    .modal-content {
+    .astroui-modal-content {
       max-width: var(--size);
     }
   }
 
   /** Positions */
 
-  .modal.modal-top-center {
+  .astroui-modal.astroui-modal-top-center {
     align-items: center;
     justify-content: flex-start;
   }
-  .modal.modal-top-start {
+  .astroui-modal.astroui-modal-top-start {
     align-items: flex-start;
     justify-content: flex-start;
   }
-  .modal.modal-top-end {
+  .astroui-modal.astroui-modal-top-end {
     align-items: flex-end;
     justify-content: flex-start;
   }
-  .modal.modal-center {
+  .astroui-modal.astroui-modal-center {
     align-items: center;
     justify-content: center;
   }
-  .modal.modal-center-start {
+  .astroui-modal.astroui-modal-center-start {
     align-items: flex-start;
     justify-content: center;
   }
-  .modal.modal-center-end {
+  .astroui-modal.astroui-modal-center-end {
     align-items: flex-end;
     justify-content: center;
   }
-  .modal.modal-bottom-center {
+  .astroui-modal.astroui-modal-bottom-center {
     align-items: center;
     justify-content: flex-end;
   }
-  .modal.modal-bottom-start {
+  .astroui-modal.astroui-modal-bottom-start {
     align-items: flex-start;
     justify-content: flex-end;
   }
-  .modal.modal-bottom-end {
+  .astroui-modal.astroui-modal-bottom-end {
     align-items: flex-end;
     justify-content: flex-end;
   }
 
-  .modal {
+  .astroui-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -262,7 +277,7 @@ const {
     padding: 1.5rem;
   }
 
-  .modal-backdrop {
+  .astroui-modal-backdrop {
     position: absolute;
     top: 0;
     left: 0;
@@ -271,7 +286,7 @@ const {
     height: 100%;
   }
 
-  .modal-content {
+  .astroui-modal-content {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -283,103 +298,113 @@ const {
     transition: visibility .25s ease-out, opacity .25s ease-out, transform .25s ease-out;
   }
   @media (min-width: 576px) {
-    .modal-content {
+    .astroui-modal-content {
       margin: 4rem 0;
     }
   }
-  .modal.fade .modal-content {
+  .astroui-modal.fade .astroui-modal-content {
     opacity: 0;
     visibility: hidden;
     transform: scale(1.1);
   }
-  .modal.show .modal-content{
+  .astroui-modal.show .astroui-modal-content{
     opacity: 1;
     visibility: visible;
     transform: scale(1);
   }
 
-  .modal.modal-static .modal-content {
+  .astroui-modal.astroui-modal-static .astroui-modal-content {
     transform: scale(1.02);
   }
 
   /** Modal header */
 
-  .modal-header{
+  .astroui-modal-header{
     display: flex;
-    padding: 1.5rem;
+    padding: 1rem;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #e9ecef;
   }
-  .modal-title {
+  .astroui-modal-title {
     margin: 0;
     font-size: 1.25rem;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.5;
+    max-width: calc(100% - 3rem);
   }
-  .btn-modal-close {
+
+  /** Modal close button */
+
+  .astroui-modal-close {
     display: flex;
     flex: none;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     background-color: transparent;
     transition: background-color .25s ease-out;
   }
-  .btn-modal-close:hover {
+  .astroui-modal-close:hover {
     background-color: #e7e8ea;
   }
 
   /** Modal body */
 
-  .modal-body {
+  .astroui-modal-body {
     position: relative;
     flex: 1 1 auto;
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   /** Modal footer */
 
-  .modal-footer {
+  .astroui-modal-footer {
     display: flex;
     flex-shrink: 0;
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-end;
-    padding: 1.5rem;
+    padding: 1rem;
     gap: .5rem;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    border-top: 1px solid #e9ecef;
   }
 
   /** Overflow scroll */
 
-  .modal.modal-scroll-outside {
+  .astroui-modal.astroui-modal-scroll-outside {
     overflow-y: auto;
   }
-  .modal.modal-scroll-outside .modal-content{
+  .astroui-modal.astroui-modal-scroll-outside .astroui-modal-content{
     max-height: auto;
     height: auto;
   }
-  .modal.modal-scroll-inside {
+  .astroui-modal.astroui-modal-scroll-inside {
     overflow: hidden;
   }
-  .modal.modal-scroll-inside .modal-content {
+  .astroui-modal.astroui-modal-scroll-inside .astroui-modal-content {
     overflow: hidden;
   }
   @media (min-width: 576px) {
-    .modal.modal-scroll-inside .modal-content{
+    .astroui-modal.astroui-modal-scroll-inside .astroui-modal-content{
       max-height: 100%;
-      max-height: calc(100vh - 4rem);
-      height: auto;
+      max-height: calc(100% - 7.5rem);
     }
   }
-  .modal.modal-scroll-inside .modal-body{
-    overflow-y: auto;
+  .astroui-modal.astroui-modal-scroll-inside .astroui-modal-body{
+    flex: 1 1 0%;
+    overflow: auto
   }
 
+  /** Border */
+
+  .astroui-modal.astroui-modal-border .astroui-modal-content > :not([hidden]) ~ :not([hidden]) {
+    --divide-y-reverse: 0;
+    border-top-width: calc(1px * calc(1 - var(--divide-y-reverse)));
+    border-bottom-width: calc(1px * var(--divide-y-reverse));
+  }
+  
 </style>
