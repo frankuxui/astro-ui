@@ -13,14 +13,28 @@ const { title } = Astro.props;
     <meta name='description' content='Astro description' />
     <meta name='viewport' content='width=device-width' />
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <meta name='generator' content={Astro.generator} />
     <title>{title}</title>
+    <script src='../script/theme.js'></script>
     
   </head>
+
+  <script>
+    if ( localStorage.getItem("color-theme") === "dark" || (!("color-theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches) ) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  </script>
   <body>
     <slot />
   </body>
-</html>
+  </html>
+  
+
 
 <style is:global>
 
@@ -28,18 +42,28 @@ const { title } = Astro.props;
   @tailwind components;
   @tailwind utilities;
 
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
   :root {
-    --font-family: 'Roboto', sans-serif;
+    --font-family: 'Inter', sans-serif;
     --font-size: 1rem;
     --bg: white;
+    --color: black;
+  }
+  
+  html.dark {
+    --bg: #030712;
+    --color: theme(colors.gray.100);
+  }
 
+  html, body {
+    font-family: var(--font-family);
   }
 
   body {
     background-color: var(--bg);
-    font-family: var(--font-family);
+    color: var(--color);
   }
+
 
 </style>

@@ -7,11 +7,13 @@ type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
 export interface Props extends HTMLAttributes<'div'> {
   variant?: Variant
   size?: Sizes
+  growing?: boolean
 }
 
 const {
   size = 'md',
   variant = 'primary',
+  growing = false,
   ...attrs
 } = Astro.props
 
@@ -19,21 +21,26 @@ const {
 
 <div
   class:list={{
-    spinner: true,
-    'spinner-xs': size === 'xs',
-    'spinner-sm': size === 'sm',
-    'spinner-md': size === 'md',
-    'spinner-lg': size === 'lg',
-    'spinner-xl': size === 'xl',
-    'spinner-2xl': size === '2xl',
-    'spinner-3xl': size === '3xl',
-    'spinner-4xl': size === '4xl',
-    'spinner-5xl': size === '5xl',
+    
+    [growing === true ? 'astroui-spinner-growing' : 'astroui-spinner'] : true,
+    
+    'astroui-spinner-xs': size === 'xs',
+    'astroui-spinner-sm': size === 'sm',
+    'astroui-spinner-md': size === 'md',
+    'astroui-spinner-lg': size === 'lg',
+    'astroui-spinner-xl': size === 'xl',
+    'astroui-spinner-2xl': size === '2xl',
+    'astroui-spinner-3xl': size === '3xl',
+    'astroui-spinner-4xl': size === '4xl',
+    'astroui-spinner-5xl': size === '5xl',
 
-    'spinner-primary': variant === 'primary',
-    'spinner-secondary': variant === 'secondary',
-    'spinner-light': variant === 'light',
-    'spinner-dark': variant === 'dark'
+    'astroui-spinner-primary': variant === 'primary',
+    'astroui-spinner-secondary': variant === 'secondary',
+    'astroui-spinner-light': variant === 'light',
+    'astroui-spinner-dark': variant === 'dark',
+
+    'astroui-spinner-growing': growing,
+
 
   }}
   {...attrs}
@@ -54,22 +61,9 @@ const {
     --dark: #1f2937;
   }
 
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  .animate-spin {
-    animation: spin 1s linear infinite;
-  }
-
-  .spinner {
-    display: inline-block;
-    flex: none;
-    border: var(--border-width) solid currentColor;
-    border-color: var(--border-color);
-    border-radius: var(--border-radius);
-    animation: spin 1s linear infinite;
+  
+  .astroui-spinner {
+    @apply inline-flex flex-none border-2 dark:border-white/20 border-black/20 rounded-full animate-spin;
   }
 
   .sr-only {
@@ -86,72 +80,88 @@ const {
 
   /** Sizes */
 
-  .spinner-xs {
+  .astroui-spinner.astroui-spinner-xs, .astroui-spinner-growing.astroui-spinner-xs {
     width: 1rem;
     height: 1rem;
   }
 
-  .spinner-sm {
+  .astroui-spinner.astroui-spinner-sm, .astroui-spinner-growing.astroui-spinner-sm {
     width: 1.25rem;
     height: 1.25rem;
   }
 
-  .spinner-md {
+  .astroui-spinner.astroui-spinner-md, .astroui-spinner-growing.astroui-spinner-md {
     width: 1.5rem;
     height: 1.5rem;
   }
 
-  .spinner-lg {
+  .astroui-spinner.astroui-spinner-lg, .astroui-spinner-growing.astroui-spinner-lg {
     width: 1.75rem;
     height: 1.75rem;
   }
 
-  .spinner-xl {
+  .astroui-spinner.astroui-spinner-xl, .astroui-spinner-growing.astroui-spinner-xl {
     width: 2rem;
     height: 2rem;
   }
 
-  .spinner-2xl {
+  .astroui-spinner.astroui-spinner-2xl, .astroui-spinner-growing.astroui-spinner-2xl {
     width: 2.25rem;
     height: 2.25rem;
   }
 
-  .spinner-3xl {
+  .astroui-spinner.astroui-spinner-3xl, .astroui-spinner-growing.astroui-spinner-3xl {
     width: 3rem;
     height: 3rem;
-    border-width: 3px;
+  }
+  .astroui-spinner.astroui-spinner-3xl, .astroui-spinner.astroui-spinner-4xl,.astroui-spinner.astroui-spinner-5xl{
+    @apply border-[3px];
   }
 
-  .spinner-4xl {
+  .astroui-spinner.astroui-spinner-4xl, .astroui-spinner-growing.astroui-spinner-4xl {
     width: 3.5rem;
     height: 3.5rem;
-    border-width: 3px;
   }
 
-  .spinner-5xl {
+  .astroui-spinner.astroui-spinner-5xl, .astroui-spinner-growing.astroui-spinner-5xl {
     width: 4rem;
     height: 4rem;
-    border-width: 3px;
   }
 
   /** Variants */
 
-  .spinner-primary {
-    border-top-color: var(--primary);
+  .astroui-spinner-primary {
+    @apply border-t-primary dark:border-t-violet-400;
+  }
+  .astroui-spinner-growing.astroui-spinner-primary {
+    @apply bg-primary dark:bg-violet-400;
   }
 
-  .spinner-secondary {
-    border-top-color: var(--secondary);
+  .astroui-spinner-secondary {
+    @apply border-t-secondary dark:border-t-white/50;
+  }
+  .astroui-spinner-growing.astroui-spinner-secondary {
+    @apply bg-secondary;
   }
 
-  .spinner-light {
-    border-color: rgba(255, 255, 255, 0.263);
-    border-top-color: var(--light);
+  .astroui-spinner-light {
+    @apply border-white/40 border-t-white;
+  }
+  .astroui-spinner-growing.astroui-spinner-light {
+    @apply bg-white;
   }
 
-  .spinner-dark {
-    border-color: rgba(0 0 0 / 0.1);
-    border-top-color: var(--dark);
+  .astroui-spinner-dark {
+    @apply border-t-black border-black/10 dark:border-white/20 dark:border-t-white/50; 
+  }
+  .astroui-spinner-growing.astroui-spinner-dark {
+    @apply bg-black dark:bg-white/50;
+  }
+
+  /** Growing */
+
+  .astroui-spinner-growing {
+    @apply inline-block rounded-full opacity-0 animate-growing;
   }
 
 </style>

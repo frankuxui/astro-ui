@@ -260,12 +260,23 @@ const h = headings.map(heading => {
     text-decoration: none;
     transition: color 0.2s;
   }
+  .dark .toc-content a {
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
+  }
   .toc-content a:hover {
-    color: #000;
+    --tw-text-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-text-opacity));
+  }
+  .dark .toc-content a:hover {
+    color: theme(colors.gray.100);
   }
   .toc-content a.toc-active {
     color: #0a0318;
     font-weight: bold;
+  }
+  .dark .toc-content a.toc-active {
+    color: #fff;
   }
 </style>
 

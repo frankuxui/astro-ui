@@ -11,8 +11,8 @@ const { isDark = false, ...attrs } = Astro.props
 
 <div
   class:list={[
-    'example-docs',
-    isDark ? 'bg-slate-950' : 'bg-white',
+    'example-docs border border-gray-200 dark:border-gray-800',
+    isDark ? 'bg-gray-900 dark:bg-gray-900' : 'bg-white dark:bg-gray-900',
     attrs.class
   ]}
   {...attrs}
@@ -49,7 +49,7 @@ const { isDark = false, ...attrs } = Astro.props
 
   /** Modal example */
   .example-docs.example-modal-docs {
-    background-color: #d8dade !important;
+    @apply bg-gray-200
   }
   .example-docs.example-modal-docs .astroui-modal {
     position: inherit !important;

@@ -7,7 +7,9 @@ toc: true
 soon: false
 ---
 import Example from '../../components/Example.astro'
+import Callout from '../../components/Callout.astro'
 import Badge from '../../components/ui/Badge.astro'
+import Button from '../../components/ui/Button.astro'
 
 ## Usage
 
@@ -55,13 +57,14 @@ Estilos o variaciones que se pueden aplicar a los badges para representar difere
 
 ## Sizes
 
-La propiedad size en los badges se utiliza para ajustar el tamaño de los badges en una página web. Permite controlar visualmente el aspecto y la legibilidad de los badges según tus necesidades de diseño.
+La propiedad size en los badges se utiliza para ajustar el tamaño de los badges en una página web. Permite controlar visualmente el aspecto y la legibilidad de los badges según tus necesidades de diseño. Los tamaño disponibles son: `xs`, `sm`, `md` y `lg`.
 
 <Example>
   <div class="flex items-center gap-4 flex-wrap">
     <Badge size='xs'>xs</Badge>
     <Badge size='sm'>sm</Badge>
     <Badge size='md'>md</Badge>
+    <Badge size='lg'>lg</Badge>
   </div>
 </Example>
 
@@ -69,6 +72,7 @@ La propiedad size en los badges se utiliza para ajustar el tamaño de los badges
 <Badge size='xs'>xs</Badge>
 <Badge size='sm'>sm</Badge>
 <Badge size='md'>md</Badge>
+<Badge size='lg'>lg</Badge>
 ```
 
 ## Pill
@@ -77,14 +81,139 @@ Esta opción permite convertir los badges en elementos circulares o redondeados.
 
 <Example>
   <div class="flex items-center gap-4 flex-wrap">
-    <Badge pill size='xs'>xs</Badge>
-    <Badge pill size='sm'>sm</Badge>
-    <Badge pill size='md'>md</Badge>
+    <Badge pill size='xs'>Badge</Badge>
+    <Badge pill size='sm'>Badge</Badge>
+    <Badge pill size='md'>Badge</Badge>
+    <Badge pill size='lg'>Badge</Badge>
   </div>
 </Example>
 
 ```astro
-<Badge pill size='xs'>xs</Badge>
-<Badge pill size='sm'>sm</Badge>
-<Badge pill size='md'>md</Badge>
+<Badge pill size='xs'>Badge</Badge>
+<Badge pill size='sm'>Badge</Badge>
+<Badge pill size='md'>Badge</Badge>
+<Badge pill size='lg'>Badge</Badge>
 ```
+
+<Example>
+  <div class="flex items-center gap-4 flex-wrap">
+    <Badge pill size='xs'>1</Badge>
+    <Badge pill size='sm'>2</Badge>
+    <Badge pill size='md'>3</Badge>
+    <Badge pill size='lg'>4</Badge>
+  </div>
+</Example>
+
+```astro
+<Badge pill size='xs'>1</Badge>
+<Badge pill size='sm'>2</Badge>
+<Badge pill size='md'>3</Badge>
+<Badge pill size='lg'>4</Badge>
+```
+
+## Custom badges
+
+Para tener estos badges customizados, se debe utilizar la prop `inline` y agregar las clases de tailwind necesarias. Esta props permite eliminar todos los estilos predeterminados de los badges.
+
+<Callout variant='warning'>
+  Es importante saber que una ves que la prop `inline` se agrega, no será posible utilizar las props `variant`, `size` y `pill`.
+</Callout>
+
+<Example>
+  <div class="flex items-center gap-4 flex-wrap">
+    <Badge inline class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-pink-500 text-white">Custom badge</Badge>
+    <Badge inline class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-purple-100 text-purple-800">Custom badge</Badge>
+    <Badge inline class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">8</Badge>
+  </div>
+</Example>
+
+```astro
+<Badge inline class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-pink-500 text-white">Custom badge</Badge>
+<Badge inline class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-purple-100 text-purple-800">Custom badge</Badge>
+<Badge inline class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">8</Badge>
+```
+
+## Notification
+
+<Example>
+  <button class='relative flex items-center justify-center text-sm font-medium h-9 rounded-md px-6 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700'>
+    <span>Notifications</span>
+    <Badge pill size='xs' class='absolute -top-1 right-0'>2</Badge>
+  </button>
+</Example>
+
+```astro
+<button class='relative flex items-center justify-center text-sm font-medium h-9 rounded-md px-6 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700'>
+  <span>Notifications</span>
+  <Badge pill size='xs' class='absolute -top-1 right-0'>2</Badge>
+</button>
+```
+
+<Example>
+  <button class='relative flex items-center justify-center text-sm font-medium h-9 rounded-md px-6 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700'>
+    <span>Messages</span>
+    <Badge pill size='xs' class='absolute -top-1 -right-1'>10</Badge>
+  </button>
+</Example>
+
+```astro
+<button class='relative flex items-center justify-center text-sm font-medium h-9 rounded-md px-6 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700'>
+  <span>Messages</span>
+  <Badge pill size='xs' class='absolute -top-1 -right-1'>10</Badge>
+</button>
+```
+
+<Example>
+  <div class='flex items-center gap-4 flex-wrap'>
+    <Button>
+      <span>Notifications</span>
+      <Badge variant='light' pill size='xs'>2</Badge>
+    </Button>
+    <Button variant='secondary'>
+      <span>Emails</span>
+      <Badge variant='dark' pill size='xs'>8</Badge>
+    </Button>
+    <button class='relative gap-2 flex items-center justify-center text-sm font-medium h-10 rounded-md px-6 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700'>
+      <span>Messages</span>
+      <Badge pill size='xs'>12</Badge>
+    </button>
+  </div>
+</Example>
+
+```astro
+<Button>
+  <span>Notifications</span>
+  <Badge variant='light' pill size='xs'>2</Badge>
+</Button>
+
+<Button variant='secondary'>
+  <span>Emails</span>
+  <Badge variant='dark' pill size='xs'>8</Badge>
+</Button>
+
+<button class='relative gap-2 flex items-center justify-center text-sm font-medium h-10 rounded-md px-6 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700'>
+  <span>Messages</span>
+  <Badge pill size='xs'>12</Badge>
+</button>
+```
+
+<Example>
+  <div class='flex items-center gap-4 flex-wrap'>
+    <button className='relative gap-2 flex items-center justify-center text-sm font-medium h-10 rounded-md px-3 border border-gray-200 hover:border-gray-300 dark:border-gray-800 dark:hover:border-gray-700'>
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewBox="0,0,256,256"><g fill="currentColor" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.33333,5.33333)"><path d="M23.27734,4.01758c-8.08348,0.38074 -14.27734,7.32581 -14.27734,15.36328v7.26758l-2.65039,5.33203c-0.00466,0.00972 -0.00922,0.01948 -0.01367,0.0293c-1.06626,2.2675 0.65977,4.99023 3.16602,4.99023h8.49805c0,3.29586 2.70414,6 6,6c3.29586,0 6,-2.70414 6,-6h8.49609c2.50624,0 4.23449,-2.72217 3.16797,-4.99023c-0.00445,-0.00981 -0.00901,-0.01958 -0.01367,-0.0293l-2.65039,-5.33203v-7.64844c0,-8.5062 -7.13671,-15.38664 -15.72266,-14.98242zM23.41797,7.01367c6.92006,-0.32579 12.58203,5.14853 12.58203,11.98633v8c-0.00021,0.23174 0.05327,0.46037 0.15625,0.66797l2.79297,5.62109c0.17961,0.38495 -0.0282,0.71094 -0.45312,0.71094h-28.99414c-0.42493,0 -0.63105,-0.32543 -0.45117,-0.71094v-0.00195l2.79297,-5.61914c0.10298,-0.2076 0.15646,-0.43623 0.15625,-0.66797v-7.61914c0,-6.50053 4.97945,-12.06393 11.41797,-12.36719zM21,37h6c0,1.67413 -1.32587,3 -3,3c-1.67413,0 -3,-1.32587 -3,-3z"></path></g></g></svg>
+      <Badge variant='success' pill size='xs' class='absolute -top-1 -right-1'>1</Badge>
+    </button>
+    <button className='relative gap-2 flex items-center justify-center text-sm font-medium h-10 rounded-md px-3 border border-gray-200 hover:border-gray-300 dark:border-gray-800 dark:hover:border-gray-700'>
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewBox="0,0,256,256"><g fill="currentColor" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.33333,5.33333)"><path d="M23.27734,4.01758c-8.08348,0.38074 -14.27734,7.32581 -14.27734,15.36328v7.26758l-2.65039,5.33203c-0.00466,0.00972 -0.00922,0.01948 -0.01367,0.0293c-1.06626,2.2675 0.65977,4.99023 3.16602,4.99023h8.49805c0,3.29586 2.70414,6 6,6c3.29586,0 6,-2.70414 6,-6h8.49609c2.50624,0 4.23449,-2.72217 3.16797,-4.99023c-0.00445,-0.00981 -0.00901,-0.01958 -0.01367,-0.0293l-2.65039,-5.33203v-7.64844c0,-8.5062 -7.13671,-15.38664 -15.72266,-14.98242zM23.41797,7.01367c6.92006,-0.32579 12.58203,5.14853 12.58203,11.98633v8c-0.00021,0.23174 0.05327,0.46037 0.15625,0.66797l2.79297,5.62109c0.17961,0.38495 -0.0282,0.71094 -0.45312,0.71094h-28.99414c-0.42493,0 -0.63105,-0.32543 -0.45117,-0.71094v-0.00195l2.79297,-5.61914c0.10298,-0.2076 0.15646,-0.43623 0.15625,-0.66797v-7.61914c0,-6.50053 4.97945,-12.06393 11.41797,-12.36719zM21,37h6c0,1.67413 -1.32587,3 -3,3c-1.67413,0 -3,-1.32587 -3,-3z"></path></g></g></svg>
+      <Badge variant='error' pill size='xs' class='absolute -top-2 left-full -ml-2'>99+</Badge>
+    </button>
+  </div>
+</Example>
+
+## Props
+
+| Prop | Type | default | Description |
+| ---- | ---- | ------- | ----------- |
+| variant | String | primary | Variante del badge. Las variantes disponibles son: `primary`, `secondary`, `success`, `error`, `dark` y `light`. |
+| size | String | md | Tamaño del badge. Los tamaños disponibles son: `xs`, `sm`, `md` y `lg`. |
+| pill | Boolean | false | Si el badge debe ser redondeado. |

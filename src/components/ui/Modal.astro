@@ -51,9 +51,7 @@ const {
     [`astroui-modal-${placement}`]: true,
     [`astroui-modal-${size}`]: true,
     [`astroui-modal-scroll-${scrollBehavior}`]: true,
-    'astroui-modal-border': border,
-    show: initialOpen
-
+    'astroui-modal-border': border
   }}
   tabindex='-1'
 >
@@ -171,7 +169,7 @@ const {
 
     // Initial open modal
   
-    if (modal.dataset.initialOpen) {
+    if (initialOpen) {
       showModal(modal)
     }
     
@@ -376,17 +374,16 @@ const {
   /** Overflow scroll */
 
   .astroui-modal.astroui-modal-scroll-outside {
-    overflow-y: auto;
+    @apply overflow-y-auto;
   }
   .astroui-modal.astroui-modal-scroll-outside .astroui-modal-content{
-    max-height: auto;
-    height: auto;
+    @apply max-h-[auto] h-auto;
   }
   .astroui-modal.astroui-modal-scroll-inside {
-    overflow: hidden;
+    @apply overflow-hidden;
   }
   .astroui-modal.astroui-modal-scroll-inside .astroui-modal-content {
-    overflow: hidden;
+    @apply overflow-hidden;
   }
   @media (min-width: 576px) {
     .astroui-modal.astroui-modal-scroll-inside .astroui-modal-content{
@@ -395,16 +392,22 @@ const {
     }
   }
   .astroui-modal.astroui-modal-scroll-inside .astroui-modal-body{
-    flex: 1 1 0%;
-    overflow: auto
+    @apply flex-1 overflow-auto;
   }
 
   /** Border */
 
-  .astroui-modal.astroui-modal-border .astroui-modal-content > :not([hidden]) ~ :not([hidden]) {
-    --divide-y-reverse: 0;
-    border-top-width: calc(1px * calc(1 - var(--divide-y-reverse)));
-    border-bottom-width: calc(1px * var(--divide-y-reverse));
+  .astroui-modal.astroui-modal-border .astroui-modal-content  {
+    @apply divide-y divide-gray-200;
+  }
+
+  /** Dark theme */
+
+  .dark .astroui-modal {
+    @apply bg-white/20;
+  }
+  .dark .astroui-modal .astroui-modal-content {
+    @apply bg-white text-black;
   }
   
 </style>

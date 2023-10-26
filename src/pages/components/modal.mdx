@@ -202,6 +202,19 @@ Los modales suelen ofrecer diferentes tamaños para adaptarse a diversos conteni
   </Modal>
 ```
 
+## Initial open
+
+Para iniciar el modal cuando carga la página, se debe usar la prop `initialOpen` en el modal que se quiere mostrar.
+
+```astro
+<Modal id='modal-example' initialOpen>
+  <h2 slot='title' class='astroui-modal-title'>Modal example</h2>
+  <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+  <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+</Modal>
+```	
+
 ## Placements
 
 Los modales se pueden mostrar en diferentes posiciones. Por defecto, la posición es `top-center` y las posiciones disponibles son `top-start`, `top-center`, `top-end`, `center-start`, `center`, `center-end`, `bottom-start`, `bottom-center` y `bottom-end`. Para cambiar la posición, se debe usar la propiedad `placement`.

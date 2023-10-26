@@ -5,14 +5,14 @@ interface Props extends HTMLAttributes<'div'> {
   id: string
   initialOpen?: boolean
   placement?: 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end'
-  divider?: boolean
+  border?: boolean
 }
 
 const {
   id,
   initialOpen = false,
   placement = 'top',
-  divider = false
+  border = false
 } = Astro.props
 ---
 
@@ -33,34 +33,36 @@ const {
   <article 
     class="astroui-popover-content"
     class:list={{
-      'astroui-popover-divider': divider,
+      'astroui-popover-border': border,
     }}
     transition:animate="fade"
     >
-    <header class="astroui-popover-header">
-      <slot name="title"></slot>
-      <button type='button' class='astroui-popover-close' data-dismiss='popover' aria-label='Close'>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='22'
-          height='22'
-          viewBox='0 0 24 24'
-          fill='none'
-          stroke='#000000'
-          stroke-width='2'
-          stroke-linecap='round'
-          stroke-linejoin='round'>
-          <line x1='18' y1='6' x2='6' y2='18'></line>
-          <line x1='6' y1='6' x2='18' y2='18'></line>
-        </svg>
-      </button>
-    </header>
-    <main class="astroui-popover-body">
-      <slot name="body"></slot>
-    </main>
-    <footer class="astroui-popover-footer">
-      <slot name="footer"></slot>
-    </footer>
+    <slot name='content'>
+      <header class="astroui-popover-header">
+        <slot name="title"></slot>
+        <button type='button' class='astroui-popover-close' data-dismiss='popover' aria-label='Close'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='22'
+            height='22'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='#000000'
+            stroke-width='2'
+            stroke-linecap='round'
+            stroke-linejoin='round'>
+            <line x1='18' y1='6' x2='6' y2='18'></line>
+            <line x1='6' y1='6' x2='18' y2='18'></line>
+          </svg>
+        </button>
+      </header>
+      <main class="astroui-popover-body">
+        <slot name="body"></slot>
+      </main>
+      <footer class="astroui-popover-footer">
+        <slot name="footer"></slot>
+      </footer>
+    </slot>
   </article>
 </div>
 
@@ -108,8 +110,8 @@ const {
   // Function on dismissing popover by button close
 
   function onDismiss(popover) {
-    const closeButton = popover.querySelector('[data-dismiss="popover"]')
-    closeButton.addEventListener('click', () => {
+    const closeButton = popover?.querySelector('[data-dismiss="popover"]') ?? null
+    closeButton?.addEventListener('click', () => {
       getHide(popover)
     })
   }
@@ -238,9 +240,9 @@ const {
   // Hide the popover when clicking the close button
 
   function hideOnCloseButton(popover) {
-    const closeButton = popover.querySelector('[data-dismiss="popover"]')
+    const closeButton = popover?.querySelector('[data-dismiss="popover"]') ?? null
 
-    closeButton.addEventListener('click', () => {
+    closeButton?.addEventListener('click', () => {
       getHide(popover)
     })
   }
@@ -283,14 +285,12 @@ const {
 
 <style is:global>
   .astroui-popover {
-    position: absolute;
-    z-index: 100;
-    max-width: max-content;
+    @apply absolute z-[100] max-w-max;
   }
 
   /** Popover content */
 
-  @keyframes contentAnimation {
+  @keyframes animationPopper {
     0% {
       opacity: 0;
     }
@@ -300,82 +300,49 @@ const {
   }
 
   .astroui-popover .astroui-popover-content {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    background-color: #fff;
-    background-clip: padding-box;
-    border-radius: 1rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    width: 18rem;
-    animation: contentAnimation 0.2s ease-in-out;
+    @apply flex flex-col relative bg-clip-padding rounded-xl bg-white shadow-2xl max-w-[18rem] animate-popover;
   }
   .astroui-popover.fade .astroui-popover-content{
-    opacity: 0;
-    visibility: hidden;
+    @apply opacity-0 invisible;
   }
   .astroui-popover.astroui-popover-show .astroui-popover-content{
-    opacity: 1;
-    visibility: visible;
+    @apply opacity-100 visible;
   }
 
-  /** Popover divider */
-
-  .astroui-popover-content.astroui-popover-divider > :not([hidden]) ~ :not([hidden]) {
-    --divide-y-reverse: 0;
-    border-top-width: calc(1px * calc(1 - var(--divide-y-reverse)));
-    border-bottom-width: calc(1px * var(--divide-y-reverse));
+  /** Popover border */
+  .astroui-popover-content.astroui-popover-border {
+    @apply divide-y divide-gray-200;
   }
 
   /** Popover header */
-
   .astroui-popover .astroui-popover-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
+    @apply flex items-start justify-between px-4 py-3;
   }
 
-  .astroui-popover :where(.astroui-popover-title, h1, h2, h3, h4, h5, h6) {
-    margin-bottom: 0;
-    line-height: 1.5;
-    font-size: 1.125rem; 
-    font-weight: 500;
-    max-width: calc(100% - 2rem);
+  .astroui-popover .astroui-popover-title {
+    @apply mb-0 leading-normal text-lg font-semibold max-w-[calc(100%_-_2rem)];  
   }
 
   /** Popover body */
-
   .astroui-popover .astroui-popover-body {
-    padding: 1rem;
+    @apply px-4 py-3;
   }
 
   /** Popover footer */
-
   .astroui-popover .astroui-popover-footer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 1rem;
+    @apply flex items-center justify-end px-4 py-3;
   }
 
   /** Popover close button */
-
   .astroui-popover-close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    background-color: #00000000;
-    color: #000;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    @apply flex items-center justify-center w-8 h-8 rounded-full bg-transparent text-black cursor-pointer transition-all;
   }
-
   .astroui-popover-close:hover {
-    background-color: #00000010;
+    @apply bg-black/10
   }
 
+  /** Dark theme */
+  .dark .astroui-popover .astroui-popover-content {
+    @apply bg-white text-black;
+  }
 </style>

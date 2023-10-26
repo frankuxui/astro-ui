@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 
-type Size = 'xs' | 'sm' | 'md'
+type Size = 'xs' | 'sm' | 'md' | 'lg'
 type Variant = 'primary' | 'secondary' | 'success' | 'error' | 'light' | 'dark'
 
 interface Props extends HTMLAttributes <'span'> {
@@ -9,72 +9,62 @@ interface Props extends HTMLAttributes <'span'> {
   variant?: Variant
   pill?: boolean
   class?: string
+  inline?: boolean
 }
 
 const {
   size = 'sm',
   variant = 'primary',
   pill = false,
+  inline = false,
   ...attrs
 } = Astro.props
 ---
 
 <span class:list={[
-  'astroui-badge',
+  !inline && 'astroui-badge',
 
-  size === 'xs' && 'astroui-badge-xs',
-  size === 'sm' && 'astroui-badge-sm',
-  size === 'md' && 'astroui-badge-md',
+  !inline && size === 'xs' && 'astroui-badge-xs',
+  !inline && size === 'sm' && 'astroui-badge-sm',
+  !inline && size === 'md' && 'astroui-badge-md',
+  !inline && size === 'lg' && 'astroui-badge-lg',
 
-  variant === 'primary' && 'astroui-badge-primary',
-  variant === 'secondary' && 'astroui-badge-secondary',
-  variant === 'success' && 'astroui-badge-success',
-  variant === 'error' && 'astroui-badge-error',
-  variant === 'light' && 'astroui-badge-light',
-  variant === 'dark' && 'astroui-badge-dark',
+  !inline && variant === 'primary' && 'astroui-badge-primary',
+  !inline && variant === 'secondary' && 'astroui-badge-secondary',
+  !inline && variant === 'success' && 'astroui-badge-success',
+  !inline && variant === 'error' && 'astroui-badge-error',
+  !inline && variant === 'light' && 'astroui-badge-light',
+  !inline && variant === 'dark' && 'astroui-badge-dark',
 
-  pill && 'astroui-badge-pill',
+  !inline && pill && 'astroui-badge-pill',
 
   attrs.class
 ]}>
   <slot></slot>
 </span>
 
-<style>
+<style is:global>
 
   .astroui-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.25rem;
+    @apply inline-flex items-center justify-center font-medium rounded-md flex-none;
   }
 
   /** Sizes */
 
   .astroui-badge.astroui-badge-xs {
-    font-size: 11px;
-    line-height: .75rem;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-    height: 20px;
+    @apply text-xs font-medium h-[20px] min-w-[20px] px-1.5;
   }
-
   .astroui-badge.astroui-badge-sm {
-    font-size: 0.875rem;
-    line-height: 1rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    height: 1.75rem;
+    @apply text-sm font-medium h-[24px] min-w-[24px] px-1.5;
   }
-
   .astroui-badge.astroui-badge-md {
-    font-size: 1rem;
-    line-height: 1.25rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    height: 2rem;
+    @apply text-base font-medium h-[28px] min-w-[28px] px-2;
   }
 
+  .astroui-badge.astroui-badge-lg {
+    @apply text-base font-medium h-[34px] min-w-[34px] px-2.5;
+  }
+  
   /** Variants */
 
   .astroui-badge.astroui-badge-primary {
@@ -83,34 +73,28 @@ const {
   }
 
   .astroui-badge.astroui-badge-secondary {
-    color: #000;
-    background-color: rgb(219, 232, 239);
+    @apply text-gray-800 bg-secondary;
   }
 
   .astroui-badge.astroui-badge-success {
-    color: #fff;
-    background-color: #05b867;
+    @apply bg-success text-white;
   }
 
   .astroui-badge.astroui-badge-error {
-    color: #fff;
-    background-color: rgb(210 15 86 / 1);
+    @apply bg-error text-white;
   }
 
   .astroui-badge.astroui-badge-light {
-    color: rgb(9, 9, 27);
-    background-color: #f8f9fa;
+    @apply bg-gray-100 text-gray-800;
   }
 
   .astroui-badge.astroui-badge-dark {
-    color: #fff;
-    background-color: rgb(9, 9, 27);
+    @apply bg-gray-800 text-white dark:bg-gray-600;
   }
 
   /** Pill */
-
   .astroui-badge.astroui-badge-pill {
-    border-radius: 9999px;
+    @apply rounded-full;
   }
 
 </style>

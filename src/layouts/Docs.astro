@@ -3,6 +3,7 @@
 import Base from './Base.astro'
 import Toc from '../components/Toc.astro'
 
+
 interface Props {
   frontmatter: {
     title: string;
@@ -63,14 +64,27 @@ const headings = components.map(component => {
 
 <Base title={frontmatter.title}>
 
-  <nav class='sticky top-0 z-[120] w-full flex h-16 items-center justify-end gap-2 px-6 bg-white/30 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
-    <div class='flex w-full items-center justify-start max-w-[90rem] mx-auto'>
+  <nav class='sticky top-0 z-[120] w-full flex h-16 items-center justify-end gap-2 px-6 bg-white/30 dark:bg-gray-950/90 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
+    <div class='flex w-full items-center justify-between max-w-[90rem] mx-auto'>
       <a href='/' class='flex items-center hover:opacity-75 md:pl-4'>
         <span class='text-xl font-poppins font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-blue-600 '>
         Astro ui
         </span>
       </a>
+      <div class="flex items-center justify-center">
+        <button 
+          id="theme-toggle" 
+          type="button"
+          class="flex items-center justify-center w-10 h-10 text-gray-500 dark:text-gray-200 transition focus:outline-none focus:ring-4 rounded-full text-sm">
+          
+          <svg id="icon-dark" class='hidden' xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          
+          <svg id="icon-light" class='hidden' xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+        </button>
+      </div>
     </div>
+    
+
   </nav>
 
   <div class='mx-auto flex max-w-[90rem]'>
@@ -85,14 +99,20 @@ const headings = components.map(component => {
                 components.map((component) => (
                   <li class='block'>
                     <a href={component.frontmatter.slug}
-                      class='block cursor-pointer px-4 py-2 text-gray-700 rounded-md hover:text-black'
-                      class:list={{ 
-                        'text-black font-medium bg-neutral-50': url === component?.frontmatter?.slug,
+                      class='block cursor-pointer px-4 py-2 text-gray-700 rounded-md hover:text-black dark:hover:text-gray-400'
+                      class:list={{
+                        [url !== component?.frontmatter?.slug ? 'dark:text-gray-500' : 'dark:text-gray-200']: true,
+                        'text-black font-medium bg-gray-100 dark:bg-gray-900 dark:hover:text-gray-200': url === component?.frontmatter?.slug,
                         'flex items-center justify-between': url !== component?.frontmatter?.soon,
+                        'pointer-events-none': component?.frontmatter?.soon
                       }}
                     >
-                      <span>{component.frontmatter.title}</span>
-                      {component?.frontmatter?.soon && <span class='px-2 h-5 flex items-center justify-center rounded text-xs bg-green-100 text-green-800'>Soon</span>}
+                      <span class:list={{
+                        'opacity-50': component?.frontmatter?.soon
+                      }}>
+                        {component.frontmatter.title}
+                      </span>
+                      {component?.frontmatter?.soon && <span class='px-2 h-5 flex items-center justify-center rounded text-xs bg-green-100 text-green-800 dark:bg-gray-700 dark:text-gray-400'>Soon</span>}
                     </a>
                   </li>
                 ))
@@ -118,12 +138,12 @@ const headings = components.map(component => {
             <p class='mt-2 text-lg text-slate-600'>{frontmatter.description}</p>
           </div> -->
           <div class="px-0 md:pl-4 md:pr-12">
-            <div class='relative w-full p-8 md:rounded-lg overflow-hidden bg-gray-50 bg-gradient-to-tr from-[#f7f7f9] via-[#fdfdff] to-[#f7f3ff]'>
+            <div class='relative w-full p-8 md:rounded-lg overflow-hidden bg-gray-50 bg-gradient-to-tr from-[#f7f7f9] via-[#fdfdff] to-[#f7f3ff] dark:from-gray-950 dark:via-gray-950 dark:to-violet-950'>
               <div class="z-0 absolute inset-x-0 h-full ewdf top-0"></div>
-              <div class="z-0 absolute h-full top-0 left-0 bg-gradient-to-r from-white/90 to-white/10 w-1/2"></div>
+              <div class="z-0 absolute h-full top-0 left-0 bg-gradient-to-r from-white/90 to-white/10 w-1/2 dark:w-full dark:from-gray-950 dark:to-gray-950/50"></div>
               <div class="relative z-[1]">
-                <h1 class='mb-4 text-3xl sm:text-4xl font-medium'>{frontmatter.title}</h1>
-                <p class='mt-2 text-lg text-slate-600'>{frontmatter.description}</p>
+                <h1 class='mb-4 text-3xl sm:text-4xl font-semibold dark:text-white'>{frontmatter.title}</h1>
+                <p class='mt-2 text-[clamp(1.125rem_,_calc(_.58114rem_+_.87719vw)_,_1.25rem)] text-slate-600 dark:text-gray-100'>{frontmatter.description}</p>
               </div>
             </div>
           </div>
@@ -133,7 +153,7 @@ const headings = components.map(component => {
         </div>
 
         <div
-          class='mx-6 md:mx-12 grid mt-16 rounded-lg border divide-x overflow-hidden shadow-sm border-gray-200'
+          class='mx-6 md:mx-12 grid mt-16 rounded-lg border divide-x dark:divide-gray-800 overflow-hidden shadow-sm border-gray-200 dark:border-gray-800'
           class:list={[ 
             previous === undefined || next === undefined ? 'grid-cols-1' : 'grid-cols-2'
           ]}
@@ -141,9 +161,9 @@ const headings = components.map(component => {
           {previous !== undefined && (
             <a
               href={`/components/${previous?.frontmatter?.slug}`}
-              class='flex flex-col space-y-2 transition-all duration-200 items-start p-8 hover:bg-gray-50'
+              class='flex flex-col space-y-2 transition-all duration-200 items-start p-8 hover:bg-gray-50 dark:hover:bg-white/5'
             >
-              <span class='pl-2 text-gray-600'>Previous</span>
+              <span class='pl-2 text-gray-600 dark:text-gray-500'>Previous</span>
               <span class='flex items-center font-medium text-primary text-lg'>
                 <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'>
                   <path d='M15 18l-6-6 6-6'/>
@@ -156,9 +176,9 @@ const headings = components.map(component => {
           {next !== undefined && (
             <a
               href={`/components/${next?.frontmatter.slug}`}
-              class='flex flex-col space-y-2 transition-all duration-200 items-end p-8 hover:bg-gray-50'
+              class='flex flex-col space-y-2 transition-all duration-200 items-end p-8 hover:bg-gray-50 dark:hover:bg-white/5'
             >
-              <span class='pr-2 text-gray-600'> Next </span>
+              <span class='pr-2 text-gray-600 dark:text-gray-500'> Next </span>
               <span class='flex items-center font-medium text-primary text-lg'>
                 <span>{next?.frontmatter?.title}</span>
                 <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M9 18l6-6-6-6'/></svg>
@@ -191,6 +211,9 @@ const headings = components.map(component => {
   .ewdf { 
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(15 23 42 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
   }
+  .dark .ewdf { 
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgba(124, 71, 221, 0.42)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+  }
   .documentation-content pre {
     margin-top: 1rem !important;
     background-image: none;
@@ -205,65 +228,69 @@ const headings = components.map(component => {
     display: block;
     border-radius: 0.75rem;
   }
+  .dark .documentation-content pre  {
+    @apply !bg-gray-900;
+  }
+  
 
   .documentation-content h1[id] {
-    @apply mt-16 mb-4 text-3xl sm:text-4xl font-medium;
+    @apply mt-16 mb-4 text-3xl sm:text-4xl font-medium dark:text-gray-50;
     letter-spacing: -0.025em;
     scroll-margin-block: 6.875rem;
   }
   .documentation-content h2[id] {
-    @apply mt-16 mb-4 text-2xl sm:text-3xl font-medium;
+    @apply mt-16 mb-4 text-2xl sm:text-3xl font-semibold dark:text-gray-50;
     letter-spacing: -0.025em;
     scroll-margin-block: 6.875rem;
   }
   .documentation-content h3[id] {
-    @apply mt-16 mb-4 text-xl sm:text-2xl font-medium;
+    @apply mt-16 mb-4 text-xl sm:text-2xl font-semibold dark:text-gray-50;
     letter-spacing: -0.025em;
     scroll-margin-block: 6.875rem;
   }
   .documentation-content h4[id] {
-    @apply mt-16 mb-4 text-lg sm:text-xl font-medium;
+    @apply mt-16 mb-4 text-lg sm:text-xl font-medium dark:text-gray-50;
     letter-spacing: -0.025em;
     scroll-margin-block: 6.875rem;
   }
   .documentation-content h5[id] {
-    @apply mt-16 mb-4 text-base sm:text-lg font-medium;
+    @apply mt-16 mb-4 text-base sm:text-lg font-medium dark:text-gray-50;
     letter-spacing: -0.025em;
     scroll-margin-block: 6.875rem;
   }
   .documentation-content h6[id] {
-    @apply mt-16 mb-4 text-base sm:text-lg font-medium;
+    @apply mt-16 mb-4 text-base sm:text-lg font-medium dark:text-gray-50;
     letter-spacing: -0.025em;
     scroll-margin-block: 6.875rem;
   }
   .documentation-content p {
-    @apply mt-4 mb-4 text-sm sm:text-base;
+    @apply mt-4 mb-4 text-sm sm:text-base text-current;
   }
   .documentation-content .example-docs p {
     @apply m-0;
   }
   .documentation-content p>code, .documentation-content li>code {
-    @apply px-1.5 rounded-sm bg-cyan-100 text-cyan-800;
+    @apply px-1.5 rounded-sm bg-cyan-100 text-cyan-800 dark:bg-cyan-800 dark:text-cyan-100;
   }
 
   .documentation-content p>a {
-    @apply font-medium underline text-blue-700;
+    @apply font-medium underline text-blue-700 dark:text-blue-400;
   }
   .documentation-content table {
-    @apply mt-12 w-full border-collapse border border-gray-200;
+    @apply mt-12 w-full border-collapse border border-gray-200 dark:border-gray-800;
   }
   .documentation-content table>thead {
-    @apply bg-gray-50;
+    @apply bg-gray-50 dark:bg-gray-900;
   }
 
   .documentation-content table>thead>tr>th {
-    @apply px-4 py-3 text-left text-sm font-medium text-black border-b border-gray-200;
+    @apply px-4 py-3 text-left text-sm font-medium text-black dark:text-gray-400 border-b border-gray-200 dark:border-gray-800;
   }
   .documentation-content table>tbody>tr>td {
-    @apply px-4 py-2 text-left text-sm text-gray-900 border-b border-gray-200;
+    @apply px-4 py-2 text-left text-sm text-gray-900 dark:text-gray-400 border-b border-gray-200 dark:border-gray-800;
   }
   .documentation-content table>tbody>tr>td>code {
-    @apply rounded-sm text-violet-600;
+    @apply rounded-sm text-violet-600 dark:text-violet-400;
   }
 
   /** Lists */
