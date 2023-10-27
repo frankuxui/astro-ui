@@ -31,161 +31,161 @@ const {
   name={name}
   value={value}
   class:list={[
-    'checkbox',
-    size && `checkbox-${size}`,
-    light && 'checkbox-light',
+    'astroui-checkbox',
+    size && `astroui-checkbox-${size}`,
+    light && 'astroui-checkbox-light',
     disabled && 'disabled'
   ]}
   {...attrs}
 />
 
 <style>
-  .checkbox {
+  .astroui-checkbox {
     @apply relative flex-none cursor-pointer rounded-sm border-[2px] border-solid border-primary outline-none focus:shadow-none focus:transition-[border-color_0.2s] appearance-none checked:focus:after:rounded-none focus:after:rounded-[2px];
   }
-  .checkbox:hover:before{
+  .astroui-checkbox:hover:before{
     @apply opacity-[0.04] shadow-[0px_0px_0px_13px_rgba(0,0,0,0.1)];
   }
-  .checkbox:before{
+  .astroui-checkbox:before{
     @apply pointer-events-none absolute scale-0 bg-transparent opacity-0 shadow-[0px_0px_0px_13px_transparent] content-[''] rounded-full border-[8px] border-solid border-transparent -translate-x-1/2 -translate-y-1/2 z-[0];
   }
-  .checkbox:after, .checkbox:focus:after{
+  .astroui-checkbox:after, .astroui-checkbox:focus:after{
     @apply absolute z-[1] block content-[''];
   }
-  .checkbox:focus:before {
+  .astroui-checkbox:focus:before {
     @apply left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-95 transition-[box-shadow_0.2s,transform_0.2s];
   }
-  .checkbox:checked{
+  .astroui-checkbox:checked{
     @apply border-primary bg-primary;
   }
-  .checkbox:checked:after{
+  .astroui-checkbox:checked:after{
     @apply border-white;
   }
-  .checkbox:checked:before{
+  .astroui-checkbox:checked:before{
     @apply bg-opacity-90;
   }
 
   /** light **/
 
-  .checkbox.checkbox-light {
+  .astroui-checkbox.astroui-checkbox-light {
     @apply border-white;
   }
-  .checkbox.checkbox-light:checked{
+  .astroui-checkbox.astroui-checkbox-light:checked{
     @apply border-white bg-white;
   }
-  .checkbox.checkbox-light:checked:after{
+  .astroui-checkbox.astroui-checkbox-light:checked:after{
     @apply border-black;
   }
-  .checkbox.checkbox-light.checkbox-xs:focus:before, .checkbox.checkbox-light.checkbox-xs:checked:focus:before {
+  .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-xs:focus:before, .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-xs:checked:focus:before {
     @apply shadow-[0px_0px_0px_10px_#ffffff37];
   }
-  .checkbox.checkbox-light.checkbox-sm:focus:before, .checkbox.checkbox-light.checkbox-sm:checked:focus:before {
+  .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-sm:focus:before, .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-sm:checked:focus:before {
     @apply shadow-[0px_0px_0px_10px_#ffffff37];
   }
-  .checkbox.checkbox-light.checkbox-md:focus:before, .checkbox.checkbox-light.checkbox-md:checked:focus:before {
+  .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-md:focus:before, .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-md:checked:focus:before {
     @apply shadow-[0px_0px_0px_12px_#ffffff37];
   }
-  .checkbox.checkbox-light.checkbox-xl:focus:before, .checkbox.checkbox-light.checkbox-xl:checked:focus:before {
+  .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-xl:focus:before, .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-xl:checked:focus:before {
     @apply shadow-[0px_0px_0px_12px_#ffffff37];
   }
 
   /* Checkbox xs */
-  .checkbox.checkbox-xs {
+  .astroui-checkbox.astroui-checkbox-xs {
     @apply h-[14px] w-[14px] border-[2px];
   }
-  .checkbox.checkbox-xs:before{
+  .astroui-checkbox.astroui-checkbox-xs:before{
     @apply border-[6px];
   }
-  .checkbox.checkbox-xs:checked:focus:after,
-  .checkbox.checkbox-xs:checked:after{
+  .astroui-checkbox.astroui-checkbox-xs:checked:focus:after,
+  .astroui-checkbox.astroui-checkbox-xs:checked:after{
     @apply h-[10px] w-[4px];
   }
-  .checkbox.checkbox-xs:focus:before,
-  .checkbox.checkbox-xs:checked:focus:before {
+  .astroui-checkbox.astroui-checkbox-xs:focus:before,
+  .astroui-checkbox.astroui-checkbox-xs:checked:focus:before {
     @apply shadow-[0px_0px_0px_10px_#00000017];
   }
-  .checkbox.checkbox-xs:checked:after{
+  .astroui-checkbox.astroui-checkbox-xs:checked:after{
     @apply absolute border-l-0 border-[1px] border-t-0 border-solid rotate-45  bg-transparent top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-b-[2px] border-r-[2px] -mt-[1px];
   }
 
   /* Checkbox sm */
-  .checkbox.checkbox-sm {
+  .astroui-checkbox.astroui-checkbox-sm {
     @apply h-[16px] w-[16px];
   }
-  .checkbox.checkbox-sm:before{
+  .astroui-checkbox.astroui-checkbox-sm:before{
     @apply border-[7px];
   }
-  .checkbox.checkbox-sm:checked:focus:after,
-  .checkbox.checkbox-sm:checked:after{
+  .astroui-checkbox.astroui-checkbox-sm:checked:focus:after,
+  .astroui-checkbox.astroui-checkbox-sm:checked:after{
     @apply h-[11px] w-[5px];
   }
-  .checkbox.checkbox-sm:focus:before,
-  .checkbox.checkbox-sm:checked:focus:before {
+  .astroui-checkbox.astroui-checkbox-sm:focus:before,
+  .astroui-checkbox.astroui-checkbox-sm:checked:focus:before {
     @apply shadow-[0px_0px_0px_10px_#00000017];
   }
-  .checkbox.checkbox-sm:checked:after{
+  .astroui-checkbox.astroui-checkbox-sm:checked:after{
     @apply absolute border-l-0 border-[1px] border-t-0 border-solid rotate-45 bg-transparent top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-b-[2px] border-r-[2px] -mt-[1px];
   }
 
   /* Checkbox md */
-  .checkbox.checkbox-md {
+  .astroui-checkbox.astroui-checkbox-md {
     @apply h-[18px] w-[18px];
   }
-  .checkbox.checkbox-md:before{
+  .astroui-checkbox.astroui-checkbox-md:before{
     @apply border-[8px];
   }
-  .checkbox.checkbox-md:checked:focus:after,
-  .checkbox.checkbox-md:checked:after{
+  .astroui-checkbox.astroui-checkbox-md:checked:focus:after,
+  .astroui-checkbox.astroui-checkbox-md:checked:after{
     @apply h-[13px] w-[5px];
   }
-  .checkbox.checkbox-md:focus:before,
-  .checkbox.checkbox-md:checked:focus:before {
+  .astroui-checkbox.astroui-checkbox-md:focus:before,
+  .astroui-checkbox.astroui-checkbox-md:checked:focus:before {
     @apply shadow-[0px_0px_0px_13px_#00000017];
   }
-  .checkbox.checkbox-md:checked:after{
+  .astroui-checkbox.astroui-checkbox-md:checked:after{
     @apply absolute border-l-0 border-t-0 border-solid rotate-45 bg-transparent top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-b-[2px] border-r-[2px] -mt-[1px];
   }
 
   /* Checkbox lg */
-  .checkbox.checkbox-lg {
+  .astroui-checkbox.astroui-checkbox-lg {
     @apply h-[22px] w-[22px] border-[3px];
   }
-  .checkbox.checkbox-lg:before{
+  .astroui-checkbox.astroui-checkbox-lg:before{
     @apply border-[12px];
   }
-  .checkbox.checkbox-lg:checked:focus:after,
-  .checkbox.checkbox-lg:checked:after{
+  .astroui-checkbox.astroui-checkbox-lg:checked:focus:after,
+  .astroui-checkbox.astroui-checkbox-lg:checked:after{
     @apply h-[16px] w-[7px];
   }
-  .checkbox.checkbox-lg:focus:before,
-  .checkbox.checkbox-lg:checked:focus:before {
+  .astroui-checkbox.astroui-checkbox-lg:focus:before,
+  .astroui-checkbox.astroui-checkbox-lg:checked:focus:before {
     @apply shadow-[0px_0px_0px_12px_#00000017];
   }
-  .checkbox.checkbox-lg:checked:after{
+  .astroui-checkbox.astroui-checkbox-lg:checked:after{
     @apply absolute border-l-0 border-[2px] border-t-0 border-solid rotate-45 bg-transparent top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-b-[3px] border-r-[3px] -mt-[2px];
   }
 
   /* Checkbox xl */
-  .checkbox.checkbox-xl {
+  .astroui-checkbox.astroui-checkbox-xl {
     @apply h-[26px] w-[26px] border-[3px];
   }
-  .checkbox.checkbox-xl:before{
+  .astroui-checkbox.astroui-checkbox-xl:before{
     @apply border-[14px];
   }
-  .checkbox.checkbox-xl:checked:focus:after,
-  .checkbox.checkbox-xl:checked:after{
+  .astroui-checkbox.astroui-checkbox-xl:checked:focus:after,
+  .astroui-checkbox.astroui-checkbox-xl:checked:after{
     @apply h-[20px] w-[8px];
   }
-  .checkbox.checkbox-xl:focus:before,
-  .checkbox.checkbox-xl:checked:focus:before {
+  .astroui-checkbox.astroui-checkbox-xl:focus:before,
+  .astroui-checkbox.astroui-checkbox-xl:checked:focus:before {
     @apply shadow-[0px_0px_0px_12px_#00000017];
   }
-  .checkbox.checkbox-xl:checked:after{
+  .astroui-checkbox.astroui-checkbox-xl:checked:after{
     @apply absolute border-l-0 border-[2px] border-t-0 border-solid rotate-45 bg-transparent top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-b-[3px] border-r-[3px] -mt-[2px];
   }
 
   /* Checkbox disabled */
-  .checkbox:disabled, .checkbox[disabled], .checkbox:disabled:checked {
+  .astroui-checkbox:disabled, .astroui-checkbox[disabled], .astroui-checkbox:disabled:checked {
     @apply cursor-default opacity-30;
   }
 

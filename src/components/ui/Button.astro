@@ -18,7 +18,7 @@ interface Props extends HTMLAttributes<'button'> {
 }
 
 const {
-  type,
+  type = 'button',
   disabled,
   style,
   variant = 'primary',
@@ -30,7 +30,6 @@ const {
 } = Astro.props
 
 ---
-
 <button
   type={type}
   disabled={disabled}
@@ -49,8 +48,8 @@ const {
     !inline && variant === 'light' && 'astroui-button-light',
     !inline && variant === 'dark' && 'astroui-button-dark',
 
-    pill && 'astroui-button-pill',
-    isLoading && 'pointer-events-none opacity-75',
+    !inline && pill && 'astroui-button-pill',
+    !inline && isLoading && 'pointer-events-none opacity-75',
     disabled && 'opacity-40 pointer-events-none',
 
     attrs.class,
@@ -70,7 +69,7 @@ const {
     --astroui-button-primary: rgb(91 33 182 / 1);
   }
   .astroui-button {
-    @apply appearance-none flex items-center justify-center rounded-md border-none font-medium outline-none focus:ring-2 transition-all duration-300 ease-in-out;
+    @apply appearance-none flex whitespace-nowrap select-none items-center justify-center rounded-md border-none font-medium outline-none focus:ring-2 transition-all duration-300 ease-in-out;
   }
 
   /* Primary */

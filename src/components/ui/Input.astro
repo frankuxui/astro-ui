@@ -1,0 +1,213 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+
+interface Props extends HTMLAttributes<'input'> { 
+  type?: 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url'
+  outline?: boolean
+  size?: Sizes
+  disabled?: boolean
+  readonly?: boolean
+  autofocus?: boolean
+  required?: boolean
+  inline?: boolean
+  state?: 'valid' | 'invalid' | null
+}
+
+const {
+  type = 'text',
+  outline = false,
+  inline = false,
+  size = 'md',
+  state = null,
+  ...attrs
+} = Astro.props
+
+---
+<div 
+  class="astroui-control"
+  class:list={[
+    state === 'valid' || state === 'invalid' ? 'astroui-append' : '',
+  ]}
+  >
+  <input
+    type={type}
+    class:list={[
+      'astroui-input',
+      
+      !inline && outline ? 'astroui-input-outline' : 'astroui-input-filled',
+  
+      !inline && size === 'xs' ? 'astroui-input-xs' : '',
+      !inline && size === 'sm' ? 'astroui-input-sm' : '',
+      !inline && size === 'md' ? 'astroui-input-md' : '',
+      !inline && size === 'lg' ? 'astroui-input-lg' : '',
+      !inline && size === 'xl' ? 'astroui-input-xl' : '',
+  
+      !inline && state === 'valid' ? 'astroui-input-valid' : '',
+      !inline && state === 'invalid' ? 'astroui-input-invalid' : '',
+      
+      attrs.class,
+    ]}
+    {...attrs}
+  />
+  { state === 'valid' && (
+    <svg class="astroui-addonz" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+    </svg>
+  )}
+  { state === 'invalid' && (
+    <svg class="astroui-addonz" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+  )}
+</div>
+
+<style is:global>
+
+  .astroui-control {
+    @apply relative w-full;
+  }
+
+  .astroui-input {
+    @apply w-full min-w-0 appearance-none items-center justify-center border border-transparent rounded-md font-medium outline-none focus:ring-2 transition-shadow duration-300 ease-in-out focus:ring-primary text-black dark:text-white dark:focus:text-black placeholder:font-normal placeholder-gray-400 dark:placeholder-gray-500;
+  }
+
+  /* Filled */
+
+  .astroui-input.astroui-input-filled {
+    @apply border-transparent bg-gray-200 focus:bg-white dark:bg-gray-700 dark:focus:bg-gray-100 dark:focus:ring-white;
+  }
+
+  .astroui-input.astroui-input-outline {
+    @apply border border-gray-300 dark:border-gray-500 dark:focus:border-white bg-white focus:bg-white dark:bg-gray-700 dark:focus:bg-gray-100 dark:focus:ring-white;
+  }
+
+  /** Sizes */
+
+  .astroui-input-xs {
+    @apply text-xs h-6 px-2;
+  }
+  .astroui-input-sm {
+    @apply text-sm h-8 px-3;
+  }
+  .astroui-input-md {
+    @apply text-base h-10 px-4;
+  }
+  .astroui-input-lg {
+    @apply text-base h-11 px-5;
+  }
+  .astroui-input-xl {
+    @apply text-lg h-14 px-5;
+  }
+
+  /** Disabled */
+
+  input[disabled], 
+  input:disabled, 
+  .astroui-input[disabled], 
+  .astroui-input:disabled {
+    @apply opacity-70 cursor-default;
+  }
+
+  /** Readonly */
+
+  input[readonly],
+  input:readonly,
+  .astroui-input[readonly],
+  .astroui-input:readonly {
+    @apply bg-gray-100 dark:bg-gray-700 pointer-events-none;
+  }
+
+  /** Addonz */
+
+.astroui-prepend, .astroui-append {
+  @apply relative;
+}
+.astroui-prepend .astroui-addonz, .astroui-append .astroui-addonz {
+  @apply absolute z-[1] top-1/2 transform -translate-y-1/2 pointer-events-none;
+}
+.astroui-prepend:focus-within .astroui-addonz, .astroui-append:focus-within .astroui-addonz {
+  @apply text-primary;
+}
+.astroui-prepend .astroui-input:focus + .astroui-addonz, .astroui-append .astroui-input:focus + .astroui-addonz {
+  @apply text-primary;
+}
+
+/** Addonz position */
+
+.astroui-prepend .astroui-addonz {
+  @apply left-2;
+}
+.astroui-append .astroui-addonz {
+  @apply right-2;
+}
+
+/** Prepend padding */
+
+.astroui-prepend .astroui-input-xs {
+  @apply pl-8;
+}
+.astroui-prepend .astroui-input-sm {
+  @apply pl-8;
+}
+.astroui-prepend .astroui-input-md {
+  @apply pl-9;
+}
+.astroui-prepend .astroui-input-lg {
+  @apply pl-10;
+}
+
+/** Append padding */
+
+.astroui-append .astroui-input-xs {
+  @apply pr-7;
+}
+.astroui-append .astroui-input-sm {
+  @apply pr-8;
+}
+.astroui-append .astroui-input-md {
+  @apply pr-9;
+}
+.astroui-append .astroui-input-lg {
+  @apply pr-10;
+}
+
+/** Addonz size in case input has state */
+
+.astroui-append .astroui-input-xs ~ .astroui-addonz {
+  @apply w-4 h-4;
+}
+.astroui-append .astroui-input-sm ~ .astroui-addonz {
+  @apply w-5 h-5;
+}
+.astroui-append .astroui-input-md ~ .astroui-addonz {
+  @apply w-5 h-5;
+}
+.astroui-append .astroui-input-lg ~ .astroui-addonz {
+  @apply w-6 h-6;
+}
+.astroui-append .astroui-input-xl ~ .astroui-addonz {
+  @apply w-7 h-7;
+}
+
+/** Addonz color in case input has state 👉 "valid" */
+
+.astroui-append .astroui-input.astroui-input-valid ~ .astroui-addonz, .astroui-prepend .astroui-input.astroui-input-valid ~ .astroui-addonz {
+  @apply text-green-600 dark:text-green-500;
+}
+
+/** Addonz color in case input has state 👉 "invalid" */
+
+.astroui-append .astroui-input.astroui-input-invalid ~ .astroui-addonz, .astroui-prepend .astroui-input.astroui-input-invalid ~ .astroui-addonz {
+  @apply text-red-500 dark:text-red-400;
+}
+
+/** States */
+
+.astroui-input.astroui-input-valid {
+  @apply border-green-600 dark:border-green-500 focus:ring-green-500 dark:focus:ring-green-400;
+}
+.astroui-input.astroui-input-invalid {
+  @apply border-red-500 dark:border-red-400 focus:ring-red-500 dark:focus:ring-red-400;
+}
+
+</style>

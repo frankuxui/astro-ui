@@ -7,6 +7,7 @@ toc: true
 soon: false
 ---
 import Example from '../../components/Example.astro'
+import Callout from '../../components/Callout.astro'
 import Button from '../../components/ui/Button.astro'
 import Spinner from '../../components/ui/Spinner.astro'
 
@@ -268,7 +269,11 @@ Los botones de iconos se pueden usar cuando se desea que el botón contenga solo
 
 ## Reset styles
 
-Para restablecer o deshacer los estilos de los botones, simplemente añade la clase `inline` al botón. Esta acción anulará las propiedades `variant` y `size` del botón, permitiendo que se adapte de manera óptima a tus necesidades y estilos altamente personalizados.
+Para restablecer o deshacer los estilos de los botones, simplemente añade la prop `inline` al botón. Esta acción anulará todos los estilos del boton, permitiendo que se adapte de manera óptima a tus necesidades y estilos altamente personalizados.
+
+<Callout variant='warning'>
+  Es importante saber que una ves que la prop `inline` se agrega, no se podrá acceder a las propiedades de los botones, como `variant`, `size`, `pill` o `isLoading`.
+</Callout>
 
 <Example>
   <Button inline>Button</Button>

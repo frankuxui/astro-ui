@@ -1,0 +1,161 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'input'> {
+  id?: string
+  name?: string
+  value?: string
+  disabled?: boolean
+  checked?: boolean
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  light?: boolean
+}
+
+const {
+  id,
+  name,
+  value,
+  disabled,
+  checked,
+  size = 'md',
+  light = false,
+  ...attrs
+} = Astro.props
+---
+
+<input
+  type='radio'
+  id={id}
+  checked={checked}
+  disabled={disabled}
+  name={name}
+  value={value}
+  class:list={[
+    'astroui-radio',
+    size && `astroui-radio-${size}`,
+    light && 'astroui-radio-light',
+    disabled && 'disabled'
+  ]}
+  {...attrs}
+/>
+
+<style>
+  
+  .astroui-radio {
+    @apply relative flex-none h-5 w-5 appearance-none rounded-full border-2 border-solid border-primary;
+  }
+  .astroui-radio:before{
+    @apply pointer-events-none absolute h-[16px] w-[16px] scale-0 rounded-full bg-transparent opacity-0 shadow-[0px_0px_0px_13px_transparent] content-[''];
+  }
+  .astroui-radio:after {
+    @apply absolute z-[1] block h-4 w-4 rounded-full content-[''];
+  }
+  .astroui-radio:checked {
+    @apply border-primary;
+  }
+  .astroui-radio:checked:before {
+    @apply opacity-[0.16];
+  }
+  .astroui-radio:checked:after {
+    @apply absolute left-1/2 top-1/2 h-[10px] w-[10px] rounded-full border-primary bg-primary content-[''] translate-x-[-50%] translate-y-[-50%];
+  }
+  .astroui-radio:hover{
+    @apply cursor-pointer;
+  }
+  .astroui-radio:hover:before{
+    @apply opacity-[0.04] shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)];
+  }
+  .astroui-radio:focus{
+    @apply shadow-none outline-none ring-0;
+  }
+  .astroui-radio:focus:before{
+    @apply scale-100 opacity-[0.12] shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] transition-[box-shadow_0.2s,transform_0.2s];
+  }
+  .astroui-radio:checked:focus{
+    @apply border-primary;
+  }
+  .astroui-radio:checked:focus:before{
+    @apply before:scale-100 before:shadow-[0px_0px_0px_13px_#3b71ca] before:transition-[box-shadow_0.2s,transform_0.2s];
+  }
+
+  /* Radio xs */
+  .astroui-radio.astroui-radio-xs {
+    @apply h-[14px] w-[14px] ;
+  }
+  .astroui-radio.astroui-radio-xs:before{
+    @apply left-[-2px] top-[-2px] border-[7px] w-0 h-0;
+  }
+  .astroui-radio.astroui-radio-xs:checked:after{
+    @apply h-[7px] w-[7px];
+  }
+  .astroui-radio.astroui-radio-xs:focus:before {
+    @apply shadow-[0px_0px_0px_10px_rgba(0,0,0,0.6)];
+  }
+
+  /* Radio sm */
+  .astroui-radio.astroui-radio-sm {
+    @apply h-[16px] w-[16px] ;
+  }
+  .astroui-radio.astroui-radio-sm:before{
+    @apply left-[-2px] top-[-2px] border-[8px] w-0 h-0;
+  }
+  .astroui-radio.astroui-radio-sm:checked:after{
+    @apply h-[9px] w-[9px];
+  }
+  .astroui-radio.astroui-radio-sm:focus:before {
+    @apply shadow-[0px_0px_0px_9px_rgba(0,0,0,0.6)];
+  }
+
+  /* Radio md */
+  .astroui-radio.astroui-radio-md {
+    @apply h-[18px] w-[18px] ;
+  }
+  .astroui-radio.astroui-radio-md:before{
+    @apply left-[-2px] top-[-2px] border-[9px] w-0 h-0;
+  }
+  .astroui-radio.astroui-radio-md:checked:after{
+    @apply h-[11px] w-[11px];
+  }
+  .astroui-radio.astroui-radio-md:focus:before {
+    @apply shadow-[0px_0px_0px_12px_rgba(0,0,0,0.6)];
+  }
+
+  /* Radio lg */
+  .astroui-radio.astroui-radio-lg {
+    @apply h-[22px] w-[22px] ;
+  }
+  .astroui-radio.astroui-radio-lg:before{
+    @apply border-[9px];
+  }
+  .astroui-radio.astroui-radio-lg:checked:after{
+    @apply h-[13px] w-[13px];
+  }
+  .astroui-radio.astroui-radio-lg:focus:before {
+    @apply shadow-[0px_0px_0px_14px_rgba(0,0,0,0.6)];
+  }
+
+  /* Radio xl */
+  .astroui-radio.astroui-radio-xl {
+    @apply border-[3px];
+  }
+  .astroui-radio.astroui-radio-xl {
+    @apply h-[26px] w-[26px] ;
+  }
+  .astroui-radio.astroui-radio-xl:before{
+    @apply w-[20px] h-[20px];
+  }
+  .astroui-radio.astroui-radio-xl:checked:after{
+    @apply h-[15px] w-[15px];
+  }
+  .astroui-radio.astroui-radio-xl:focus:before {
+    @apply shadow-[0px_0px_0px_16px_rgba(0,0,0,0.6)];
+  }
+
+
+  /* Disabled */
+
+  .astroui-radio:disabled, .astroui-radio[disabled], .astroui-radio:disabled:checked {
+    @apply cursor-default opacity-30;
+  }
+
+</style>
