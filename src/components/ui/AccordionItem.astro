@@ -1,0 +1,34 @@
+---
+
+---
+
+<div class="astroui-accordion-item" data-accordion-item>
+  <header class="astroui-accordion-header">
+    <button
+      type="button"
+      data-toggle='accordion' 
+      class:list={[
+        'astroui-accordion-button',
+      ]}
+      >
+      <slot name="title" />
+      <svg 
+        width="26"
+        height="26"
+        class="astroui-accordion-icon"
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        >
+        <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
+      </svg>
+    </button>
+  </header>
+  <main 
+    class="astroui-accordion-panel"
+    aria-hidden="true"
+  >
+    <div class="astroui-accordion-body">
+      <slot name="content" />
+    </div>
+  </main>
+</div>

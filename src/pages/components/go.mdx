@@ -1,0 +1,79 @@
+---
+layout: "../../layouts/Docs.astro"
+title: "Go"
+description: "Go"
+slug: "go"
+toc: true
+soon: false
+---
+import Example from '../../components/Example.astro'
+import Go from '../../components/ui/Go.astro'
+
+## Usage
+
+
+<Example>
+  <Go />
+</Example>
+
+```astro
+<Go />
+```
+
+## Sizes
+
+Los tamaño disponibles son: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`. Por defecto es `md`.
+
+<Example>
+  <div class="flex flex-col items-start gap-4">
+    <Go size="xs" />
+    <Go size="sm" />
+    <Go size="md" />
+    <Go size="lg" />
+    <Go size="xl" />
+    <Go size="2xl" />
+    <Go size="3xl" />
+    <Go size="4xl" />
+    <Go size="5xl" />
+  </div>
+</Example>
+
+```astro
+<Go size="xs" />
+...
+```	
+
+## With text
+
+<Example>
+  <Go text='Go up!' />
+</Example>
+
+<Example>
+  <div class="flex flex-col items-start gap-4">
+    <Go text='Go up!' size="xs" />
+    <Go text='Go up!' size="sm" />
+    <Go text='Go up!' size="md" />
+    <Go text='Go up!' size="lg" />
+    <Go text='Go up!' size="xl" />
+    <Go text='Go up!' size="2xl" />
+    <Go text='Go up!' size="3xl" />
+    <Go text='Go up!' size="4xl" />
+    <Go text='Go up!' size="5xl" />
+  </div>
+</Example>
+
+## Directions
+
+<Example>
+  <div class="flex items-start gap-4 flex-wrap">
+    <Go size='xl' direction="up" />
+    <Go size='xl' direction="up-right" />
+    <Go size='xl' direction="up-left" />
+    <Go size='xl' direction="down" />
+    <Go size='xl' direction="down-right" />
+    <Go size='xl' direction="down-left" />
+    <Go size='xl' direction="left" />
+    <Go size='xl' direction="right" />
+  </div>
+</Example>

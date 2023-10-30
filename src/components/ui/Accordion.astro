@@ -1,0 +1,174 @@
+---
+
+const {
+  id,
+  alwaysOpen = false
+} = Astro.props
+
+---
+
+<article id={id} class="astroui-accordion">
+  <slot />
+</article>
+
+<script define:vars={{id, alwaysOpen}}>
+
+  const triggers = document.getElementById(id).querySelectorAll('[data-toggle="accordion"]')
+  const panels = document.getElementById(id).querySelectorAll('.astroui-accordion-panel')
+  const items = document.getElementById(id).querySelectorAll('.astroui-accordion-item')
+    
+  const accordion = {
+    id,
+    items: {
+      forEach: (callback) => {
+        items.forEach((item, index) => {
+          callback(item, index)
+        })
+      }
+    },
+    triggers: triggers,
+    panels: panels
+  }
+
+  
+  //
+  // Add attributes to accordion
+
+  accordion.items.forEach((item, index) => {
+    item.setAttribute('data-index', index)
+  })
+
+  accordion.triggers.forEach((trigger, index) => {
+    trigger.setAttribute('data-index', index)
+  })
+
+  accordion.panels.forEach((panel, index) => {
+    panel.setAttribute('data-index', index)
+  })
+
+  //
+  // Add attributes to triggers and panels
+
+  function addAttribute(element, attribute, value) {
+    return element.setAttribute(attribute, value)
+  }
+
+  panels.forEach((panel) => {
+    addAttribute(panel, 'data-parent', id)
+    addAttribute(panel, 'aria-hidden', true)
+    addAttribute(panel, 'aria-labelledby', id)
+  })
+
+  triggers.forEach((trigger) => {
+    addAttribute(trigger, 'aria-controls', id)
+    addAttribute(trigger, 'aria-expanded', false)    
+  })
+
+  
+  //
+  // Add event listeners to triggers
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault()
+      const index = trigger.getAttribute('data-index')
+      const panel = document.querySelector(`#${id} .astroui-accordion-panel[data-index="${index}"]`)
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true'
+      
+      if (!alwaysOpen) {
+        accordion.items.forEach((item) => {
+          const itemIndex = item.getAttribute('data-index')
+          const itemPanel = document.querySelector(`#${id} .astroui-accordion-panel[data-index="${itemIndex}"]`)
+          const itemTrigger = document.querySelector(`#${id} .astroui-accordion-button[data-index="${itemIndex}"]`)
+          const isItemExpanded = itemTrigger.getAttribute('aria-expanded') === 'true'
+          const isItemHidden = itemPanel.getAttribute('aria-hidden') === 'true'
+          if (!isItemHidden) {
+            itemPanel.setAttribute('aria-hidden', true)
+            itemTrigger.setAttribute('aria-expanded', false)
+            itemPanel.classList.remove('show')
+            itemPanel.style.height = '0px'
+          }
+        })
+      }
+
+      if (isExpanded) {
+        trigger.setAttribute('aria-expanded', false)
+        panel.setAttribute('aria-hidden', true)
+        panel.classList.remove('show')
+        panel.style.height = '0px'
+      } else {
+        trigger.setAttribute('aria-expanded', true)
+        panel.setAttribute('aria-hidden', false)
+        panel.classList.add('show')
+        panel.style.height = `${panel.scrollHeight}px`
+      }
+      
+
+    })
+
+  })
+
+
+  panels.forEach((panel) => {
+    panel.addEventListener('transitionend', (event) => {
+      const isHidden = panel.getAttribute('aria-hidden') === 'true'
+      if (isHidden) {
+        panel.classList.remove('show')
+      }
+    })
+  })
+
+
+  
+
+</script>
+
+<style is:global>
+
+  .astroui-accordion {
+    @apply w-full flex flex-col space-y-1;
+  }
+
+  /** Item */
+
+  .astroui-accordion .astroui-accordion-item {
+    @apply w-full;
+  }
+  
+  /** Panel */
+
+  .astroui-accordion .astroui-accordion-panel {
+    @apply invisible h-0 w-full overflow-hidden transition-all duration-200 ease-in-out;
+  }
+  .astroui-accordion .astroui-accordion-panel.show {
+    @apply visible;
+  }
+  
+  /** Header */
+
+  .astroui-accordion .astroui-accordion-header {
+    @apply w-full;
+  }
+
+  /** Body */
+
+  .astroui-accordion .astroui-accordion-body {
+    @apply w-full p-4;
+  }
+
+  /** Button */
+
+  .astroui-accordion .astroui-accordion-button {
+    @apply w-full relative flex items-center justify-between px-4 py-3 font-medium text-lg rounded-md transition-all duration-150 bg-gray-50 hover:bg-gray-100 focus:z-[1] focus:ring-2 focus:ring-primary dark:bg-gray-900 dark:focus:ring-gray-600 dark:text-gray-100;
+  }
+
+  /** Icon */
+
+  .astroui-accordion .astroui-accordion-icon {
+    @apply transition-transform duration-200 ease-in-out;
+  }
+  .astroui-accordion [aria-expanded="true"] .astroui-accordion-icon {
+    @apply transform rotate-180;
+  }
+
+</style>

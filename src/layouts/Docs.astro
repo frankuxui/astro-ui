@@ -41,7 +41,6 @@ const pathname = Astro.url.pathname
 const url = pathname.split('/').slice(-1)[0]
 const components = await Astro.glob('../pages/components/*.mdx')
 
-
 const pagination = components.reduce((acc, component, index) => {
   if (component.frontmatter.slug === url) {
     return {
@@ -55,14 +54,10 @@ const pagination = components.reduce((acc, component, index) => {
 const { previous, next } = pagination as Pagination
 
 
-const headings = components.map(component => {
-  const headings = component.getHeadings()
-  return headings
-})
-
 ---
 
 <Base title={frontmatter.title}>
+
 
   <nav class='sticky top-0 z-[120] w-full flex h-16 items-center justify-end gap-2 px-6 bg-white/30 dark:bg-gray-950/90 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
     <div class='flex w-full items-center justify-between max-w-[90rem] mx-auto'>
