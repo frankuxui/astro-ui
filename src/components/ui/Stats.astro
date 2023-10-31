@@ -80,128 +80,76 @@ const {
 <style is:global>
 
   .astroui-stat {
-    --astroui-stat-primary: #e3f0ff;
-    --astroui-stat-primary-color: #0e2be8;
-    --astroui-stat-secondary: #e8e8e8;
-    --astroui-stat-secondary-color: #000000;
-    --astroui-stat-success: #dfffed;
-    --astroui-stat-success-color: #00903e;
-    --astroui-stat-error: #ffd8eb;
-    --astroui-stat-error-color: #c70039;
-    --astroui-stat-light: #f7f7f7;
-    --astroui-stat-light-color: #3d3d3d;
-    --astroui-stat-dark: #000000;
-    --astroui-stat-dark-color: #ffffff;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    @apply inline-flex items-center justify-center;
   }
 
   /** Content */
-
   .astroui-stat .astroui-stat-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem; /* 8px */
-    font-weight: 500;
+    @apply flex items-center justify-center gap-2 font-medium;
   }
 
   /** Variants */
-
   .astroui-stat.astroui-stat-primary.astroui-stat-fill {
-    background-color: var(--astroui-stat-primary);
-    color: var(--astroui-stat-primary-color);
+    @apply bg-violet-100 text-violet-600 dark:bg-violet-500/40 dark:text-violet-400;
   }
   .astroui-stat.astroui-stat-primary {
-    color: var(--astroui-stat-primary-color);
+    @apply text-violet-600;
   }
 
   .astroui-stat.astroui-stat-secondary.astroui-stat-fill {
-    background-color: var(--astroui-stat-secondary);
-    color: var(--astroui-stat-secondary-color);
+    @apply bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-100;
   }
   .astroui-stat.astroui-stat-secondary {
-    color: var(--astroui-stat-secondary-color);
+    @apply text-gray-500;
   }
 
   .astroui-stat.astroui-stat-success.astroui-stat-fill {
-    background-color: var(--astroui-stat-success);
-    color: var(--astroui-stat-success-color);
+    @apply bg-green-100 text-green-600 dark:bg-green-500/40 dark:text-green-400;
   }
   .astroui-stat.astroui-stat-success {
-    color: var(--astroui-stat-success-color);
+    @apply text-green-600;
   }
 
   .astroui-stat.astroui-stat-error.astroui-stat-fill {
-    background-color: var(--astroui-stat-error);
-    color: var(--astroui-stat-error-color);
+    @apply bg-red-100 text-red-600 dark:bg-red-500/30 dark:text-red-400;
   }
   .astroui-stat.astroui-stat-error {
-    color: var(--astroui-stat-error-color);
+    @apply text-red-600;
   }
 
   .astroui-stat.astroui-stat-light.astroui-stat-fill {
-    background-color: var(--astroui-stat-light);
-    color: var(--astroui-stat-light-color);
+    @apply bg-gray-100 text-gray-600;
   }
   .astroui-stat.astroui-stat-light {
-    color: var(--astroui-stat-dark-color);
+    @apply text-gray-400;
   }
 
   .astroui-stat.astroui-stat-dark.astroui-stat-fill {
-    background-color: var(--astroui-stat-dark);
-    color: var(--astroui-stat-dark-color);
+    @apply bg-gray-800 text-gray-100 dark:bg-gray-700 dark:text-gray-100;
   }
   .astroui-stat.astroui-stat-dark {
-    color: var(--astroui-stat-dark-color);
+    @apply text-gray-100;
   }
 
   /** Sizes */
 
   .astroui-stat.astroui-stat-xs {
-    height: 1.25rem; /* 20px */
-    font-size: 0.75rem; /* 12px */
-    line-height: 1rem; /* 16px */
-    padding-left: 0.25rem; /* 4px */
-    padding-right: 0.25rem; /* 4px */
-    border-radius: 0.125rem ;/* 2px */
+    @apply h-5 text-xs pl-1 pr-1 rounded-sm;
   }
 
   .astroui-stat.astroui-stat-sm {
-    height: 1.5rem; /* 24px */
-    font-size: 0.875rem; /* 14px */
-    line-height: 1.25rem; /* 20px */
-    padding-left: 0.5rem; /* 8px */
-    padding-right: 0.5rem; /* 8px */
-    border-radius: 0.25rem; /* 4px */
+    @apply h-6 text-sm pl-2 pr-2 rounded-sm;
   }
 
   .astroui-stat.astroui-stat-md {
-    height: 1.75rem; /* 28px */
-    font-size: 1rem; /* 16px */
-    line-height: 1.5rem; /* 24px */
-    padding-left: 0.75rem; /* 12px */
-    padding-right: 0.75rem; /* 12px */
-    border-radius: 0.375rem; /* 6px */
+    @apply h-7 text-sm pl-3 pr-3 rounded-md;
   }
 
   .astroui-stat.astroui-stat-lg {
-    height: 2rem; /* 32px */
-    font-size: 1.125rem; /* 18px */
-    line-height: 1.75rem; /* 28px */
-    padding-left: 1rem; /* 16px */
-    padding-right: 1rem; /* 16px */
-    border-radius: 0.375rem; /* 6px */
+    @apply h-8 text-base pl-4 pr-4 rounded-md;
   }
 
   .astroui-stat.astroui-stat-xl {
-    height: 2.25rem; /* 36px */
-    font-size: 1.125rem; /* 18px */
-    line-height: 1.75rem; /* 28px */
-    padding-left: 1.25rem; /* 20px */
-    padding-right: 1.25rem; /* 20px */
-    border-radius: 0.375rem; /* 6px */
+    @apply h-9 text-base pl-5 pr-5 rounded-md;
   }
 </style>

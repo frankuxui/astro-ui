@@ -74,11 +74,11 @@ const {
   /* Filled */
 
   .astroui-input.astroui-input-filled {
-    @apply border-transparent bg-gray-200 focus:bg-white dark:bg-gray-700 dark:focus:bg-gray-100 dark:focus:ring-white;
+    @apply border-transparent bg-gray-100 focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-100 dark:focus:ring-white;
   }
 
   .astroui-input.astroui-input-outline {
-    @apply border border-gray-300 dark:border-gray-500 dark:focus:border-white bg-white focus:bg-white dark:bg-gray-700 dark:focus:bg-gray-100 dark:focus:ring-white;
+    @apply border border-gray-300 dark:border-gray-700 dark:focus:border-white bg-white focus:bg-white dark:bg-gray-950 dark:focus:bg-gray-100 dark:focus:ring-white;
   }
 
   /** Sizes */
@@ -105,7 +105,7 @@ const {
   input:disabled, 
   .astroui-input[disabled], 
   .astroui-input:disabled {
-    @apply opacity-70 cursor-default;
+    @apply bg-gray-300 opacity-50 cursor-default dark:placeholder:text-white/50;
   }
 
   /** Readonly */
@@ -174,10 +174,10 @@ const {
 /** Addonz size in case input has state */
 
 .astroui-append .astroui-input-xs ~ .astroui-addonz {
-  @apply w-4 h-4;
+  @apply w-3.5 h-3.5;
 }
 .astroui-append .astroui-input-sm ~ .astroui-addonz {
-  @apply w-5 h-5;
+  @apply w-4 h-4;
 }
 .astroui-append .astroui-input-md ~ .astroui-addonz {
   @apply w-5 h-5;

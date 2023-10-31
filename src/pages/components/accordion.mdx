@@ -4,7 +4,7 @@ title: "Accordion"
 description: "Accordion component"
 slug: "accordion"
 toc: true
-soon: true
+soon: false
 ---
 import Example from '../../components/Example.astro'
 import Accordion from '../../components/ui/Accordion.astro'
@@ -74,6 +74,42 @@ import AccordionItem from '../components/ui/AccordionItem.astro'
 
 ```astro
 <Accordion id='accordion-example' alwaysOpen>
+  <AccordionItem>
+    <h2 slot="title">Accordion title 1</h2>
+    <p slot="content">...</p>
+  </AccordionItem>
+  <AccordionItem>
+    <h2 slot="title">Accordion title 2</h2>
+    <p slot="content">...</p>
+  </AccordionItem>
+  <AccordionItem>
+    <h2 slot="title">Accordion title 3</h2>
+    <p slot="content">...</p>
+  </AccordionItem>
+</Accordion>
+```
+
+## Border
+
+<Example>
+  <Accordion id='accordion-example-3' border>
+    <AccordionItem>
+      <h2 slot="title">Accordion title 1</h2>
+      <p slot="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget ultricies aliquam, nunc sapien aliquet nunc, vitae a </p>
+    </AccordionItem>
+    <AccordionItem>
+      <h2 slot="title">Accordion title 2</h2>
+      <p slot="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget ultricies aliquam, nunc sapien aliquet nunc, vitae a </p>
+    </AccordionItem>
+    <AccordionItem>
+      <h2 slot="title">Accordion title 3</h2>
+      <p slot="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget ultricies aliquam, nunc sapien aliquet nunc, vitae a </p>
+    </AccordionItem>
+  </Accordion>
+</Example>
+
+```astro
+<Accordion id='accordion-example' border>
   <AccordionItem>
     <h2 slot="title">Accordion title 1</h2>
     <p slot="content">...</p>

@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes, CSSProperty } from 'astro/types'
 
-type Variants = 'primary' | 'secondary' | 'error' | 'light' | 'dark'
+type Variants = 'primary' | 'secondary' | 'error' | 'light' | 'dark' | 'link'
 type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 interface Props extends HTMLAttributes<'button'> {
@@ -47,6 +47,7 @@ const {
     !inline && variant === 'error' && 'astroui-button-error',
     !inline && variant === 'light' && 'astroui-button-light',
     !inline && variant === 'dark' && 'astroui-button-dark',
+    !inline && variant === 'link' && 'astroui-button-link',
 
     !inline && pill && 'astroui-button-pill',
     !inline && isLoading && 'pointer-events-none opacity-75',
@@ -90,6 +91,16 @@ const {
   /* Light */
   .astroui-button-light {
     @apply bg-white text-black hover:bg-gray-100 focus:ring-gray-400;
+  }
+
+  /* Dark */
+  .astroui-button-dark {
+    @apply bg-black text-white hover:bg-gray-900 focus:ring-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-400;
+  }
+
+  /* Link */
+  .astroui-button-link {
+    @apply bg-transparent text-black focus:ring-primary dark:text-white dark:focus:ring-gray-400;
   }
   
 
