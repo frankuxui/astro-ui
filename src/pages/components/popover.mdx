@@ -18,6 +18,12 @@ import Popover from '../../components/ui/Popover.astro'
   </Popover>
 </Example>
 
+```astro
+<Popover>
+  <div slot='content'>Simple popover.</div>
+</Popover>
+```
+
 ## Usage
 
 Para el funcionamiento del popover, debe agregar la prop `data-toggle` al elemento que activará el popover. El valor de la prop `data-toggle` debe ser el id del popover. Si esto no se cumple, el popover no funcionará.

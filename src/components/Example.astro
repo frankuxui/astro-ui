@@ -86,14 +86,14 @@ const { isDark = false, ...attrs } = Astro.props
 
   /** Popover */
 
-  .example-docs.example-popover-docs .astroui-popover {
+  .example-docs.example-popover-docs .astroui-popover, .example-docs.example-dropdown-docs .astroui-dropdown{
     position: relative !important;
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;
   }
-  .example-docs.example-popover-docs .astroui-popover .astroui-popover-content {
+  .example-docs.example-popover-docs .astroui-popover .astroui-popover-content, .example-docs.example-dropdown-docs .astroui-dropdown .astroui-dropdown-content{
     opacity: 1 !important;
     visibility: visible !important;
     transform: scale(1) !important;

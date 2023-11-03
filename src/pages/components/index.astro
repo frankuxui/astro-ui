@@ -48,8 +48,9 @@ const components = await Astro.glob('../components/*.mdx')
               components.map((component) => (
                 <a 
                   href={`/components/${component.frontmatter.slug}`}
+                  data-cursor-hover="dark"
+                  class="transition-all duration-300 overflow-hidden w-full flex flex-col p-6 space-y-1 rounded-2xl bg-gray-100 dark:bg-gray-800 ring-2 ring-transparent focus:ring-primary"
                   class:list={{
-                    'relative w-full flex flex-col p-6 space-y-1 rounded-2xl bg-gray-100 dark:bg-gray-800 ring-2 ring-transparent focus:ring-primary': true,
                     'pointer-events-none opacity-30': component?.frontmatter?.soon
                   }}
                 >

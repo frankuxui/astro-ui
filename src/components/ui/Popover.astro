@@ -1,5 +1,5 @@
 ---
-import type { HTMLAttributes, CSSProperty } from 'astro/types'
+import type { HTMLAttributes } from 'astro/types'
 
 interface Props extends HTMLAttributes<'div'> {
   id: string
@@ -47,7 +47,7 @@ const {
             height='22'
             viewBox='0 0 24 24'
             fill='none'
-            stroke='#000000'
+            stroke='currentColor'
             stroke-width='2'
             stroke-linecap='round'
             stroke-linejoin='round'>
@@ -284,23 +284,15 @@ const {
 </script>
 
 <style is:global>
+
   .astroui-popover {
     @apply absolute z-[100] max-w-max;
   }
 
   /** Popover content */
 
-  @keyframes animationPopper {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
   .astroui-popover .astroui-popover-content {
-    @apply flex flex-col relative bg-clip-padding rounded-xl bg-white shadow-2xl max-w-[18rem] animate-popover;
+    @apply flex flex-col relative bg-clip-padding rounded-xl bg-white shadow-2xl max-w-[18rem] animate-popover dark:bg-gray-800;
   }
   .astroui-popover.fade .astroui-popover-content{
     @apply opacity-0 invisible;
@@ -311,7 +303,7 @@ const {
 
   /** Popover border */
   .astroui-popover-content.astroui-popover-border {
-    @apply divide-y divide-gray-200;
+    @apply divide-y divide-gray-200 dark:divide-gray-700;
   }
 
   /** Popover header */
@@ -334,15 +326,9 @@ const {
   }
 
   /** Popover close button */
-  .astroui-popover-close {
-    @apply flex items-center justify-center w-8 h-8 rounded-full bg-transparent text-black cursor-pointer transition-all;
-  }
-  .astroui-popover-close:hover {
-    @apply bg-black/10
+  .astroui-popover .astroui-popover-close {
+    @apply flex items-center justify-center w-8 h-8 rounded-full bg-transparent text-black cursor-pointer transition-all dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-white/5;
   }
 
-  /** Dark theme */
-  .dark .astroui-popover .astroui-popover-content {
-    @apply bg-white text-black;
-  }
+
 </style>

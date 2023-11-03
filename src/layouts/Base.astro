@@ -20,15 +20,17 @@ const { title } = Astro.props;
     <title>{title}</title>
     <script src='../script/theme.js'></script>
     
+    
   </head>
-
+  
   <script>
     if ( localStorage.getItem("color-theme") === "dark" || (!("color-theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches) ) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  </script>
+    </script>
+    <script src="../script/cursor-effect.js"></script>
   <body>
     <slot />
   </body>
@@ -65,5 +67,23 @@ const { title } = Astro.props;
     color: var(--color);
   }
 
+  .cursor {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    inset: 0px auto auto 0px;
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+    transform: transform 0.3s ease;
+    background-color: rgba(139, 161, 247, 0.064);
+    mix-blend-mode: difference;
+  }
+  .dark .cursor {
+    filter: blur(100px);
+    background-color: rgba(139, 161, 247, 0.121);
+    width: 260px;
+    height: 260px;
+  }
 
 </style>

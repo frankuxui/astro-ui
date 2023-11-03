@@ -1,0 +1,272 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'div'> {
+  id: string
+  initialOpen?: boolean
+  placement?: 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end'
+}
+
+const {
+  id,
+  initialOpen = false,
+  placement = 'bottom-start',
+} = Astro.props
+
+---
+
+<div 
+  class="astroui-dropdown fade"
+  id={id}
+  role="dialog"
+  aria-hidden={initialOpen ? 'false' : 'true'}
+  data-placement={placement}
+  class:list={{
+    'astroui-dropdown-show': initialOpen
+  }}
+  style={{
+    display: initialOpen ? 'block' : 'none'
+  }}
+  transition:animate="fade"
+  >
+  <div 
+    class="astroui-dropdown-content"
+    transition:animate="fade"
+    >
+    <slot />
+  </div>
+</div>
+
+<script define:vars={{id, initialOpen, placement}}>
+  const dropdown = document.querySelectorAll(`#${id}`)
+  const trigger = document.querySelectorAll(`[data-toggle="${id}"]`)
+
+  //
+  // Check if the dropdown is open
+  
+  function isShow(dropdown) {
+    return dropdown.getAttribute('aria-hidden') === 'false'
+  }
+
+  //
+  // Show the dropdown
+
+  function getShow(dropdown) {
+    dropdown.style.display = 'block'
+    dropdown.setAttribute('aria-hidden', 'false')
+    dropdown.classList.add('astroui-dropdown-show')
+  }
+
+  //
+  // Hide the dropdown
+
+  function getHide(dropdown) {
+    dropdown.classList.remove('astroui-dropdown-show')
+    dropdown.setAttribute('aria-hidden', 'true')
+    dropdown.style.display = 'none'
+  }
+
+  //
+  // Toggle the dropdown
+
+  function getToggle(dropdown) {
+    if (isShow(dropdown)) {
+      getHide(dropdown)
+    } else {
+      getShow(dropdown)
+    }
+  }
+
+  //
+  // Function on dismissing dropdown by button close
+
+  function onDismiss(dropdown) {
+    const closeButton = dropdown?.querySelectorAll('[data-dismiss="dropdown"]')
+    closeButton?.forEach((button) => {
+      button.addEventListener('click', () => {
+        getHide(dropdown)
+      })
+    })
+  }
+
+  //
+  // Get placement
+
+  function getPlacement(dropdown) {
+    const trigger = document.querySelector(`[data-toggle="${dropdown.id}"]`)
+    const top = trigger?.offsetTop
+    const left = trigger?.offsetLeft
+    const triggerWidth = trigger?.offsetWidth
+    const triggerHeight = trigger?.offsetHeight
+    const dropdownWidth = dropdown?.offsetWidth
+    const dropdownHeight = dropdown?.offsetHeight
+    const placement = dropdown?.dataset.placement || 'top'
+
+    const gap = 5
+
+    const position = {
+      top,
+      left
+    }
+    
+    if (placement === 'top') {
+      position.top = top - dropdownHeight - gap
+      position.left = left + triggerWidth / 2 - dropdownWidth / 2
+    }
+
+    if (placement === 'top-start') {
+      position.top = top - dropdownHeight - gap
+      position.left = left
+    }
+
+    if (placement === 'top-end') {
+      position.top = top - dropdownHeight - gap
+      position.left = left + triggerWidth - dropdownWidth
+    }
+
+    if (placement === 'bottom') {
+      position.top = top + triggerHeight + gap
+      position.left = left + triggerWidth / 2 - dropdownWidth / 2
+    }
+
+    if (placement === 'bottom-start') {
+      position.top = top + triggerHeight + gap
+      position.left = left
+    }
+
+    if (placement === 'bottom-end') {
+      position.top = top + triggerHeight + gap
+      position.left = left + triggerWidth - dropdownWidth
+    }
+
+    if (placement === 'left') {
+      position.top = top + triggerHeight / 2 - dropdownHeight / 2
+      position.left = left - dropdownWidth - gap
+    }
+
+    if (placement === 'left-start') {
+      position.top = top
+      position.left = left - dropdownWidth - gap
+    }
+
+    if (placement === 'left-end') {
+      position.top = top + triggerHeight - dropdownHeight
+      position.left = left - dropdownWidth - gap
+    }
+
+    if (placement === 'right') {
+      position.top = top + triggerHeight / 2 - dropdownHeight / 2
+      position.left = left + triggerWidth + gap
+    }
+
+    if (placement === 'right-start') {
+      position.top = top
+      position.left = left + triggerWidth + gap
+    }
+
+    if (placement === 'right-end') {
+      position.top = top + triggerHeight - dropdownHeight
+      position.left = left + triggerWidth + gap
+    }
+
+    dropdown.style.transform = `translate3d(${position.left}px, ${position.top}px, 0)`
+    dropdown.style.inset = '0px auto auto 0px'
+  }
+
+  //
+  // Initial states
+
+  dropdown.forEach((dropdown) => {
+    if (initialOpen) {
+      dropdown.style.display = 'block'
+      dropdown.setAttribute('aria-hidden', 'false')
+      dropdown.classList.add('astroui-dropdown-show')
+      getPlacement(dropdown)
+    } else {
+      dropdown.style.display = 'none'
+      dropdown.setAttribute('aria-hidden', 'true')
+      dropdown.classList.remove('astroui-dropdown-show')
+    }
+
+    onDismiss(dropdown)
+  })
+
+  //
+  // Hide the dropdown when pressing the escape key
+
+  function hideOnEscKey(dropdown) {
+    const escKeyListener = (event) => {
+      if (event.key === 'Escape' && isShow(dropdown)) {
+        getHide(dropdown)
+        removeKeyListener()
+      }
+    }
+
+    const removeKeyListener = () => {
+      document.removeEventListener('keydown', escKeyListener)
+    }
+
+    document.addEventListener('keydown', escKeyListener)
+  }
+
+  //
+  // Hide the dropdown when clicking the close button
+
+  function hideOnCloseButton(dropdown) {
+    const closeButton = dropdown?.querySelector('[data-dismiss="dropdown"]') ?? null
+
+    closeButton?.addEventListener('click', () => {
+      getHide(dropdown)
+    })
+  }
+
+  //
+  // Hide the dropdown when clicking outside
+
+  function hideOnOutsideClick(dropdown, trigger, event) {
+    if (!dropdown?.contains(event.target) && !trigger?.contains(event.target) && isShow(dropdown)) {
+      getHide(dropdown)
+    }
+  }
+
+  document.addEventListener('click', (event) => {
+    dropdown.forEach((dropdown) => {
+      const trigger = document.querySelector(`[data-toggle="${dropdown.id}"]`)
+      hideOnOutsideClick(dropdown, trigger, event)
+    })
+  })
+  
+
+  //
+  // Event listeners
+
+  
+  trigger.forEach((trigger) => {
+    const dropdown = document.querySelector(`#${trigger.dataset.toggle}`)
+    const element = document.querySelector(`[data-toggle="${dropdown.id}"]`)
+    element.addEventListener('click', () => {
+      getToggle(dropdown)
+      hideOnEscKey(dropdown)
+      hideOnCloseButton(dropdown)
+      getPlacement(dropdown)
+    })
+  })
+
+</script>
+
+<style is:global>
+
+  .astroui-dropdown {
+    @apply absolute z-[100] max-w-max;
+  }
+  .astroui-dropdown .astroui-dropdown-content {
+    @apply flex flex-col relative py-2 bg-clip-padding rounded-lg border bg-white shadow-2xl max-w-[20rem] animate-popover dark:border-gray-700 dark:bg-gray-800;
+  }
+  .astroui-dropdown.fade .astroui-dropdown-content{
+    @apply opacity-0 invisible;
+  }
+  .astroui-dropdown.astroui-dropdown-show .astroui-dropdown-content{
+    @apply opacity-100 visible;
+  }
+
+</style>
