@@ -5,9 +5,13 @@ const pathname = Astro.url.pathname
 const url = pathname.split('/').slice(-1)[0]
 const components = await Astro.glob('../components/*.mdx')
 
+function truncate(str, n) {
+  return (str.length > n) ? str.substr(0, n-1) + '...' : str;
+};
+
 ---
 
-<Layout title='Astro UI' >
+<Layout title='Components' >
   <nav class='sticky top-0 z-[120] w-full flex h-16 items-center justify-end gap-2 px-6 bg-white/30 dark:bg-gray-950/90 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
     <div class='flex w-full items-center justify-between max-w-[90rem] mx-auto'>
       <a href='/' class='flex items-center hover:opacity-75'>
@@ -43,21 +47,26 @@ const components = await Astro.glob('../components/*.mdx')
               </p>
           </div>
 
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-8">
+          <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-8">
             {
               components.map((component) => (
                 <a 
                   href={`/components/${component.frontmatter.slug}`}
                   data-cursor-hover="dark"
-                  class="transition-all duration-300 overflow-hidden w-full flex flex-col p-6 space-y-1 rounded-2xl bg-gray-100 dark:bg-gray-800 ring-2 ring-transparent focus:ring-primary"
+                  class="transition-all duration-300 overflow-hidden w-full flex flex-col rounded-2xl bg-gray-100 dark:bg-gray-800 ring-2 ring-transparent focus:ring-primary"
                   class:list={{
                     'pointer-events-none opacity-30': component?.frontmatter?.soon
                   }}
                 >
-                  <h2 class='text-lg sm:text-xl font-bold dark:text-white'>{component.frontmatter.title}</h2>
-                  <p class='text-base truncate text-slate-600 dark:text-gray-500'>
-                    {component.frontmatter.description}
-                  </p>
+                  <header>
+                    <img src={`../components/${component.frontmatter.image}.png`} alt={component.frontmatter.title} class='w-full h-40 object-cover' />
+                  </header>
+                  <main class="p-6 space-y-1">
+                    <h2 class='text-lg sm:text-xl font-bold dark:text-white'>{component.frontmatter.title}</h2>
+                    <p class='text-sm text-slate-600 dark:text-gray-500'>
+                      {truncate(component.frontmatter.description, 70)}
+                    </p>
+                  </main>
                 </a>
               ))
             }
