@@ -19,7 +19,7 @@ const { title } = Astro.props;
     <meta name='generator' content={Astro.generator} />
     <title>{title ? `Astro ui - ${title}` : 'Astro ui'}</title>
     <script src='../script/theme.js'></script>
-    
+    <script src="../components/ui/tooltip.js"></script>
     
   </head>
   
@@ -84,6 +84,10 @@ const { title } = Astro.props;
     background-color: rgba(139, 161, 247, 0.121);
     width: 260px;
     height: 260px;
+  }
+
+  .tooltip {
+    @apply absolute z-[100] max-w-max px-3 py-2 text-sm font-medium rounded-md shadow-lg backdrop-blur-md text-white bg-black/90 dark:bg-white/90 dark:text-black;
   }
 
 </style>

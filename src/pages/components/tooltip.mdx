@@ -4,9 +4,38 @@ title: "Tooltip"
 description: ""
 slug: "tooltip"
 toc: true
-soon: true
+soon: false
 image: "tooltip"
 ---
 import Example from '../../components/Example.astro'
+import Button from '../../components/ui/Button.astro'
+
+## Import
+
+```js
+<script src="../components/ui/tooltip.js"></script>
+```
 
 ## Usage
+
+<Example>
+  <Button 
+    data-toggle="tooltip" 
+    data-placement="top"
+    data-content="Tooltip on top"
+    >
+    Tooltip
+  </Button>
+</Example>
+
+
+
+```astro
+<Button 
+  data-toggle="tooltip" 
+  data-placement="top"
+  data-content="Tooltip on top"
+  >
+  Tooltip
+</Button>
+```
