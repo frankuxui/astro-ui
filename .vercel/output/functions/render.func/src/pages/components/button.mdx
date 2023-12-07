@@ -1,0 +1,313 @@
+---
+layout: "../../layouts/Docs.astro"
+title: "Button"
+description: "Los botones son elementos de la interfaz de usuario que los usuarios pueden hacer clic para proporcionar entrada. Los botones típicamente aparecen en las formas y cuadros de diálogo, pero también se pueden colocar en barras de herramientas, barras de título y paneles."
+slug: "button"
+toc: true
+soon: false
+image: "button"
+---
+import Example from '../../components/Example.astro'
+import Callout from '../../components/Callout.astro'
+import Button from '../../components/ui/Button.astro'
+import Spinner from '../../components/ui/Spinner.astro'
+
+## Usage
+
+This is a basic button.
+
+<Example>
+  <Button>Default</Button>
+</Example>
+
+```js
+<Button>Default</Button>
+```
+
+## Principal buttons
+
+<Example>
+  <div class="flex items-center gap-4 flex-wrap">
+    <Button variant='primary'>Primary</Button>
+    <Button variant='secondary'>Secondary</Button>
+  </div>
+</Example>
+
+```astro
+<Button variant='primary'>Primary</Button>
+<Button variant='secondary'>Secondary</Button>
+```
+
+## Variants
+
+Estas variantes de colores permiten personalizar el aspecto visual de los botones para que se adapten al diseño general de la aplicación o sitio web, o para transmitir ciertos significados o intenciones a los usuarios.
+
+<Example>
+  <div class="flex items-center gap-4 flex-wrap">
+    <Button variant='primary'>Primary</Button>
+    <Button variant='secondary'>Secondary</Button>
+    <Button variant='error'>Error</Button>
+    <Button variant='dark'>Dark</Button>
+    <Button variant='link'>Link</Button>
+  </div>
+</Example>
+
+```astro
+<Button variant='primary'>Primary</Button>
+<Button variant='secondary'>Secondary</Button>
+<Button variant='error'>Error</Button>
+<Button variant='dark'>Dark</Button>
+<Button variant='link'>Link</Button>
+```
+
+### Light variant
+
+<Example isDark >
+  <Button variant='light'>Primary</Button>
+</Example>
+
+```astro
+<Button variant='light'>Primary</Button>
+```
+
+## Sizes
+
+Los botones pueden tener diferentes tamaños. El tamaño predeterminado es `md`. Los tamaños disponibles son: `xs`, `sm`, `md`, `lg` y `xl`.
+
+<Example>
+<div class="flex items-center gap-4 flex-wrap">
+  <Button size='xs'>Extra Small</Button>
+  <Button size='sm'>Small</Button>
+  <Button size='md'>Medium</Button>
+  <Button size='lg'>Large</Button>
+  <Button size='xl'>Extra Large</Button>
+</div>
+</Example>
+
+```astro
+<Button size='xs'>Extra Small</Button>
+<Button size='sm'>Small</Button>
+<Button size='md'>Medium</Button>
+<Button size='lg'>Large</Button>
+<Button size='xl'>Extra Large</Button>
+```
+
+## Pill
+
+Los botones de píldoras son botones redondeados que se pueden usar para atraer la atención del usuario a una acción específica.
+
+<Example>
+<div class="flex items-center gap-4 flex-wrap">
+  <Button pill variant='primary'>Primary</Button>
+  <Button pill variant='secondary'>Secondary</Button>
+  <Button pill variant='error'>Error</Button>
+  <Button pill variant='dark'>Dark</Button>
+  <Button pill variant='link'>Link</Button>
+</div>
+</Example>
+
+```astro
+<Button pill variant='primary'>Primary</Button>
+<Button pill variant='secondary'>Secondary</Button>
+<Button pill variant='error'>Error</Button>
+<Button pill variant='dark'>Dark</Button>
+<Button pill variant='link'>Link</Button>
+```
+
+## Full Width
+
+Botones que ocupan todo el ancho del contenedor. Esto es útil cuando se desea que el botón ocupe todo el ancho del contenedor y se adapte a su tamaño.
+
+<Example>
+<div class="grid">
+  <Button>Button</Button>
+</div>
+</Example>
+
+```astro
+<div class="grid">
+  <Button>Button</Button>
+</div>
+```
+
+### Grid cols
+
+<Example>
+<div class="grid grid-cols-3 gap-4">
+  <Button>Button</Button>
+  <Button>Button</Button>
+  <Button>Button</Button>
+</div>
+</Example>
+
+```astro
+<div class="grid grid-cols-3 gap-4">
+  <Button>Button</Button>
+  <Button>Button</Button>
+  <Button>Button</Button>
+</div>
+```
+
+## States
+
+Los botones pueden tener diferentes estados. Los estados disponibles son: `disabled`, `loading` y `active`.
+
+### Disabled
+
+<Example>
+<div class="flex items-center gap-4 flex-wrap">
+  <Button disabled variant='primary'>Primary</Button>
+  <Button disabled variant='secondary'>Secondary</Button>
+  <Button disabled variant='error'>Error</Button>
+</div>
+</Example>
+
+```astro
+<Button disabled variant='primary'>Primary</Button>
+<Button disabled variant='secondary'>Secondary</Button>
+<Button disabled variant='error'>Error</Button>
+```
+
+### Loading
+
+Los botones de carga se pueden usar cuando se realiza una acción que lleva tiempo completarla. Esto ayuda a los usuarios a comprender que la acción se está procesando.
+
+<Example>
+<div class="flex items-center gap-4 flex-wrap">
+  <Button isLoading variant='primary'>Loading...</Button>
+  <Button isLoading variant='secondary'>Loading...</Button>
+  <Button isLoading variant='error'>Loading...</Button>
+</div>
+</Example>
+
+```astro
+<Button isLoading variant='primary'>Loading...</Button>
+<Button isLoading variant='secondary'>Loading...</Button>
+<Button isLoading variant='error'>Loading...</Button>
+```
+
+## With spinner
+
+Los botones de carga se pueden usar cuando se realiza una acción que lleva tiempo completarla. Esto ayuda a los usuarios a comprender que la acción se está procesando.
+
+<Example>
+<div class="flex items-center gap-4 flex-wrap">
+  <Button isLoading variant='primary'>
+    <span>Loading</span>
+    <Spinner variant='light' size='sm'/>
+  </Button>
+  <Button isLoading variant='secondary'>
+    <span>Loading</span>
+    <Spinner variant='dark' size='sm'/>
+  </Button>
+  <Button isLoading variant='error'>
+    <span>Loading</span>
+    <Spinner variant='light' size='sm'/>
+  </Button>
+</div>
+</Example>
+
+```astro
+<Button isLoading variant='primary'>
+  <span>Loading</span>
+  <Spinner variant='light' size='sm'/>
+</Button>
+
+<Button isLoading variant='secondary'>
+  <span>Loading</span>
+  <Spinner variant='dark' size='sm'/>
+</Button>
+
+<Button isLoading variant='error'>
+  <span>Loading</span>
+  <Spinner variant='light' size='sm'/>
+</Button>
+```
+
+## Button icons
+
+Los botones de iconos se pueden usar cuando se desea que el botón contenga solo un icono. Esto ayuda a los usuarios a comprender que la acción se está procesando.
+
+<Example>
+<Button variant='secondary'>
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+</Button>
+</Example>
+
+```astro
+<Button variant='secondary'>
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="18" 
+    height="18" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    stroke-width="2" 
+    stroke-linecap="round" 
+    stroke-linejoin="round">
+    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+  </svg>
+</Button>
+```
+
+<Example>
+<Button>
+  <span>Do you like it?</span>
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+</Button>
+</Example>
+
+```astro
+<Button>
+  <span>Do you like it?</span>
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="18" 
+    height="18" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    stroke-width="2" 
+    stroke-linecap="round" 
+    stroke-linejoin="round">
+    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+  </svg>
+</Button>
+```
+
+## Reset styles
+
+Para restablecer o deshacer los estilos de los botones, simplemente añade la prop `inline` al botón. Esta acción anulará todos los estilos del boton, permitiendo que se adapte de manera óptima a tus necesidades y estilos altamente personalizados.
+
+<Callout variant='warning'>
+  Es importante saber que una ves que la prop `inline` se agrega, no se podrá acceder a las propiedades de los botones, como `variant`, `size`, `pill` o `isLoading`.
+</Callout>
+
+<Example>
+  <Button inline>Button</Button>
+</Example>
+
+```astro
+<Button inline>Button</Button>
+```
+
+## Custom button
+
+<Example>
+  <Button inline class='h-10 rounded-md px-6 flex items-center justify-center bg-green-600 text-white '>Custom button</Button>
+</Example>
+
+```astro
+<Button inline class='h-10 rounded-md px-6 flex items-center justify-center bg-green-600 text-white'>Custom button</Button>
+```
+
+## Props
+
+| Prop | Type | default | Description |
+| ---- | ---- | ------- | ----------- |
+| variant | String | primary | Variante del botón. Las variantes disponibles son: `primary`, `secondary`, `error` y `light`. |
+| size | String | md | Tamaño del botón. Los tamaños disponibles son: `xs`, `sm`, `md`, `lg` y `xl`. |
+| pill | Boolean | false | Si el botón debe ser redondeado. |
+| isLoading | Boolean | false | Si el botón está cargando. |
+| disabled | Boolean | false | Si el botón está deshabilitado. |

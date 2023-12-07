@@ -1,0 +1,189 @@
+---
+layout: "../../layouts/Docs.astro"
+title: "Popover"
+description: "Componente de interfaz de usuario que muestra contenido adicional o información emergente cuando un usuario realiza una acción específica, como hacer clic en un elemento o pasar el mouse sobre él. Por lo general, los popovers suelen ser pequeñas ventanas emergentes que aparecen junto a un elemento de la página, como un botón, un enlace o un icono, y proporcionan información adicional o opciones relacionadas con ese elemento."
+slug: "popover"
+toc: true
+soon: false
+image: "popover"
+---
+import Example from '../../components/Example.astro'
+import Button from '../../components/ui/Button.astro'
+import Popover from '../../components/ui/Popover.astro'
+
+## Example
+
+<Example class='example-popover-docs'>
+  <Popover style={{ display: 'block' }}>
+    <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+  </Popover>
+</Example>
+
+```astro
+<Popover>
+  <div slot='content'>Simple popover.</div>
+</Popover>
+```
+
+## Usage
+
+Para el funcionamiento del popover, debe agregar la prop `data-toggle` al elemento que activará el popover. El valor de la prop `data-toggle` debe ser el id del popover. Si esto no se cumple, el popover no funcionará.
+
+<Example>
+  <Button data-toggle='popover-example'>Popover toggle</Button>
+  <Popover id='popover-example' placement='top'>
+    <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+  </Popover>
+</Example>
+
+```astro
+<Button data-toggle='popover-example'>Popover toggle</Button>
+<Popover id='popover-example' placement='top'>
+  <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+</Popover>
+```
+
+## Initial open
+
+Para inicializar el popover abierto, agregue la prop `initialOpen`. Esto es útil para mostrar un popover en la carga de la página o en respuesta a una acción del usuario.
+
+<Example>
+  <Button data-toggle='popover-initial-open'>Popover toggle</Button>
+  <Popover id='popover-initial-open' initialOpen placement='top' divider>
+    <div slot='content' class='p-6'>
+      <h2 class='font-medium text-base'>Popover header</h2>
+      <p class="text-sm mt-2 text-gray-500">This is a popover body.</p>
+    </div>
+  </Popover>
+</Example>
+
+```astro
+<Button data-toggle='popover-initial-open'>Popover toggle</Button>
+<Popover id='popover-initial-open' initialOpen placement='top' divider>
+  <div slot='content' class='p-4'>
+    <h2 >Popover header</h2>
+    <p class="text-sm text-gray-500">This is a popover body.</p>
+  </div>
+</Popover>
+```
+
+## Placement
+
+Los popover pueden tener diferentes posiciones. La posición predeterminada es `top`. Las posiciones disponibles son: `top`, `top-start`, `top-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end`, `right`, `right-start` y `right-end`. Puede usar la prop `placement` para establecer la posición.
+
+<Example>
+  <div class="flex items-center gap-4 flex-wrap">
+    <Button data-toggle='popover-example-3'>Top</Button>
+    <Popover id='popover-example-3' placement='top'>
+      <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+    </Popover>
+    <Button data-toggle='popover-example-4'>Top start</Button>
+    <Popover id='popover-example-4' placement='top-start'>
+      <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+    </Popover>
+    <Button data-toggle='popover-example-5'>Top end</Button>
+    <Popover id='popover-example-5' placement='top-end'>
+      <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+    </Popover>
+    <Button data-toggle='popover-example-6'>Bottom</Button>
+    <Popover id='popover-example-6' placement='bottom'>
+      <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+    </Popover>
+    <Button data-toggle='popover-example-7'>Bottom start</Button>
+    <Popover id='popover-example-7' placement='bottom-start'>
+      <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+    </Popover>
+    <Button data-toggle='popover-example-8'>Bottom end</Button>
+    <Popover id='popover-example-8' placement='bottom-end'>
+      <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+    </Popover>
+    <Button data-toggle='popover-example-9'>left</Button>
+    <Popover id='popover-example-9' placement='left'>
+      <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+    </Popover>
+    <Button data-toggle='popover-example-10'>Left start</Button>
+    <Popover id='popover-example-10' placement='left-start'>
+      <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+    </Popover>
+    <Button data-toggle='popover-example-11'>Left end</Button>
+    <Popover id='popover-example-11' placement='left-end'>
+      <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+    </Popover>
+    <Button data-toggle='popover-example-12'>Right</Button>
+    <Popover id='popover-example-12' placement='right'>
+      <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+    </Popover>
+    <Button data-toggle='popover-example-13'>Right start</Button>
+    <Popover id='popover-example-13' placement='right-start'>
+      <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+    </Popover>
+    <Button data-toggle='popover-example-14'>Right end</Button>
+    <Popover id='popover-example-14' placement='right-end'>
+      <div slot='content' class="p-6 text-gray-500">Simple popover.</div>
+    </Popover>
+  </div>
+</Example>
+
+```astro
+<Button data-toggle='popover-example'>Right end</Button>
+<Popover id='popover-example' placement='right-end'>
+  <h3 slot='title'>Popover header</h3>
+  <p slot='body' class="text-sm text-gray-500">This is a popover body.</p>
+  <p slot='footer' class="text-sm text-gray-500">Popover footer.</p>
+</Popover>
+```
+
+## Modify the content
+
+<Example class='example-popover-docs'>
+  <Popover style={{ display: 'block' }}>
+    <div slot='content' class='p-4'>
+      <h2 >Popover header</h2>
+      <p class="text-sm text-gray-500">This is a popover body.</p>
+    </div>
+  </Popover>
+</Example>
+
+```astro
+<Button data-toggle='popover-example'>Popover toggle</Button>
+<Popover id='popover-example'>
+  <div slot='content' class='p-4'>
+    <h2 >Popover header</h2>
+    <p class="text-sm text-gray-500">This is a popover body.</p>
+  </div>
+</Popover>
+```
+
+<Example class='example-popover-docs'>
+  <Popover style={{ display: 'block' }}>
+    <h3 slot='title' class="astroui-popover-title">Popover header</h3>
+    <p slot='body' class="text-sm text-gray-500">This is a popover body. Here's some more content.</p>
+    <p slot='footer' class="text-sm text-gray-500">Popover footer.</p>
+  </Popover>
+</Example>
+
+```astro
+<Popover id='popover-example'>
+  <h3 slot='title' class="astroui-popover-title">Popover header</h3>
+  <p slot='body' class="text-sm text-gray-500">This is a popover body. Here's some more content.</p>
+  <p slot='footer' class="text-sm text-gray-500">Popover footer.</p>
+</Popover>
+```
+
+## Border
+
+<Example class='example-popover-docs'>
+  <Popover border={true} style={{ display: 'block' }}>
+    <h3 slot='title' class="astroui-popover-title">Popover header</h3>
+    <p slot='body' class="text-sm text-gray-500">This is a popover body. Here's some more content.</p>
+    <p slot='footer' class="text-sm text-gray-500">Popover footer.</p>
+  </Popover>
+</Example>
+
+```astro
+<Popover border={true} id='popover-example'>
+  <h3 slot='title' class="astroui-popover-title" >Popover header</h3>
+  <p slot='body' class="text-sm text-gray-500">This is a popover body. Here's some more content.</p>
+  <p slot='footer' class="text-sm text-gray-500">Popover footer.</p>
+</Popover>
+```

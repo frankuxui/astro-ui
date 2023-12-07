@@ -1,0 +1,544 @@
+---
+layout: "../../layouts/Docs.astro"
+title: "Modal"
+description: "Componente de interfaz de usuario utilizado para mostrar información o contenido adicional de manera superpuesta en la página web actual. Los modales son ventanas emergentes que se utilizan para destacar información importante, realizar acciones adicionales o solicitar la interacción del usuario sin que este abandone la página principal."
+slug: "modal"
+toc: true
+soon: false
+image: "modal"
+---
+import Example from '../../components/Example.astro'
+import Button from '../../components/ui/Button.astro'
+import Modal from '../../components/ui/Modal.astro'
+
+## Example
+
+<Example class='example-modal-docs'>
+  <Modal>
+    <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+</Example>
+
+```astro
+<Modal>
+  <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
+  <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  <Button slot='footer' type='button' variant='secondary'>Close</Button>
+  <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+</Modal>
+```
+
+## Usage
+
+Para dar funcionalidad a los modales, se debe usar el atributo `data-toggle` en un elemento que desencadene el modal. El valor del atributo `data-toggle` debe ser el `id` del modal que se quiere mostrar.
+
+<Example>
+  <Button data-toggle='modal-example'>Example</Button>
+  <Modal id='modal-example'>
+    <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+</Example>
+
+```astro
+<Button data-toggle='modal-example'>Example</Button>
+<Modal id='modal-example'>
+  <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
+  <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+  <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+</Modal>
+```
+
+## Sizes
+
+Los modales suelen ofrecer diferentes tamaños para adaptarse a diversos contenidos y necesidades de diseño. A continuación, te menciono algunos tamaños comunes para modales:
+
+**A continuación, te muestro un ejemplo de cómo usar los diferentes tamaños de modales:** 👇
+
+- `xs: 20rem`
+- `sm: 24rem`
+- `md: 32rem`
+- `lg: 40rem`
+- `xl: 48rem`
+- `2xl: 56rem`
+- `3xl: 64rem`
+- `4xl: 72rem`
+- `5xl: 80rem`
+- `6xl: 88rem`
+- `7xl: 96rem`
+- `8xl: 104rem`
+- `9xl: 112rem`
+- `full: 100%`
+
+<Example>
+  <div class="flex items-center gap-4 flex-wrap">
+    <Button data-toggle='modal-xs'>Extra small</Button>
+    <Button data-toggle='modal-sm'>Small</Button>
+    <Button data-toggle='modal-md'>Medium</Button>
+    <Button data-toggle='modal-lg'>Large</Button>
+    <Button data-toggle='modal-xl'>Extra large</Button>
+    <Button data-toggle='modal-2xl'>2xl</Button>
+    <Button data-toggle='modal-3xl'>3xl</Button>
+    <Button data-toggle='modal-4xl'>4xl</Button>
+    <Button data-toggle='modal-5xl'>5xl</Button>
+    <Button data-toggle='modal-6xl'>6xl</Button>
+    <Button data-toggle='modal-7xl'>7xl</Button>
+    <Button data-toggle='modal-8xl'>8xl</Button>
+    <Button data-toggle='modal-9xl'>9xl</Button>
+    <Button data-toggle='modal-full'>Full</Button>
+  </div>
+
+  <Modal id='modal-xs' size='xs'>
+    <h2 slot='title' class='astroui-modal-title'>Modal extra small</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-sm' size='sm'>
+    <h2 slot='title' class='astroui-modal-title'>Modal small</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-md' size='md'>
+    <h2 slot='title' class='astroui-modal-title'>Modal medium</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-lg' size='lg'>
+    <h2 slot='title' class='astroui-modal-title'>Modal large</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-xl' size='xl'>
+    <h2 slot='title' class='astroui-modal-title'>Modal extra large</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-2xl' size='2xl'>
+    <h2 slot='title' class='astroui-modal-title'>Modal 2xl</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-3xl' size='3xl'>
+    <h2 slot='title' class='astroui-modal-title'>Modal 3xl</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-4xl' size='4xl'>
+    <h2 slot='title' class='astroui-modal-title'>Modal 4xl</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' data-dismiss='modal'  variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-5xl' size='5xl'>
+    <h2 slot='title' class='astroui-modal-title'>Modal 5xl</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button'  data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button'  variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-6xl' size='6xl'>
+    <h2 slot='title' class='astroui-modal-title'>Modal 6xl</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button'  data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button'  variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-7xl' size='7xl'>
+    <h2 slot='title' class='astroui-modal-title'>Modal 7xl</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button'  data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button'  variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-8xl' size='8xl'>
+    <h2 slot='title' class='astroui-modal-title'>Modal 8xl</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button'  data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button'  variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-9xl' size='9xl'>
+    <h2 slot='title' class='astroui-modal-title'>Modal 9xl</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button'  data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button'  variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-full' size='full'>
+    <h2 slot='title' class='astroui-modal-title'>Modal full</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button'  data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button'  variant='primary'>Save changes</Button>
+  </Modal>
+</Example>
+
+```astro
+  <Button data-toggle='modal-xs'>Extra small</Button>
+  <Modal id='modal-xs' size='xs'>
+    <h2 slot='title' class='astroui-modal-title'>Modal extra small</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+```
+
+## Initial open
+
+Para iniciar el modal cuando carga la página, se debe usar la prop `initialOpen` en el modal que se quiere mostrar.
+
+```astro
+<Modal id='modal-example' initialOpen>
+  <h2 slot='title' class='astroui-modal-title'>Modal example</h2>
+  <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+  <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+</Modal>
+```	
+
+## Placements
+
+Los modales se pueden mostrar en diferentes posiciones. Por defecto, la posición es `top-center` y las posiciones disponibles son `top-start`, `top-center`, `top-end`, `center-start`, `center`, `center-end`, `bottom-start`, `bottom-center` y `bottom-end`. Para cambiar la posición, se debe usar la propiedad `placement`.
+
+<Example>
+  <div class="flex items-center gap-4 flex-wrap">
+    <Button data-toggle='modal-top-start'>Top start</Button>
+    <Button data-toggle='modal-top-center'>Top center</Button>
+    <Button data-toggle='modal-top-end'>Top end</Button>
+    <Button data-toggle='modal-center-start'>Center start</Button>
+    <Button data-toggle='modal-center'>Center</Button>
+    <Button data-toggle='modal-center-end'>Center end</Button>
+    <Button data-toggle='modal-bottom-start'>Bottom start</Button>
+    <Button data-toggle='modal-bottom-center'>Bottom center</Button>
+    <Button data-toggle='modal-bottom-end'>Bottom end</Button>
+  </div>
+
+
+  <Modal id='modal-top-start' placement='top-start'>
+    <h2 slot='title' class='astroui-modal-title'>Modal top start</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-top-center' placement='top-center'>
+    <h2 slot='title' class='astroui-modal-title'>Modal top center</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-top-end' placement='top-end'>
+    <h2 slot='title' class='astroui-modal-title'>Modal top end</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-center-start' placement='center-start'>
+    <h2 slot='title' class='astroui-modal-title'>Modal center start</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-center' placement='center'>
+    <h2 slot='title' class='astroui-modal-title'>Modal center</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-center-end' placement='center-end'>
+    <h2 slot='title' class='astroui-modal-title'>Modal center end</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-bottom-start' placement='bottom-start'>
+    <h2 slot='title' class='astroui-modal-title'>Modal bottom start</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-bottom-center' placement='bottom-center'>
+    <h2 slot='title' class='astroui-modal-title'>Modal bottom center</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+  <Modal id='modal-bottom-end' placement='bottom-end'>
+    <h2 slot='title' class='astroui-modal-title'>Modal bottom end</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+
+</Example>
+
+```astro
+<Button data-toggle='modal-example-positions'>Buttom start</Button>
+<Modal id='modal-example-positions' placement='bottom-start'>
+  <h2 slot='title' class='astroui-modal-title'>Modal bottom start</h2>
+  <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  <Button slot='footer' type='button' variant='secondary'>Close</Button>
+  <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+</Modal>
+```
+
+## Static backdrop
+
+Los modales se pueden mostrar con un fondo estático. Para cambiar el modo, se debe usar la propiedad `staticBackdrop`.
+
+<Example>
+  <Button data-toggle='modal-example-static'>Static backdrop</Button>
+  <Modal id='modal-example-static' staticBackdrop>
+    <h2 slot='title' class='astroui-modal-title'>Modal static backdrop</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+</Example>
+  
+```astro
+<Button data-toggle='modal-example-static'>Static backdrop</Button>
+<Modal id='modal-example-static' staticBackdrop>
+  <h2 slot='title' class='astroui-modal-title'>Modal static backdrop</h2>
+  <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+  <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+</Modal>
+```
+
+
+## Modal content
+
+Este ejemplo es fundamental para si queremos personalizar el contenido del modal. En este caso, el modal no tiene un `body`, ni un `header` ni un `footer`. En su lugar, tiene un `content` que representa todo el contenido del modal.
+
+Una sugerencia para aplicar estilos es el uso de [Tailwind CSS](https://tailwindcss.com/).
+
+<Example class='example-modal-docs'>
+  <Modal>
+    <div slot='content'>
+      <h2 class='astroui-modal-title'>Modal title</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+      <Button type='button' variant='secondary'>Close</Button>
+      <Button type='button' variant='primary'>Save changes</Button>
+    </div>
+  </Modal>
+</Example>
+
+```astro
+<Modal>
+  <div slot='content' class='custom-tailwind-class'>
+    <h2 class='astroui-modal-title'>Modal title</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button type='button' variant='secondary'>Close</Button>
+    <Button type='button' variant='primary'>Save changes</Button>
+  </div>
+</Modal>
+```
+
+### Custom content
+
+Personalizando el modal con usando [Tailwind CSS](https://tailwindcss.com/).
+
+<Example class='example-modal-docs'>
+  <Modal>
+    <div slot='content' class='flex flex-col gap-4'>
+      <div class='w-full flex justify-between items-center p-4'>
+        <h2 class='astroui-modal-title'>Custom modal</h2>
+        <button class='flex-none' data-dismiss='modal' >
+          <svg xmlns="http://www.w3.org/2000/svg" 
+          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+        </button>
+      </div>
+      <div class='px-4'>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+      </div>
+      <div class='flex justify-end gap-2 w-full p-4'>
+        <button type='button' data-dismiss='modal' class='px-4 h-10 rounded-md flex items-center justify-center border border-gray-300 text-black'>Close</button>
+        <button type='button' class='px-4 h-10 rounded-md flex items-center justify-center bg-blue-700 text-white'>Save changes</button>
+      </div>
+    </div>
+  </Modal>
+</Example>
+
+<Example>
+  <Button data-toggle='custom-modal'>Open custom modal</Button>
+  <Modal id='custom-modal'>
+    <div slot='content' class='flex flex-col gap-4'>
+      <div class='w-full flex justify-between items-center p-4'>
+        <h2 class='astroui-modal-title'>Custom modal</h2>
+        <button class='flex-none' data-dismiss='modal'>
+          <svg xmlns="http://www.w3.org/2000/svg" 
+          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+        </button>
+      </div>
+      <div class='px-4'>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+      </div>
+      <div class='flex justify-end gap-2 w-full p-4'>
+        <button type='button' data-dismiss='modal' class='px-4 h-10 rounded-md flex items-center justify-center border border-gray-300 text-black'>Close</button>
+        <button type='button' class='px-4 h-10 rounded-md flex items-center justify-center bg-blue-700 text-white'>Save changes</button>
+      </div>
+    </div>
+  </Modal>
+</Example>
+
+```astro
+<Button data-toggle='custom-modal'>Open custom modal</Button>
+<Modal id='custom-modal'>
+  <div slot='content' class='flex flex-col gap-4'>
+    <div class='w-full flex justify-between items-center p-4'>
+      <h2 class='astroui-modal-title'>Custom modal</h2>
+      <button class='flex-none' data-dismiss='modal'>
+        <svg xmlns="http://www.w3.org/2000/svg" 
+        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+      </button>
+    </div>
+    <div class='px-4'>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    </div>
+    <div class='flex justify-end gap-2 w-full p-4'>
+      <button type='button' data-dismiss='modal' class='px-4 h-10 rounded-md flex items-center justify-center border border-gray-300 text-black'>Close</button>
+      <button type='button' class='px-4 h-10 rounded-md flex items-center justify-center bg-blue-700 text-white'>Save changes</button>
+    </div>
+  </div>
+</Modal>
+```
+
+## Scroll behavior
+
+Los modales se pueden mostrar con un scroll interno o externo. Para cambiar el modo, se debe usar la propiedad `scrollBehavior`. Esto es útil cuando el contenido del modal es más largo que la altura del modal o cuando el modal se muestra dentro de un scroll.
+
+### Inside scroll
+
+<Example>
+  <Button data-toggle='modal-example-inside-scroll'>Inside scroll</Button>
+  <Modal scrollBehavior='inside' id='modal-example-inside-scroll'>
+    <h2 slot='title' class='astroui-modal-title'>Modal inside scroll</h2>
+    <div slot='body'>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+    </div>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+</Example>
+
+```astro	
+<Button data-toggle='modal-example-inside-scroll'>Inside scroll</Button>
+<Modal scrollBehavior='inside' id='modal-example-inside-scroll'>
+  <h2 slot='title' class='astroui-modal-title'>Modal inside scroll</h2>
+  <div slot='body' class='h-64 overflow-y-auto'>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  </div>
+  <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+  <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+</Modal>
+```
+
+### Outside scroll
+
+<Example>
+  <Button data-toggle='modal-example-outside-scroll'>Outside scroll</Button>
+  <Modal scrollBehavior='outside' id='modal-example-outside-scroll'>
+    <h2 slot='title' class='astroui-modal-title'>Modal outside scroll</h2>
+    <div slot='body'>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+    </div>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+</Example>
+
+```astro	
+<Button data-toggle='modal-example-outside-scroll'>Outside scroll</Button>
+<Modal scrollBehavior='outside' id='modal-example-outside-scroll'>
+  <h2 slot='title' class='astroui-modal-title'>Modal outside scroll</h2>
+  <div slot='body' class='h-64 overflow-y-auto'>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  </div>
+  <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+  <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+</Modal>
+```
+
+## Hide button close
+
+<Example>
+  <Button data-toggle='modal-hide-button-close'>Example</Button>
+  <Modal showButtonClose={false} id='modal-hide-button-close'>
+    <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+</Example>
+
+```astro
+<Button data-toggle='modal-example'>Example</Button>
+<Modal showButtonClose={false} id='modal-example'>
+  <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
+  <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+  <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+</Modal>
+```
+
+## Modal borders
+
+El modal por defecto contiene border para separar o delimitar el contenido. Para quitar los bordes, se debe usar la propiedad `border={false}`.
+
+<Example>
+  <Button data-toggle='modal-border'>Example</Button>
+  <Modal border={false} id='modal-border'>
+    <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
+    <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+    <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+    <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+  </Modal>
+</Example>
+
+```astro
+<Button data-toggle='modal-example'>Example</Button>
+<Modal border={false} id='modal-example'>
+  <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
+  <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
+  <Button slot='footer' type='button' data-dismiss='modal' variant='secondary'>Close</Button>
+  <Button slot='footer' type='button' variant='primary'>Save changes</Button>
+</Modal>
+```

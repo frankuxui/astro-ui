@@ -1,0 +1,291 @@
+---
+layout: "../../layouts/Docs.astro"
+title: "Input"
+description: "Los inputs son elementos de la interfaz de usuario que los usuarios pueden escribir para proporcionar entrada. Los inputs típicamente aparecen en las formas y cuadros de diálogo, pero también se pueden colocar en barras de herramientas, barras de título y paneles."
+slug: "input"
+toc: true
+soon: false
+image: "input"
+---
+import Example from '../../components/Example.astro'
+import Input from '../../components/ui/Input.astro'
+import Button from '../../components/ui/Button.astro'
+import Alert from '../../components/ui/Alert.astro'
+
+## Usage
+
+<Example>
+  <Input />
+</Example>
+
+```astro
+<Input />
+```
+
+## Outline
+
+<Example>
+  <Input outline />
+</Example>
+
+```astro
+<Input outline />
+```
+
+## Sizes
+
+El uso principal de los tamaños de input es hacer que los inputs se vean más grandes o más pequeños que su tamaño predeterminado. Esto se puede lograr aplicando la prop `size` a un input. Los tamaños disponibles son: `xs`, `sm`, `md`, `lg` y `xl`.
+
+<Example>
+  <div class="flex flex-col gap-4">
+    <Input size='xs' placeholder="Extra small" />
+    <Input size='sm' placeholder="Small" />
+    <Input size='md' placeholder="Medium" />
+    <Input size='lg' placeholder="Large" />
+    <Input size='xl' placeholder="Extra large" />
+  </div>
+</Example>
+
+```astro
+<Input size='xs' placeholder="Extra small" />
+<Input size='sm' placeholder="Small" />
+<Input size='md' placeholder="Medium" />
+<Input size='lg' placeholder="Large" />
+<Input size='xl' placeholder="Extra large" />
+```
+
+## Disabled
+
+Los inputs deshabilitados se muestran con un color de fondo gris claro. Su principal propósito es evitar que los usuarios envíen datos que no se pueden usar, por ejemplo, cuando se requiere un valor para un campo de entrada, pero no se puede proporcionar.
+
+<Example>
+  <Input disabled placeholder="Disabled input" />
+</Example>
+
+```astro
+<Input disabled placeholder="Disabled input" />
+```
+
+## Readonly
+
+Este input es de solo lectura. El usuario no puede modificar el valor del input, pero sí puede seleccionar su contenido y copiarlo.
+
+<Example>
+  <Input readonly value="This is a readonly input" />
+</Example>
+
+```astro
+<Input readonly value="This is a readonly input" />
+```
+
+## State
+
+### Valid state
+
+En este estado, el input se muestra con un borde verde y un icono de verificación. Este estado se usa para indicar que el input es válido.
+
+<Example>
+  <div class="max-w-xs">
+    <Input state='valid' placeholder="Valid input" value="This is a valid input" />
+  </div>
+</Example>
+
+```astro
+<Input state='valid' placeholder="Valid input" value="This is a valid input" />
+```
+
+### Invalid state
+
+En este estado, el input se muestra con un borde rojo y un icono de error. Este estado se usa para indicar que el input es inválido.
+
+<Example>
+  <div class="max-w-xs">
+    <Input state='invalid' placeholder="Invalid input" value="This is an invalid input" />
+  </div>
+</Example>
+
+```astro
+<Input state='invalid' placeholder="Invalid input" value="This is an invalid input" />
+```
+
+### With sizes
+
+<Example>
+  <div class="flex flex-col gap-4 max-w-xs">
+    <Input size='xs' state='valid' placeholder="Extra small" />
+    <Input size='sm' state='valid' placeholder="Small" />
+    <Input size='md' state='valid' placeholder="Medium"/>
+    <Input size='lg' state='valid' placeholder="Large" />
+    <Input size='xl' state='valid' placeholder="Extra large"/>
+  </div>
+</Example>
+
+```astro
+<!-- Size -->
+<Input size='xs' state='valid' placeholder="Extra small" />
+```
+
+<Example>
+  <div class="flex flex-col gap-4 max-w-xs">
+    <Input size='xs' state='invalid' placeholder="Extra small" />
+    <Input size='sm' state='invalid' placeholder="Small" />
+    <Input size='md' state='invalid' placeholder="Medium"/>
+    <Input size='lg' state='invalid' placeholder="Large" />
+    <Input size='xl' state='invalid' placeholder="Extra large"/>
+  </div>
+</Example>
+
+```astro
+<!-- Size -->
+<Input size='xs' state='invalid' placeholder="Extra small" />
+```
+
+## Prepend and append
+
+<Example>
+  <div class="astroui-prepend max-w-xs">
+    <Input placeholder="Prepend" />
+    <svg class="astroui-addonz" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+  </div>
+  <div class="astroui-prepend max-w-xs mt-4">
+    <Input outline placeholder="Prepend" />
+    <svg class="astroui-addonz" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+  </div>
+</Example>
+
+```astro
+<div class="astroui-prepend">
+  <Input placeholder="Prepend" />
+  <svg class="astroui-addonz" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+</div>
+
+<!-- Outline -->
+<div class="astroui-prepend">
+  <Input outline placeholder="Prepend" />
+  <svg class="astroui-addonz" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+</div>
+```
+
+<Example>
+  <div class="astroui-append max-w-xs">
+    <Input placeholder="Append" />
+    <svg class="astroui-addonz" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+  </div>
+  <div class="astroui-append max-w-xs mt-4">
+    <Input outline placeholder="Append" />
+    <svg class="astroui-addonz" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+  </div>
+</Example>
+
+```astro
+<div class="astroui-append">
+  <Input placeholder="Append" />
+  <svg class="astroui-addonz" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+</div>
+
+<!-- Outline -->
+<div class="astroui-append">
+  <Input outline placeholder="Append" />
+  <svg class="astroui-addonz" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+</div>
+```
+
+## Examples
+
+<Example>
+  <form class="flex items-center gap-4 max-w-md">
+    <Input placeholder="Search" />
+    <Button variant='primary'>Search</Button>
+  </form>
+</Example>
+
+```astro
+<form class="flex items-center gap-4 max-w-md">
+  <Input placeholder="Search" />
+  <Button variant='primary'>Search</Button>
+</form>
+```
+
+<Example>
+  <form class="flex items-center gap-4 max-w-md">
+    <Input outline placeholder="Search" />
+    <Button variant='secondary'>Search</Button>
+  </form>
+</Example>
+
+```astro
+<form class="flex items-center gap-4 max-w-md">
+  <Input outline placeholder="Search" />
+  <Button variant='secondary'>Search</Button>
+</form>
+```
+
+<Example>
+  <form class="max-w-xs mx-auto space-y-4">
+    <div class="space-y-2">
+      <label for="user" class="block font-medium text-gray-700">Email</label>
+      <Input id="user" name="user" placeholder="Usuario" />
+    </div>
+    <div class="space-y-2">
+      <label for="password" class="block font-medium text-gray-700">Password</label>
+      <Input id="password" name="password" type="password" placeholder="Password" />
+    </div>
+    <div>
+      <Button class="w-full" variant='primary'>Enter your account</Button>
+    </div>
+  </form>
+</Example>
+
+```astro
+<form class="max-w-xs mx-auto space-y-4">
+  <div class="space-y-2">
+    <label for="user" class="block font-medium text-gray-700">Email</label>
+    <Input id="user" name="user" placeholder="Usuario" />
+  </div>
+  <div class="space-y-2">
+    <label for="password" class="block font-medium text-gray-700">Password</label>
+    <Input id="password" name="password" type="password" placeholder="Password" />
+  </div>
+  <div>
+    <Button class="w-full" variant='primary'>Enter your account</Button>
+  </div>
+</form>
+```
+
+<Example>
+  <form class="max-w-xs mx-auto space-y-4">
+    <div class="space-y-2">
+      <label for="user2" class="block font-medium text-gray-700">Email</label>
+      <Input id="user2" name="user2" placeholder="Usuario" value="frankuxui" />
+    </div>
+    <div class="space-y-2">
+      <label for="password2" class="block font-medium text-gray-700">Password</label>
+      <Input state='invalid' id="password2" name="password2" type="password" placeholder="Password" value="dewdwedew"  />
+    </div>
+    <div>
+      <Button class="w-full" variant='primary'>Enter your account</Button>
+    </div>
+    <Alert type="error">
+      <p>Your password is incorrect.</p>
+    </Alert>
+  </form>
+</Example>
+
+```astro
+<form class="max-w-xs mx-auto space-y-4">
+  <div class="space-y-2">
+    <label for="user" class="block font-medium text-gray-700">Email</label>
+    <Input id="user" name="user" placeholder="Usuario" />
+  </div>
+  <div class="space-y-2">
+    <label for="password" class="block font-medium text-gray-700">Password</label>
+    <Input state='invalid' id="password" name="password" type="password" placeholder="Password"/>
+  </div>
+  <div>
+    <Button class="w-full" variant='primary'>Enter your account</Button>
+  </div>
+  <Alert type="error">
+    <p>Your password is incorrect.</p>
+  </Alert>
+</form>
+```

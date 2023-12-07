@@ -1,0 +1,91 @@
+---
+import Layout from '../../layouts/Layout.astro'
+
+const pathname = Astro.url.pathname
+const url = pathname.split('/').slice(-1)[0]
+const components = await Astro.glob('../components/*.mdx')
+
+function truncate(str, n) {
+  return (str.length > n) ? str.substr(0, n-1) + '...' : str;
+};
+
+---
+
+<Layout title='Components' >
+  <nav class='sticky top-0 z-[120] w-full flex h-16 items-center justify-end gap-2 px-6 bg-white/30 dark:bg-gray-950/90 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
+    <div class='flex w-full items-center justify-between max-w-[90rem] mx-auto'>
+      <a href='/' class='flex items-center hover:opacity-75'>
+        <span class='text-xl font-poppins font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-blue-600 '>
+        Astro ui
+        </span>
+      </a>
+      <div class="flex items-center justify-center">
+        <button 
+          id="theme-toggle" 
+          type="button"
+          class="flex items-center justify-center w-10 h-10 text-gray-500 dark:text-gray-200 transition focus:outline-none focus:ring-4 rounded-full text-sm">
+          
+          <svg id="icon-dark" class='hidden' xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          
+          <svg id="icon-light" class='hidden' xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class='px-6 mx-auto flex max-w-full'>
+
+    <article class='w-full break-words flex min-h-[calc(100vh_-_4rem)] min-w-0 justify-center pb-8'>
+      <main class='w-full min-w-0 max-w-[90rem] pt-4'>
+        <div class='mt-8'>
+
+          <div class='relative w-full py-8 md:rounded-xl overflow-hidden'>
+              <h1 class='mb-4 text-3xl sm:text-4xl font-bold'>Components</h1>
+              <p class='mt-2 text-lg text-gray-500 dark:text-gray-400'>
+                Listado de componentes de interfaz de usuario para el desarrollo de aplicaciones web.
+              </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-8">
+            {
+              components.map((component) => (
+                <a 
+                  href={`/components/${component.frontmatter.slug}`}
+                  data-cursor-hover="dark"
+                  class="transition-all duration-300 overflow-hidden w-full flex flex-col rounded-2xl bg-gray-100 dark:bg-gray-800 ring-2 ring-transparent focus:ring-primary"
+                  class:list={{
+                    'pointer-events-none opacity-30': component?.frontmatter?.soon
+                  }}
+                >
+                  <header>
+                    <img src={`../components/${component.frontmatter.image}.png`} alt={component.frontmatter.title} class='w-full h-46 object-cover' />
+                  </header>
+                  <main class="p-6 space-y-1">
+                    <h2 class='text-lg sm:text-xl font-bold dark:text-white'>{component.frontmatter.title}</h2>
+                    <p class='text-sm text-slate-600 dark:text-gray-500'>
+                      {truncate(component.frontmatter.description, 70)}
+                    </p>
+                  </main>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        
+        <div class='py-20'>
+          <a href='/' class='flex items-center hover:opacity-75 '>
+            <span class='text-xl font-poppins font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-blue-600 '>
+            Astro ui
+            </span>
+          </a>
+          <p class='text-sm text-gray-500'>
+            &copy; {new Date().getFullYear()} Astro UI. All rights reserved.
+          </p>
+        </div>
+
+      </main>
+    </article>
+
+  </div>
+</Layout>

@@ -1,0 +1,167 @@
+---
+layout: "../../layouts/Docs.astro"
+title: "Alert"
+description: "Alerta se refiere a una ventana emergente que se muestra en el navegador web para notificar al usuario sobre algún evento o mensaje importante. Es una forma común de mostrar mensajes informativos, advertencias o errores en una página web."
+slug: "alert"
+toc: true
+soon: false
+image: "alert"
+---
+import Example from '../../components/Example.astro'
+import Alert from '../../components/ui/Alert.astro'
+import Button from '../../components/ui/Button.astro'
+
+## Usage
+
+<Example>
+  <Alert> This is a alert </Alert>
+</Example>
+
+```astro
+<Alert> This is a alert </Alert>
+```
+
+## Custom children
+
+<Example>
+  <Alert message='This is a alert' />
+</Example>
+
+```astro
+<Alert message='This is a alert' />
+```
+
+
+## Variants
+
+Las variantes de alertas se refieren a diferentes estilos o tipos de alertas que se pueden utilizar para resaltar distintos tipos de mensajes o información en una página web. Estas variantes suelen tener diferentes colores, íconos o elementos visuales para representar diferentes estados o categorías.
+
+- La variante `success` se utiliza para mostrar mensajes de éxito o confirmación en una página web. Se utiliza para informar a los usuarios que una operación, acción o proceso se ha completado correctamente.
+- La variante `error` se utiliza para mostrar mensajes de error en una página web. Se utiliza para informar a los usuarios que una operación, acción o proceso no se ha completado correctamente.
+
+<Example>
+  <div class="flex flex-col gap-4">
+    <Alert type='success'>A simple success alert—check it out!</Alert>
+    <Alert type='error'>A simple error alert—check it out!</Alert>
+  </div>
+</Example>
+
+```astro
+<Alert type='success'>A simple success alert—check it out!</Alert>
+<Alert type='error'>A simple error alert—check it out!</Alert>
+```
+
+
+## Sizes
+
+Las propiedades de tamaño `size` en una alerta se utilizan para ajustar el tamaño de la alerta en función de tus necesidades de diseño y presentación. Estas propiedades te permiten controlar visualmente el aspecto y la legibilidad de las alertas en tu página web.
+
+- `xs` - Extra small
+- `sm` - Small
+- `md` - Medium
+
+<Example>
+  <div class="flex flex-col gap-4">
+    <Alert size='xs'>A simple xs alert—check it out!</Alert>
+    <Alert size='sm'>A simple sm alert—check it out!</Alert>
+    <Alert size='md'>A simple md alert—check it out!</Alert>
+  </div>
+</Example>
+
+```astro
+<Alert size='xs'>A simple xs alert—check it out!</Alert>
+<Alert size='sm'>A simple sm alert—check it out!</Alert>
+<Alert size='md'>A simple md alert—check it out!</Alert>
+```
+
+## Custom children
+
+<Example>
+  <div class="flex flex-col gap-4">
+    <Alert message='A simple xs alert—check it out!' />
+  </div>
+</Example>
+
+```astro
+<Alert message='A simple xs alert—check it out!' />
+```
+
+## Custom classes
+
+Con las clases de [Tailwind CSS](https://tailwindcss.com/docs) puedes personalizar el aspecto de las alertas para que se adapten a tus necesidades de diseño y presentación. Puedes utilizar las clases de Tailwind CSS para cambiar el color de fondo, el color del texto, el tamaño y otros aspectos visuales de las alertas.
+
+La prop `classNames` acepta un objeto con las siguientes propiedades: `root` y `content`.
+
+<Example>
+  <Alert 
+    classNames={{
+      root: '!bg-gradient-to-r from-violet-600 to-indigo-600',
+      content: 'font-medium text-white'
+    }} 
+    message='A simple xs alert—check it out!' 
+  />
+</Example>
+
+```astro
+<Alert 
+  classNames={{
+    root: '!bg-gradient-to-r from-violet-600 to-indigo-600',
+    content: 'font-medium text-white'
+  }} 
+  message='A simple xs alert—check it out!' 
+/>
+```
+
+## Live alert
+
+Las alertas en vivo se utilizan para mostrar mensajes que se actualizan automáticamente en una página web. Estas alertas se utilizan para mostrar mensajes que cambian con el tiempo, como los mensajes de estado de una operación o proceso en curso.
+
+<Example>
+  <div id="alertTemplate" class='space-y-2'></div>
+  <div class='mt-2'>
+    <Button data-toggle='alert' id="liveAlert">Show live alert</Button>
+  </div>
+</Example>
+
+```js
+  const alertTemplate = document?.getElementById('alertTemplate')
+
+  const appendAlert = (message, type, size) => {
+    const wrapper = document.createElement('div')
+    wrapper.classList.add('astroui-alert-root')
+    wrapper.innerHTML = [
+      `<div class="astroui-alert astroui-alert-${type} astroui-alert-${size}" role="alert">`,
+      `  <div>${message}</div>`,
+      '  <button type="button" class="astroui-alert-close" data-dismiss="alert" aria-label="Close"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg></button>',
+      '</div>'
+    ].join('')
+
+    alertTemplate?.append(wrapper)
+
+    const dismissAlert = document?.querySelectorAll('[data-dismiss="alert"]')
+
+    dismissAlert.forEach((button) => {
+      button.addEventListener('click', () => {
+        wrapper.remove()
+      })
+    })
+  }
+
+  // Trigger alerts
+  
+  const alertTrigger = document?.querySelector('[data-toggle="alert"]')
+    
+  if (alertTrigger) {
+    alertTrigger.addEventListener('click', () => {
+      appendAlert('Nice, you triggered this alert message!', 'success', 'md')
+    })
+  }
+```
+
+## Props
+
+| Prop | Type | default | Description |
+| ---- | ---- | ------- | ----------- |
+| type | String | primary | Variante de la alerta. Las variantes disponibles son: `success` y `error`. |
+| size | String | md | Tamaño de la alerta. Los tamaños disponibles son: `xs`, `sm` y `md`. |
+| message | String | - | Mensaje de la alerta. |

@@ -1,0 +1,227 @@
+---
+layout: "../../layouts/Docs.astro"
+title: "Dropdown"
+description: "Los dropdowns son elementos de la interfaz de usuario que permiten a los usuarios seleccionar una opción de una lista de opciones. Los dropdowns se utilizan para agrupar opciones relacionadas y mostrarlas en una lista desplegable."
+slug: "dropdown"
+toc: true
+soon: false
+image: "dropdown"
+---
+import Example from '../../components/Example.astro'
+import Dropdown from '../../components/ui/Dropdown.astro'
+import DropdownItem from '../../components/ui/DropdownItem.astro'
+import Button from '../../components/ui/Button.astro'
+
+## Import
+
+```js
+import Dropdown from '../../components/ui/Dropdown.astro'
+import DropdownItem from '../../components/ui/DropdownItem.astro'
+```
+
+## Example
+
+<Example class='example-dropdown-docs'>
+  <Dropdown style={{ display: 'block' }}>
+    <DropdownItem>Action</DropdownItem>
+    <DropdownItem>Another action</DropdownItem>
+    <DropdownItem>Something else here</DropdownItem>
+  </Dropdown>
+</Example>
+
+```astro
+<Dropdown>
+  <DropdownItem>Action</DropdownItem>
+  <DropdownItem>Another action</DropdownItem>
+  <DropdownItem>Something else here</DropdownItem>
+</Dropdown>
+```
+
+## Usage
+
+<Example>
+  <Button data-toggle='dropdown-menu'>Dropdown menu</Button>
+  <Dropdown id="dropdown-menu">
+    <DropdownItem data-dismiss='dropdown'>Action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Another action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Something else here</DropdownItem>
+  </Dropdown>
+</Example>
+
+## Placement
+
+<Example>
+
+  <div class="flex items-center gap-4 flex-wrap">
+
+  <Button size="sm" data-toggle='dropdown-top'>Dropdown top</Button>
+  <Dropdown id="dropdown-top" placement='top'>
+    <DropdownItem data-dismiss='dropdown'>Action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Another action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Something else here</DropdownItem>
+  </Dropdown>
+
+  <Button size="sm" data-toggle='dropdown-right'>Dropdown right</Button>
+  <Dropdown id="dropdown-right" placement='right'>
+    <DropdownItem data-dismiss='dropdown'>Action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Another action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Something else here</DropdownItem>
+  </Dropdown>
+
+  <Button size="sm" data-toggle='dropdown-bottom'>Dropdown bottom</Button>
+  <Dropdown id="dropdown-bottom" placement='bottom'>
+    <DropdownItem data-dismiss='dropdown'>Action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Another action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Something else here</DropdownItem>
+  </Dropdown>
+
+  <Button size="sm" data-toggle='dropdown-left'>Dropdown left</Button>
+  <Dropdown id="dropdown-left" placement='left'>
+    <DropdownItem data-dismiss='dropdown'>Action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Another action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Something else here</DropdownItem>
+  </Dropdown>
+
+  <Button size="sm" data-toggle='dropdown-top-start'>Dropdown top start</Button>
+  <Dropdown id="dropdown-top-start" placement='top-start'>
+    <DropdownItem data-dismiss='dropdown'>Action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Another action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Something else here</DropdownItem>
+  </Dropdown>
+
+  <Button size="sm" data-toggle='dropdown-top-end'>Dropdown top end</Button>
+  <Dropdown id="dropdown-top-end" placement='top-end'>
+    <DropdownItem data-dismiss='dropdown'>Action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Another action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Something else here</DropdownItem>
+  </Dropdown>
+
+  <Button size="sm" data-toggle='dropdown-bottom-start'>Dropdown bottom start</Button>
+  <Dropdown id="dropdown-bottom-start" placement='bottom-start'>
+    <DropdownItem data-dismiss='dropdown'>Action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Another action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Something else here</DropdownItem>
+  </Dropdown>
+
+  <Button size="sm" data-toggle='dropdown-bottom-end'>Dropdown bottom end</Button>
+  <Dropdown id="dropdown-bottom-end" placement='bottom-end'>
+    <DropdownItem data-dismiss='dropdown'>Action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Another action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Something else here</DropdownItem>
+  </Dropdown>
+
+  <Button size="sm" data-toggle='dropdown-left-start'>Dropdown left start</Button>
+  <Dropdown id="dropdown-left-start" placement='left-start'>
+    <DropdownItem data-dismiss='dropdown'>Action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Another action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Something else here</DropdownItem>
+  </Dropdown>
+
+  <Button size="sm" data-toggle='dropdown-left-end'>Dropdown left end</Button>
+  <Dropdown id="dropdown-left-end" placement='left-end'>
+    <DropdownItem data-dismiss='dropdown'>Action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Another action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Something else here</DropdownItem>
+  </Dropdown>
+
+  <Button size="sm" data-toggle='dropdown-right-start'>Dropdown right start</Button>
+  <Dropdown id="dropdown-right-start" placement='right-start'>
+    <DropdownItem data-dismiss='dropdown'>Action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Another action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Something else here</DropdownItem>
+  </Dropdown>
+
+  <Button size="sm" data-toggle='dropdown-right-end'>Dropdown right end</Button>
+  <Dropdown id="dropdown-right-end" placement='right-end'>
+    <DropdownItem data-dismiss='dropdown'>Action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Another action</DropdownItem>
+    <DropdownItem data-dismiss='dropdown'>Something else here</DropdownItem>
+  </Dropdown>
+  
+  </div>
+
+</Example>
+
+
+## Customization menu
+
+<Example class='example-dropdown-docs'>
+  <Dropdown style={{ display: 'block' }}>
+    <DropdownItem>Action</DropdownItem>
+    <DropdownItem>Another action</DropdownItem>
+    <DropdownItem>Something else here</DropdownItem>
+    <div class="w-full border my-2 dark:border-white/5" />
+    <DropdownItem>Another action</DropdownItem>
+    <DropdownItem>Something else here</DropdownItem>
+  </Dropdown>
+</Example>
+
+```astro
+<Dropdown>
+  <DropdownItem>Action</DropdownItem>
+  <DropdownItem>Another action</DropdownItem>
+  <DropdownItem>Something else here</DropdownItem>
+  <div class="w-full border my-2 dark:border-white/5" />
+  <DropdownItem>Another action</DropdownItem>
+  <DropdownItem>Something else here</DropdownItem>
+</Dropdown>
+```
+
+<Example class='example-dropdown-docs'>
+  <Dropdown style={{ display: 'block' }}>
+    <header class="flex items-start p-4 gap-4">
+      <figure class="relative">
+        <img class="flex-none w-12 h-12" src="https://api.multiavatar.com/Binx.png" />
+        <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+      </figure>
+      <div class="flex flex-col">
+        <h5 class="font-medium">Frank Esteban</h5>
+        <span class="text-sm text-gray-600 dark:text-gray-500">@frankuxui</span>
+      </div>
+    </header>
+    <main>
+      <DropdownItem class="group">
+        <span>Dashboard</span>
+        <span class="invisible opacity-0 group-hover:visible transition-transform duration-300 -translate-x-3 group-hover:translate-x-0 group-hover:opacity-100">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+        </span>
+      </DropdownItem>
+      <DropdownItem>Configuration</DropdownItem>
+      <DropdownItem>Pricing</DropdownItem>
+      <div class="w-full border my-2 dark:border-white/5" />
+      <DropdownItem>Privacy Policy</DropdownItem>
+      <DropdownItem>Terms of Service</DropdownItem>
+      <DropdownItem>Logout</DropdownItem>
+    </main>
+  </Dropdown>
+</Example>
+
+```astro
+<Dropdown>
+  <header class="flex items-start p-4 gap-4">
+    <figure class="relative">
+      <img class="flex-none w-12 h-12" src="https://api.multiavatar.com/Binx.png" />
+      <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+    </figure>
+    <div class="flex flex-col">
+      <h5 class="font-medium">Frank Esteban</h5>
+      <span class="text-sm text-gray-600 dark:text-gray-500">@frankuxui</span>
+    </div>
+  </header>
+  <main>
+    <DropdownItem class="group">
+      <span>Dashboard</span>
+      <span class="invisible opacity-0 group-hover:visible transition-transform duration-300 -translate-x-3 group-hover:translate-x-0 group-hover:opacity-100">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+      </span>
+    </DropdownItem>
+    <DropdownItem>Configuration</DropdownItem>
+    <DropdownItem>Pricing</DropdownItem>
+    <div class="w-full border my-2 dark:border-white/5" />
+    <DropdownItem>Privacy Policy</DropdownItem>
+    <DropdownItem>Terms of Service</DropdownItem>
+    <DropdownItem>Logout</DropdownItem>
+  </main>
+</Dropdown>
+```
+
