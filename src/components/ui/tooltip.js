@@ -115,9 +115,5 @@ trigger.forEach((trigger) => {
     tooltip.remove()
   })
 
-  /* if (initialOpen) {
-    addPosition(trigger)
-    trigger.dispatchEvent(new Event('mouseenter'))
-  } */  
   
 })
