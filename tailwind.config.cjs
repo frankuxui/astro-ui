@@ -3,7 +3,7 @@ import colors from 'tailwindcss/colors'
 
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-  darkMode: "class",
+  darkMode: 'class',
   theme: {
     extend: {
 
@@ -15,7 +15,6 @@ module.exports = {
         drawer: 'drawer 0.2s linear',
         'drawer-reverse': 'drawer-reverse 0.2s linear'
       },
-      
 
       // Colors
 
@@ -37,7 +36,6 @@ module.exports = {
         dark: '#101729'
       },
 
-      
       // Keyframes
 
       keyframes: {
@@ -46,12 +44,12 @@ module.exports = {
             transform: 'scale(0.95)'
           },
           '100%': {
-            opacity: 1,
+            opacity: 1
           }
         },
         growing: {
           '0%': {
-            transform: 'scale(0)',
+            transform: 'scale(0)'
           },
           '100%': {
             transform: 'none',
@@ -74,9 +72,9 @@ module.exports = {
             transform: 'translateX(0)'
           }
         }
-      },
+      }
     }
-    
+
   },
   plugins: []
 }

@@ -16,11 +16,11 @@ import Drawer from '../../components/ui/Drawer.astro'
 <Example>
   <Button data-toggle='drawer-example'>Drawer</Button>
   <Drawer id='drawer-example'>
-    <h2 slot='title' class="font-medium text-xl">Title here</h2>
+    <h2 slot='title' class='font-medium text-xl'>Title here</h2>
     <div slot='body'>
       <p>Drawer body text goes here.</p>
     </div>
-    <div slot="footer" class="flex items-center justify-end gap-2">
+    <div slot='footer' class='flex items-center justify-end gap-2'>
       <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
       <Button type='button' variant='primary'>Save changes</Button>
     </div>
@@ -29,16 +29,16 @@ import Drawer from '../../components/ui/Drawer.astro'
 
 ```astro
 <Button data-toggle='drawer-example'>Drawer</Button>
-<Drawer id='drawer-example'>
-  <h2 slot='title' class="font-medium text-xl">Title here</h2>
-  <div slot='body'>
-    <p>Drawer body text goes here.</p>
-  </div>
-  <div slot="footer" class="flex items-center justify-end gap-2">
-    <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
-    <Button type='button' variant='primary'>Save changes</Button>
-  </div>
-</Drawer>
+  <Drawer id='drawer-example'>
+    <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+    <div slot='body'>
+      <p>Drawer body text goes here.</p>
+    </div>
+    <div slot='footer' class='flex items-center justify-end gap-2'>
+      <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+      <Button type='button' variant='primary'>Save changes</Button>
+    </div>
+  </Drawer>
 ```
 
 ## Placement
@@ -46,25 +46,25 @@ import Drawer from '../../components/ui/Drawer.astro'
 Para cambiar la posición del drawer, use el atributo `placement` con los valores `left` o `right`. Por defecto, el drawer se muestra en la parte izquierda de la pantalla.
 
 <Example>
-  <div class="flex items-center justify-start gap-4">
+  <div class='flex items-center justify-start gap-4'>
     <Button data-toggle='drawer-left'>Drawer left</Button>
-    <Drawer id="drawer-left" placement='left'>
-      <h2 slot='title' class="font-medium text-xl">Title here</h2>
+    <Drawer id='drawer-left' placement='left'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
       <div slot='body'>
         <p>Drawer body text goes here.</p>
       </div>
-      <div slot="footer" class="flex items-center justify-end gap-2">
+      <div slot='footer' class='flex items-center justify-end gap-2'>
         <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
         <Button type='button' variant='primary'>Save changes</Button>
       </div>
     </Drawer>
     <Button data-toggle='drawer-right'>Drawer right</Button>
-    <Drawer id="drawer-right" placement='right'>
-      <h2 slot='title' class="font-medium text-xl">Title here</h2>
+    <Drawer id='drawer-right' placement='right'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
       <div slot='body'>
         <p>Drawer body text goes here.</p>
       </div>
-      <div slot="footer" class="flex items-center justify-end gap-2">
+      <div slot='footer' class='flex items-center justify-end gap-2'>
         <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
         <Button type='button' variant='primary'>Save changes</Button>
       </div>

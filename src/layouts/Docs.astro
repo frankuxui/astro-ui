@@ -3,7 +3,6 @@
 import Base from './Base.astro'
 import Toc from '../components/Toc.astro'
 
-
 interface Props {
   frontmatter: {
     title: string;
@@ -53,11 +52,9 @@ const pagination = components.reduce((acc, component, index) => {
 
 const { previous, next } = pagination as Pagination
 
-
 ---
 
 <Base title={frontmatter.title}>
-
 
   <nav class='sticky top-0 z-40 w-full flex h-16 items-center justify-end gap-2 px-6 bg-white/30 dark:bg-gray-950/90 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
     <div class='flex w-full items-center justify-between max-w-[90rem] mx-auto'>
@@ -66,15 +63,15 @@ const { previous, next } = pagination as Pagination
         Astro ui
         </span>
       </a>
-      <div class="flex items-center justify-center">
-        <button 
-          id="theme-toggle" 
-          type="button"
-          class="flex items-center justify-center w-10 h-10 text-gray-500 dark:text-gray-200 transition focus:outline-none focus:ring-4 rounded-full text-sm">
-          
-          <svg id="icon-dark" class='hidden' xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-          
-          <svg id="icon-light" class='hidden' xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+      <div class='flex items-center justify-center'>
+        <button
+          id='theme-toggle'
+          type='button'
+          class='flex items-center justify-center w-10 h-10 text-gray-500 dark:text-gray-200 transition focus:outline-none focus:ring-4 rounded-full text-sm'>
+
+          <svg id='icon-dark' class='hidden' xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'></path></svg>
+
+          <svg id='icon-light' class='hidden' xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='5'/><path d='M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4'/></svg>
         </button>
       </div>
     </div>
@@ -119,7 +116,7 @@ const { previous, next } = pagination as Pagination
     <nav class='order-last hidden w-64 shrink-0 xl:block print:hidden px-4'>
       <div class='sticky top-16 overflow-y-auto pr-4 pt-6 text-sm ltr:-mr-4 rtl:-ml-4'>
         <p class='mb-4 font-medium tracking-tight'>En esta página</p>
-        {frontmatter.toc && <Toc  />}
+        {frontmatter.toc && <Toc />}
       </div>
     </nav>
 
@@ -130,11 +127,11 @@ const { previous, next } = pagination as Pagination
             <h1 class='mb-4 text-3xl sm:text-4xl font-medium'>{frontmatter.title}</h1>
             <p class='mt-2 text-lg text-slate-600'>{frontmatter.description}</p>
           </div> -->
-          <div class="px-0 md:pl-4 md:pr-12">
+          <div class='px-0 md:pl-4 md:pr-12'>
             <div class='relative w-full p-8 md:rounded-lg overflow-hidden bg-gray-50 bg-gradient-to-tr from-[#f7f7f9] via-[#fdfdff] to-[#f7f3ff] dark:from-gray-950 dark:via-gray-950 dark:to-violet-950'>
-              <div class="z-0 absolute inset-x-0 h-full ewdf top-0"></div>
-              <div class="z-0 absolute h-full top-0 left-0 bg-gradient-to-r from-white/90 to-white/10 w-1/2 dark:w-full dark:from-gray-950 dark:to-gray-950/50"></div>
-              <div class="relative z-[1]">
+              <div class='z-0 absolute inset-x-0 h-full ewdf top-0'></div>
+              <div class='z-0 absolute h-full top-0 left-0 bg-gradient-to-r from-white/90 to-white/10 w-1/2 dark:w-full dark:from-gray-950 dark:to-gray-950/50'></div>
+              <div class='relative z-[1]'>
                 <h1 class='mb-4 text-3xl sm:text-4xl font-semibold dark:text-white'>{frontmatter.title}</h1>
                 <p class='mt-2 text-[clamp(1.125rem_,_calc(_.58114rem_+_.87719vw)_,_1.25rem)] text-slate-600 dark:text-gray-100'>{frontmatter.description}</p>
               </div>
@@ -147,7 +144,7 @@ const { previous, next } = pagination as Pagination
 
         <div
           class='mx-6 md:mx-12 grid mt-16 rounded-lg border divide-x dark:divide-gray-800 overflow-hidden shadow-sm border-gray-200 dark:border-gray-800'
-          class:list={[ 
+          class:list={[
             previous === undefined || next === undefined ? 'grid-cols-1' : 'grid-cols-2'
           ]}
         >
@@ -201,10 +198,10 @@ const { previous, next } = pagination as Pagination
 <style is:global >
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
-  .ewdf { 
+  .ewdf {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(15 23 42 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
   }
-  .dark .ewdf { 
+  .dark .ewdf {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgba(124, 71, 221, 0.42)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
   }
   .documentation-content pre {
@@ -224,7 +221,6 @@ const { previous, next } = pagination as Pagination
   .dark .documentation-content pre  {
     @apply !bg-gray-900;
   }
-  
 
   .documentation-content h1[id] {
     @apply mt-16 mb-4 text-3xl sm:text-4xl font-medium dark:text-gray-50;
