@@ -1,9 +1,12 @@
 ---
+
+type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full'
+type Placement = 'left' | 'right'
 interface Props {
   id: string
   initialOpen?: boolean
-  placement?: 'left' | 'right'
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full'
+  placement?: Placement
+  size?: Size
 }
 
 const {
@@ -35,7 +38,7 @@ const {
     size === 'full' && 'astroui-drawer-full'
   ]}
   id={id}
-  style='display: none;'
+  style='display: none'
 >
   <div class='astroui-drawer-backdrop' />
   <div class='astroui-drawer-content'>
