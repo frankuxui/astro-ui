@@ -52,7 +52,7 @@ const {
     !inline && isLoading && 'pointer-events-none opacity-75',
     disabled && 'opacity-40 pointer-events-none',
 
-    attrs.class,
+    attrs.class
   ]}
   {...attrs}
 >
@@ -60,8 +60,6 @@ const {
     <slot />
   </span>
 </button>
-
-
 
 <style is:global>
 
@@ -86,7 +84,7 @@ const {
   .astroui-button-error {
     @apply bg-error text-white hover:bg-error-dark focus:ring-error;
   }
-    
+
   /** Light */
   .astroui-button-light {
     @apply bg-white text-black hover:bg-gray-100 focus:ring-gray-400;
@@ -101,7 +99,6 @@ const {
   .astroui-button-link {
     @apply bg-transparent text-black focus:ring-primary dark:text-white dark:focus:ring-gray-400;
   }
-  
 
   /** Sizes */
   .astroui-button-xs {
@@ -125,5 +122,4 @@ const {
     @apply rounded-full;
   }
 
-  
 </style>

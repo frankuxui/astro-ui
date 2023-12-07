@@ -1,5 +1,5 @@
 const cursor = document?.createElement('div')
-const color = 'rgb(139 161 247 / 8%)'
+// const color = 'rgb(139 161 247 / 8%)'
 const x = 0
 const y = 0
 cursor.classList.add('cursor')

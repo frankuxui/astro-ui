@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'astro/types'
 
 type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
-interface Props extends HTMLAttributes<'input'> { 
+interface Props extends HTMLAttributes<'input'> {
   type?: 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url'
   outline?: boolean
   size?: Sizes
@@ -25,39 +25,39 @@ const {
 } = Astro.props
 
 ---
-<div 
-  class="astroui-control"
+<div
+  class='astroui-control'
   class:list={[
-    state === 'valid' || state === 'invalid' ? 'astroui-append' : '',
+    state === 'valid' || state === 'invalid' ? 'astroui-append' : ''
   ]}
-  >
+>
   <input
     type={type}
     class:list={[
       'astroui-input',
-      
+
       !inline && outline ? 'astroui-input-outline' : 'astroui-input-filled',
-  
+
       !inline && size === 'xs' ? 'astroui-input-xs' : '',
       !inline && size === 'sm' ? 'astroui-input-sm' : '',
       !inline && size === 'md' ? 'astroui-input-md' : '',
       !inline && size === 'lg' ? 'astroui-input-lg' : '',
       !inline && size === 'xl' ? 'astroui-input-xl' : '',
-  
+
       !inline && state === 'valid' ? 'astroui-input-valid' : '',
       !inline && state === 'invalid' ? 'astroui-input-invalid' : '',
-      
-      attrs.class,
+
+      attrs.class
     ]}
     {...attrs}
   />
   { state === 'valid' && (
-    <svg class="astroui-addonz" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-      <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+    <svg class='astroui-addonz' xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'>
+      <path d='M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z'></path>
     </svg>
   )}
   { state === 'invalid' && (
-    <svg class="astroui-addonz" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+    <svg class='astroui-addonz' xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'></circle><line x1='12' y1='8' x2='12' y2='12'></line><line x1='12' y1='16' x2='12.01' y2='16'></line></svg>
   )}
 </div>
 
@@ -101,9 +101,9 @@ const {
 
   /** Disabled */
 
-  input[disabled], 
-  input:disabled, 
-  .astroui-input[disabled], 
+  input[disabled],
+  input:disabled,
+  .astroui-input[disabled],
   .astroui-input:disabled {
     @apply bg-gray-300 opacity-50 cursor-default dark:placeholder:text-white/50;
   }

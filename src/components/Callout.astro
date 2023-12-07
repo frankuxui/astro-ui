@@ -9,8 +9,8 @@ interface Props {
 const { variant = 'default' } = Astro.props
 ---
 
-<div 
-  class="docs-callout flex flex-col p-4 rounded-lg"
+<div
+  class='docs-callout flex flex-col p-4 rounded-lg'
   class:list={[
     variant === 'default' && 'bg-gray-200 dark:bg-gray-800',
     variant === 'primary' && 'bg-blue-100 dark:bg-blue-800',
@@ -22,7 +22,6 @@ const { variant = 'default' } = Astro.props
 >
   <slot></slot>
 </div>
-
 
 <style is:global>
   .docs-callout > p {

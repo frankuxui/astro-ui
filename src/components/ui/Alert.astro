@@ -14,7 +14,7 @@ interface Props {
   classNames?: ClassNames;
 }
 
-const cx = (...args: any[]) => args.filter(Boolean).join(' ')
+const cx = (...args) => args.filter(Boolean).join(' ')
 
 const classList = {
   root: [],
@@ -24,14 +24,13 @@ const {
   message,
   size = 'md',
   type = 'success',
-  id,
   classNames = classList,
   ...attrs
 } = Astro.props;
 ---
 
 <div
-  role="alert"
+  role='alert'
   class:list={[
     'astroui-alert',
 
@@ -47,15 +46,14 @@ const {
   {...attrs}
 >
   {message
-    ? <div class:list={['astroui-alert-content', cx(classNames.content)]}>{message}</div>
-    : <div class:list={['astroui-alert-content', cx(classNames.content)]}> <slot></slot></div>
+    ? <div class:list={[ 'astroui-alert-content', cx(classNames.content) ]}>{message}</div>
+    : <div class:list={[ 'astroui-alert-content', cx(classNames.content) ]}> <slot></slot></div>
   }
 </div>
 
 <script >
-  
   const alertTemplate = document?.getElementById('alertTemplate')
-  
+
   // Append alert to placeholder
 
   const appendAlert = (message, type, size) => {
@@ -78,16 +76,14 @@ const {
   }
 
   // Trigger alerts
-  
+
   const alertTrigger = document?.querySelector('[data-toggle="alert"]')
-    
+
   if (alertTrigger) {
     alertTrigger.addEventListener('click', () => {
       appendAlert('Nice, you triggered this alert message!', 'success', 'md')
     })
   }
-
-  
 </script>
 
 <style is:global>
@@ -99,7 +95,7 @@ const {
 
   .astroui-alert-success {
     @apply bg-success-light text-green-900;
-    
+
   }
   .astroui-alert-error {
     @apply bg-error-light text-red-900;

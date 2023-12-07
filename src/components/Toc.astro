@@ -18,7 +18,6 @@ const h = headings.map(heading => {
 ---
 
 <script >
-
   const tocContent = document?.querySelector('.toc-content')
 
   tocContent?.querySelectorAll('a').forEach(a => {
@@ -37,10 +36,7 @@ const h = headings.map(heading => {
       })
       a.classList.add('toc-active')
     })
-  }) 
-  
-    
-  
+  })
 
   const headings = Array.from(document.querySelectorAll('h2[id], h3[id], h4[id], h5[id], h6[id]')).map(heading => {
     const slug = heading.id
@@ -49,7 +45,7 @@ const h = headings.map(heading => {
     heading.classList.add('toc-heading')
     return { slug, text, tag }
   })
-  
+
   window.addEventListener('DOMContentLoaded', () => {
     headings.forEach(heading => {
       const el = document.querySelector(`#${heading.slug}`)
@@ -94,9 +90,8 @@ const h = headings.map(heading => {
 
   // console.log(headings)
 
-  
-  /* 
-  
+  /*
+
   Toc pure javascript 👇
 
   const headings = Array.from(document.querySelectorAll('h2[id], h3[id], h4[id], h5[id], h6[id]')).map(heading => {
@@ -177,22 +172,20 @@ const h = headings.map(heading => {
       observer.observe(el)
     }
   }) */
-
-  
 </script>
 
-<!-- 
+<!--
   Toc pure javascript
 
 <div class='toc' >
   <ul class='toc-content flex flex-col mt-24' />
-</div> 
+</div>
 -->
 
 <div class='toc'>
   <ul class='toc-content flex flex-col mt-24'>
     {h.map(heading => (
-      <li 
+      <li
         class:list={[
           'toc-heading',
           heading.tag === 'h2' && 'ml-0',
@@ -207,8 +200,8 @@ const h = headings.map(heading => {
         </a>
       </li>
     ))}
+  </ul>
 </div>
-
 
 <style is:inline>
 
@@ -278,5 +271,5 @@ const h = headings.map(heading => {
   .dark .toc-content a.toc-active {
     color: #fff;
   }
-</style>
 
+</style>

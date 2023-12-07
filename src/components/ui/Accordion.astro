@@ -3,27 +3,27 @@
 const {
   id,
   alwaysOpen = false,
-  border = false,
+  border = false
 } = Astro.props
 
 ---
 
-<article 
-  id={id} 
-  class="astroui-accordion"
+<article
+  id={id}
+  class='astroui-accordion'
   class:list={[
-    border && 'astroui-accordion-border',
+    border && 'astroui-accordion-border'
   ]}
-  >
+>
   <slot />
 </article>
 
-<script define:vars={{id, alwaysOpen}}>
+<script define:vars={{ id, alwaysOpen }}>
 
   const triggers = document.getElementById(id).querySelectorAll('[data-toggle="accordion"]')
   const panels = document.getElementById(id).querySelectorAll('.astroui-accordion-panel')
   const items = document.getElementById(id).querySelectorAll('.astroui-accordion-item')
-    
+
   const accordion = {
     id,
     items: {
@@ -33,11 +33,10 @@ const {
         })
       }
     },
-    triggers: triggers,
-    panels: panels
+    triggers,
+    panels
   }
 
-  
   //
   // Add attributes to accordion
 
@@ -56,7 +55,7 @@ const {
   //
   // Add attributes to triggers and panels
 
-  function addAttribute(element, attribute, value) {
+  function addAttribute (element, attribute, value) {
     return element.setAttribute(attribute, value)
   }
 
@@ -68,10 +67,9 @@ const {
 
   triggers.forEach((trigger) => {
     addAttribute(trigger, 'aria-controls', id)
-    addAttribute(trigger, 'aria-expanded', false)    
+    addAttribute(trigger, 'aria-expanded', false)
   })
 
-  
   //
   // Add event listeners to triggers
 
@@ -81,13 +79,12 @@ const {
       const index = trigger.getAttribute('data-index')
       const panel = document.querySelector(`#${id} .astroui-accordion-panel[data-index="${index}"]`)
       const isExpanded = trigger.getAttribute('aria-expanded') === 'true'
-      
+
       if (!alwaysOpen) {
         accordion.items.forEach((item) => {
           const itemIndex = item.getAttribute('data-index')
           const itemPanel = document.querySelector(`#${id} .astroui-accordion-panel[data-index="${itemIndex}"]`)
           const itemTrigger = document.querySelector(`#${id} .astroui-accordion-button[data-index="${itemIndex}"]`)
-          const isItemExpanded = itemTrigger.getAttribute('aria-expanded') === 'true'
           const isItemHidden = itemPanel.getAttribute('aria-hidden') === 'true'
           if (!isItemHidden) {
             itemPanel.setAttribute('aria-hidden', true)
@@ -109,25 +106,17 @@ const {
         panel.classList.add('show')
         panel.style.height = `${panel.scrollHeight}px`
       }
-      
-
     })
-
   })
 
-
   panels.forEach((panel) => {
-    panel.addEventListener('transitionend', (event) => {
+    panel.addEventListener('transitionend', () => {
       const isHidden = panel.getAttribute('aria-hidden') === 'true'
       if (isHidden) {
         panel.classList.remove('show')
       }
     })
   })
-
-
-  
-
 </script>
 
 <style is:global>
@@ -141,7 +130,7 @@ const {
   .astroui-accordion .astroui-accordion-item {
     @apply w-full;
   }
-  
+
   /** Panel */
 
   .astroui-accordion .astroui-accordion-panel {
@@ -150,7 +139,7 @@ const {
   .astroui-accordion .astroui-accordion-panel.show {
     @apply visible;
   }
-  
+
   /** Header */
 
   .astroui-accordion .astroui-accordion-header {

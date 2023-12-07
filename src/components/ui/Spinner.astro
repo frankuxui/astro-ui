@@ -21,9 +21,9 @@ const {
 
 <div
   class:list={{
-    
-    [growing === true ? 'astroui-spinner-growing' : 'astroui-spinner'] : true,
-    
+
+    [growing === true ? 'astroui-spinner-growing' : 'astroui-spinner']: true,
+
     'astroui-spinner-xs': size === 'xs',
     'astroui-spinner-sm': size === 'sm',
     'astroui-spinner-md': size === 'md',
@@ -39,8 +39,7 @@ const {
     'astroui-spinner-light': variant === 'light',
     'astroui-spinner-dark': variant === 'dark',
 
-    'astroui-spinner-growing': growing,
-
+    'astroui-spinner-growing': growing
 
   }}
   {...attrs}
@@ -61,7 +60,6 @@ const {
     --dark: #1f2937;
   }
 
-  
   .astroui-spinner {
     @apply inline-flex flex-none border-2 dark:border-white/20 border-black/20 rounded-full animate-spin;
   }
@@ -152,7 +150,7 @@ const {
   }
 
   .astroui-spinner-dark {
-    @apply border-t-black border-black/10 dark:border-white/20 dark:border-t-white/70; 
+    @apply border-t-black border-black/10 dark:border-white/20 dark:border-t-white/70;
   }
   .astroui-spinner-growing.astroui-spinner-dark {
     @apply bg-black dark:bg-white/50;

@@ -19,15 +19,15 @@ const {
   inline = false,
   variant = 'secondary',
   size = 'md',
-  rounded = false,
+  rounded = false
 } = Astro.props
 
 ---
 
-<button 
-  type="button"
+<button
+  type='button'
   class:list={[
-    "astroui-icon-button",
+    'astroui-icon-button',
 
     !inline && variant === 'primary' && 'astroui-icon-button--primary',
     !inline && variant === 'secondary' && 'astroui-icon-button--secondary',
@@ -41,9 +41,9 @@ const {
     !inline && size === 'lg' && 'astroui-icon-button--lg',
     !inline && size === 'xl' && 'astroui-icon-button--xl',
 
-    !inline && rounded && 'astroui-icon-button--rounded',
+    !inline && rounded && 'astroui-icon-button--rounded'
   ]}
-  >
+>
   <slot />
 </button>
 

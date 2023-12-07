@@ -6,17 +6,17 @@ interface Props {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full'
 }
 
-const { 
+const {
   id,
   initialOpen = false,
   placement = 'left',
-  size = 'xs',
+  size = 'xs'
 } = Astro.props
 
 ---
 
-<aside 
-  class="astroui-drawer"
+<aside
+  class='astroui-drawer'
   class:list={[
     placement === 'left' && 'astroui-drawer-left',
     placement === 'right' && 'astroui-drawer-right',
@@ -35,12 +35,12 @@ const {
     size === 'full' && 'astroui-drawer-full'
   ]}
   id={id}
-  style="display: none;"
-  >
-  <div class="astroui-drawer-backdrop" />
-  <div class="astroui-drawer-content">
-    <header class="astroui-drawer-header">
-      <slot name="title"></slot>
+  style='display: none;'
+>
+  <div class='astroui-drawer-backdrop' />
+  <div class='astroui-drawer-content'>
+    <header class='astroui-drawer-header'>
+      <slot name='title'></slot>
       <button type='button' class='astroui-drawer-close' data-dismiss='drawer' aria-label='Close'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -57,31 +57,31 @@ const {
         </svg>
       </button>
     </header>
-    <main class="astroui-drawer-body">
-      <slot name="body"></slot>
+    <main class='astroui-drawer-body'>
+      <slot name='body'></slot>
     </main>
-    <div class="astroui-drawer-footer">
-      <slot name="footer"></slot>
+    <div class='astroui-drawer-footer'>
+      <slot name='footer'></slot>
     </div>
   </div>
 </aside>
 
-<script define:vars={{ id, initialOpen, placement }}>
+<script define:vars={{ id, initialOpen }}>
 
   const trigger = document.querySelectorAll(`[data-toggle="${id}"]`)
-  const buttonClose = document.querySelectorAll(`#${id} [data-dismiss="drawer"]`) 
-  const drawer = document.querySelectorAll(`#${id}`)
+  const buttonClose = document.querySelectorAll(`#${id} [data-dismiss="drawer"]`)
+  // const drawer = document.querySelectorAll(`#${id}`)
 
   // Open drawer
 
-  function openDrawer(drawer) {
+  function openDrawer (drawer) {
     drawer.classList.add('open')
     drawer.style.display = 'block'
   }
 
   // Close drawer
 
-  function closeDrawer(drawer) {
+  function closeDrawer (drawer) {
     drawer.classList.remove('open')
     setTimeout(() => {
       drawer.style.display = 'none'
@@ -94,7 +94,6 @@ const {
     const drawer = document.querySelector(`#${trigger.dataset.toggle}`)
     const backdrop = document.querySelector(`#${trigger.dataset.toggle} .astroui-drawer-backdrop`)
 
-        
     if (initialOpen) {
       openDrawer(drawer)
     }
@@ -112,16 +111,14 @@ const {
         closeDrawer(drawer)
       })
     })
-
   })
-
 </script>
 
 <style is:global>
   .astroui-drawer {
     @apply fixed top-0 left-0 w-full h-full z-50 overflow-hidden;
   }
-  
+
   /** Placements */
 
   .astroui-drawer.astroui-drawer-left .astroui-drawer-content {
@@ -176,13 +173,12 @@ const {
     @apply w-full max-w-full;
   }
 
-  
   /** Backdrop */
 
   .astroui-drawer-backdrop {
     @apply absolute top-0 left-0 w-full h-full bg-black opacity-50 transition-opacity duration-200;
   }
-  
+
   /** Content */
 
   .astroui-drawer-content {
@@ -223,11 +219,10 @@ const {
     @apply bg-gray-400;
   }
 
-
   /** Footer */
 
   .astroui-drawer-footer {
     @apply flex-none p-4 border-t border-gray-200;
   }
-  
+
 </style>

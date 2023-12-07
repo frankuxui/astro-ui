@@ -1,5 +1,5 @@
 ---
-type Direction = 'up' | 'up-right' | 'right' | 'down-right' | 'down' | 'down-left' | 'left' | 'up-left';
+type Direction = 'up' | 'up-right' | 'right' | 'down-right' | 'down' | 'down-left' | 'left' | 'up-left'
 type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
 
 interface Props {
@@ -11,15 +11,15 @@ interface Props {
 const {
   direction = 'right',
   text,
-  size = 'md',
+  size = 'md'
 } = Astro.props
 
 const circleSizes = {
-  'xs': 'h-6 w-6',
-  'sm': 'h-7 w-7',
-  'md': 'h-8 w-8',
-  'lg': 'h-9 w-9',
-  'xl': 'h-10 w-10',
+  xs: 'h-6 w-6',
+  sm: 'h-7 w-7',
+  md: 'h-8 w-8',
+  lg: 'h-9 w-9',
+  xl: 'h-10 w-10',
   '2xl': 'h-11 w-11',
   '3xl': 'h-12 w-12',
   '4xl': 'h-16 w-16',
@@ -27,11 +27,11 @@ const circleSizes = {
 }
 
 const arrowSizes = {
-  'xs': 'h-4 w-4',
-  'sm': 'h-4 w-4',
-  'md': 'h-5 w-5',
-  'lg': 'h-6 w-6',
-  'xl': 'h-7 w-7',
+  xs: 'h-4 w-4',
+  sm: 'h-4 w-4',
+  md: 'h-5 w-5',
+  lg: 'h-6 w-6',
+  xl: 'h-7 w-7',
   '2xl': 'h-8 w-8',
   '3xl': 'h-10 w-10',
   '4xl': 'h-11 w-11',
@@ -39,14 +39,14 @@ const arrowSizes = {
 }
 ---
 
-<button 
-  class="astroui-circle-animation"
-  >
-  {text && ( 
-    <span 
+<button
+  class='astroui-circle-animation'
+>
+  {text && (
+    <span
       class:list={[
         'font-medium',
-        
+
         size === 'xs' && 'text-xs',
         size === 'sm' && 'text-sm',
         size === 'md' && 'text-base',
@@ -59,28 +59,28 @@ const arrowSizes = {
       ]}
     >
       {text}
-    </span> 
+    </span>
   )}
-  <div 
-    class="relative inline-flex flex-none items-center justify-center"
+  <div
+    class='relative inline-flex flex-none items-center justify-center'
     class:list={[
       circleSizes[size]
     ]}
-    >
-    <div class="absolute text-gray-200 dark:text-gray-600">
+  >
+    <div class='absolute text-gray-200 dark:text-gray-600'>
       <svg
         class:list={[
           circleSizes[size]
         ]}
-        viewBox="0 0 60 60"
-        >
-        <circle stroke="currentColor" stroke-width="2" fill="transparent" r="28" cx="30" cy="30"></circle>
-        <circle class="astroui-circle" stroke="currentColor" stroke-width="2" fill="transparent" r="28" cx="30" cy="30" style="stroke-dasharray: 175.929, 175.929; transform: rotate(-90deg); transform-origin: 30px 30px;" stroke-dashoffset="175.92918860102841" transform-origin="30px 30px"></circle>
+        viewBox='0 0 60 60'
+      >
+        <circle stroke='currentColor' stroke-width='2' fill='transparent' r='28' cx='30' cy='30'></circle>
+        <circle class='astroui-circle' stroke='currentColor' stroke-width='2' fill='transparent' r='28' cx='30' cy='30' style='stroke-dasharray: 175.929, 175.929; transform: rotate(-90deg); transform-origin: 30px 30px;' stroke-dashoffset='175.92918860102841' transform-origin='30px 30px'></circle>
       </svg>
     </div>
-    <span style="transform: none;">
-      <svg 
-        class="transform"
+    <span style='transform: none;'>
+      <svg
+        class='transform'
         class:list={[
           'astroui-circle-animation-text',
           direction === 'up' && 'rotate-180',
@@ -93,20 +93,20 @@ const arrowSizes = {
           direction === 'left' && 'rotate-[90deg]',
 
           arrowSizes[size]
-        
+
         ]}
-        viewBox="0 0 32 32" 
-        fill="none" 
-        xmlns="http://www.w3.org/2000/svg"
-        >
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.101 5.5V23.1094L9.40108 17.4095L8.14807 18.6619L15.9862 26.5L23.852 18.6342L22.5996 17.3817L16.8725 23.1094V5.5H15.101Z" fill="currentColor"></path>
+        viewBox='0 0 32 32'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+      >
+        <path fill-rule='evenodd' clip-rule='evenodd' d='M15.101 5.5V23.1094L9.40108 17.4095L8.14807 18.6619L15.9862 26.5L23.852 18.6342L22.5996 17.3817L16.8725 23.1094V5.5H15.101Z' fill='currentColor'></path>
       </svg>
     </span>
   </div>
 </button>
 
 <style is:global>
-  
+
   .astroui-circle-animation {
     --astroui-circle-animation-color: theme(colors.primary);
     --astroui-circle-animation-color-hover: theme(colors.primary);
@@ -133,6 +133,5 @@ const arrowSizes = {
     stroke-dashoffset: 175.92918860102841;
     transition: stroke-dashoffset 0.3s ease 0s, stroke 0.3s ease 0s;
   }
-
 
 </style>

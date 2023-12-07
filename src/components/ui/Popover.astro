@@ -16,10 +16,10 @@ const {
 } = Astro.props
 ---
 
-<div 
-  class="astroui-popover fade"
+<div
+  class='astroui-popover fade'
   id={id}
-  role="dialog"
+  role='dialog'
   aria-hidden={initialOpen ? 'false' : 'true'}
   data-placement={placement}
   class:list={{
@@ -28,18 +28,18 @@ const {
   style={{
     display: initialOpen ? 'block' : 'none'
   }}
-  transition:animate="fade"
-  >
-  <article 
-    class="astroui-popover-content"
+  transition:animate='fade'
+>
+  <article
+    class='astroui-popover-content'
     class:list={{
-      'astroui-popover-border': border,
+      'astroui-popover-border': border
     }}
-    transition:animate="fade"
-    >
+    transition:animate='fade'
+  >
     <slot name='content'>
-      <header class="astroui-popover-header">
-        <slot name="title"></slot>
+      <header class='astroui-popover-header'>
+        <slot name='title'></slot>
         <button type='button' class='astroui-popover-close' data-dismiss='popover' aria-label='Close'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -56,31 +56,31 @@ const {
           </svg>
         </button>
       </header>
-      <main class="astroui-popover-body">
-        <slot name="body"></slot>
+      <main class='astroui-popover-body'>
+        <slot name='body'></slot>
       </main>
-      <footer class="astroui-popover-footer">
-        <slot name="footer"></slot>
+      <footer class='astroui-popover-footer'>
+        <slot name='footer'></slot>
       </footer>
     </slot>
   </article>
 </div>
 
-<script define:vars={{id, initialOpen, placement}}>
+<script define:vars={{ id, initialOpen }}>
   const popover = document.querySelectorAll(`#${id}`)
   const trigger = document.querySelectorAll(`[data-toggle="${id}"]`)
-  
+
   //
   // Check if the popover is open
-  
-  function isShow(popover) {
+
+  function isShow (popover) {
     return popover.getAttribute('aria-hidden') === 'false'
   }
-  
+
   //
   // Show the popover
 
-  function getShow(popover) {
+  function getShow (popover) {
     popover.style.display = 'block'
     popover.setAttribute('aria-hidden', 'false')
     popover.classList.add('astroui-popover-show')
@@ -89,7 +89,7 @@ const {
   //
   // Hide the popover
 
-  function getHide(popover) {
+  function getHide (popover) {
     popover.classList.remove('astroui-popover-show')
     popover.setAttribute('aria-hidden', 'true')
     popover.style.display = 'none'
@@ -98,7 +98,7 @@ const {
   //
   // Toggle the popover
 
-  function getToggle(popover) {
+  function getToggle (popover) {
     if (isShow(popover)) {
       getHide(popover)
     } else {
@@ -109,17 +109,17 @@ const {
   //
   // Function on dismissing popover by button close
 
-  function onDismiss(popover) {
+  function onDismiss (popover) {
     const closeButton = popover?.querySelector('[data-dismiss="popover"]') ?? null
     closeButton?.addEventListener('click', () => {
       getHide(popover)
     })
   }
-  
+
   //
   // Get placement
 
-  function getPlacement(popover) {
+  function getPlacement (popover) {
     const trigger = document.querySelector(`[data-toggle="${popover.id}"]`)
     const top = trigger?.offsetTop
     const left = trigger?.offsetLeft
@@ -135,7 +135,7 @@ const {
       top,
       left
     }
-    
+
     if (placement === 'top') {
       position.top = top - popoverHeight - gap
       position.left = left + triggerWidth / 2 - popoverWidth / 2
@@ -221,7 +221,7 @@ const {
   //
   // Hide the popover when pressing the escape key
 
-  function hideOnEscKey(popover) {
+  function hideOnEscKey (popover) {
     const escKeyListener = (event) => {
       if (event.key === 'Escape' && isShow(popover)) {
         getHide(popover)
@@ -239,7 +239,7 @@ const {
   //
   // Hide the popover when clicking the close button
 
-  function hideOnCloseButton(popover) {
+  function hideOnCloseButton (popover) {
     const closeButton = popover?.querySelector('[data-dismiss="popover"]') ?? null
 
     closeButton?.addEventListener('click', () => {
@@ -250,7 +250,7 @@ const {
   //
   // Hide the popover when clicking outside
 
-  function hideOnOutsideClick(popover, trigger, event) {
+  function hideOnOutsideClick (popover, trigger, event) {
     if (!popover?.contains(event.target) && !trigger?.contains(event.target) && isShow(popover)) {
       getHide(popover)
     }
@@ -262,12 +262,10 @@ const {
       hideOnOutsideClick(popover, trigger, event)
     })
   })
-  
 
   //
   // Event listeners
 
-  
   trigger.forEach((trigger) => {
     const popover = document.querySelector(`#${trigger.dataset.toggle}`)
     const element = document.querySelector(`[data-toggle="${popover.id}"]`)
@@ -278,9 +276,6 @@ const {
       getPlacement(popover)
     })
   })
-
-  
-    
 </script>
 
 <style is:global>
@@ -312,7 +307,7 @@ const {
   }
 
   .astroui-popover .astroui-popover-title {
-    @apply mb-0 leading-normal text-lg font-semibold max-w-[calc(100%_-_2rem)];  
+    @apply mb-0 leading-normal text-lg font-semibold max-w-[calc(100%_-_2rem)];
   }
 
   /** Popover body */
@@ -329,6 +324,5 @@ const {
   .astroui-popover .astroui-popover-close {
     @apply flex items-center justify-center w-8 h-8 rounded-full bg-transparent text-black cursor-pointer transition-all dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-white/5;
   }
-
 
 </style>

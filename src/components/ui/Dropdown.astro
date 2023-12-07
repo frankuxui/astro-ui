@@ -10,15 +10,15 @@ interface Props extends HTMLAttributes<'div'> {
 const {
   id,
   initialOpen = false,
-  placement = 'bottom-start',
+  placement = 'bottom-start'
 } = Astro.props
 
 ---
 
-<div 
-  class="astroui-dropdown fade"
+<div
+  class='astroui-dropdown fade'
   id={id}
-  role="dialog"
+  role='dialog'
   aria-hidden={initialOpen ? 'false' : 'true'}
   data-placement={placement}
   class:list={{
@@ -27,31 +27,31 @@ const {
   style={{
     display: initialOpen ? 'block' : 'none'
   }}
-  transition:animate="fade"
+  transition:animate='fade'
+>
+  <div
+    class='astroui-dropdown-content'
+    transition:animate='fade'
   >
-  <div 
-    class="astroui-dropdown-content"
-    transition:animate="fade"
-    >
     <slot />
   </div>
 </div>
 
-<script define:vars={{id, initialOpen, placement}}>
+<script define:vars={{ id, initialOpen }}>
   const dropdown = document.querySelectorAll(`#${id}`)
   const trigger = document.querySelectorAll(`[data-toggle="${id}"]`)
 
   //
   // Check if the dropdown is open
-  
-  function isShow(dropdown) {
+
+  function isShow (dropdown) {
     return dropdown.getAttribute('aria-hidden') === 'false'
   }
 
   //
   // Show the dropdown
 
-  function getShow(dropdown) {
+  function getShow (dropdown) {
     dropdown.style.display = 'block'
     dropdown.setAttribute('aria-hidden', 'false')
     dropdown.classList.add('astroui-dropdown-show')
@@ -60,7 +60,7 @@ const {
   //
   // Hide the dropdown
 
-  function getHide(dropdown) {
+  function getHide (dropdown) {
     dropdown.classList.remove('astroui-dropdown-show')
     dropdown.setAttribute('aria-hidden', 'true')
     dropdown.style.display = 'none'
@@ -69,7 +69,7 @@ const {
   //
   // Toggle the dropdown
 
-  function getToggle(dropdown) {
+  function getToggle (dropdown) {
     if (isShow(dropdown)) {
       getHide(dropdown)
     } else {
@@ -80,7 +80,7 @@ const {
   //
   // Function on dismissing dropdown by button close
 
-  function onDismiss(dropdown) {
+  function onDismiss (dropdown) {
     const closeButton = dropdown?.querySelectorAll('[data-dismiss="dropdown"]')
     closeButton?.forEach((button) => {
       button.addEventListener('click', () => {
@@ -92,7 +92,7 @@ const {
   //
   // Get placement
 
-  function getPlacement(dropdown) {
+  function getPlacement (dropdown) {
     const trigger = document.querySelector(`[data-toggle="${dropdown.id}"]`)
     const top = trigger?.offsetTop
     const left = trigger?.offsetLeft
@@ -108,7 +108,7 @@ const {
       top,
       left
     }
-    
+
     if (placement === 'top') {
       position.top = top - dropdownHeight - gap
       position.left = left + triggerWidth / 2 - dropdownWidth / 2
@@ -194,7 +194,7 @@ const {
   //
   // Hide the dropdown when pressing the escape key
 
-  function hideOnEscKey(dropdown) {
+  function hideOnEscKey (dropdown) {
     const escKeyListener = (event) => {
       if (event.key === 'Escape' && isShow(dropdown)) {
         getHide(dropdown)
@@ -212,7 +212,7 @@ const {
   //
   // Hide the dropdown when clicking the close button
 
-  function hideOnCloseButton(dropdown) {
+  function hideOnCloseButton (dropdown) {
     const closeButton = dropdown?.querySelector('[data-dismiss="dropdown"]') ?? null
 
     closeButton?.addEventListener('click', () => {
@@ -223,7 +223,7 @@ const {
   //
   // Hide the dropdown when clicking outside
 
-  function hideOnOutsideClick(dropdown, trigger, event) {
+  function hideOnOutsideClick (dropdown, trigger, event) {
     if (!dropdown?.contains(event.target) && !trigger?.contains(event.target) && isShow(dropdown)) {
       getHide(dropdown)
     }
@@ -235,12 +235,10 @@ const {
       hideOnOutsideClick(dropdown, trigger, event)
     })
   })
-  
 
   //
   // Event listeners
 
-  
   trigger.forEach((trigger) => {
     const dropdown = document.querySelector(`#${trigger.dataset.toggle}`)
     const element = document.querySelector(`[data-toggle="${dropdown.id}"]`)
@@ -251,7 +249,6 @@ const {
       getPlacement(dropdown)
     })
   })
-
 </script>
 
 <style is:global>

@@ -1,4 +1,3 @@
-
 //
 // Trigger
 
@@ -18,7 +17,7 @@ const gap = 3
 //
 // Get placement
 
-function getPlacement(trigger) {
+function getPlacement (trigger) {
   const placements = {
     top: {
       top: window.scrollY + trigger?.getBoundingClientRect().y - tooltip?.offsetHeight - gap,
@@ -83,9 +82,7 @@ function getPlacement(trigger) {
   }
 
   return placements[trigger.dataset.placement ?? 'top']
-
 }
-
 
 //
 // Add position to tooltip
@@ -96,7 +93,6 @@ function addPosition (reference) {
   tooltip.style.inset = '0px auto auto 0px'
   tooltip.style.margin = '0px'
 }
-
 
 //
 // Add event listeners
@@ -109,11 +105,8 @@ trigger.forEach((trigger) => {
     const content = event.target?.dataset.content
     tooltip.innerHTML = content
     addPosition(reference)
-    
   })
   trigger.addEventListener('mouseleave', () => {
     tooltip.remove()
   })
-
-  
 })

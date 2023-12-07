@@ -13,13 +13,13 @@ interface Props extends HTMLAttributes<'div'> {
   class?: string
 }
 
-const { 
+const {
   variant = 'primary',
   size = 'md',
   fill = true,
   icon = true,
-  style, 
-  ...attrs 
+  style,
+  ...attrs
 } = Astro.props
 ---
 
@@ -33,28 +33,32 @@ const {
     variant === 'error' ? fill ? 'astroui-stat-error astroui-stat-fill' : 'astroui-stat-error' : '',
     variant === 'light' ? fill ? 'astroui-stat-light astroui-stat-fill' : 'astroui-stat-light' : '',
     variant === 'dark' ? fill ? 'astroui-stat-dark astroui-stat-fill' : 'astroui-stat-dark' : '',
-    
+
     size === 'xs' ? 'astroui-stat-xs' : '',
     size === 'sm' ? 'astroui-stat-sm' : '',
     size === 'md' ? 'astroui-stat-md' : '',
     size === 'lg' ? 'astroui-stat-lg' : '',
     size === 'xl' ? 'astroui-stat-xl' : '',
-    
+
     attrs.class
   ]}
   {...attrs}
-  >
-  <span class="astroui-stat-content">
+>
+  <span class='astroui-stat-content'>
     {icon && (
-      <slot name="icon">
+      <slot name='icon'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width={
-            size === 'xs' ? '14' :
-            size === 'sm' ? '16' :
-            size === 'md' ? '20' :
-            size === 'lg' ? '24' :
-            size === 'xl' ? '28' : '20'
+            size === 'xs'
+              ? '14'
+              : size === 'sm'
+                ? '16'
+                : size === 'md'
+                  ? '20'
+                  : size === 'lg'
+                    ? '24'
+                    : size === 'xl' ? '28' : '20'
           }
           fill='none'
           viewBox='0 0 24 24' stroke='currentColor'

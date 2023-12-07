@@ -1,10 +1,8 @@
 ---
-import Base from './Base.astro';
+import Base from './Base.astro'
 interface Props {
   title: string;
 }
-
-
 
 const { title } = Astro.props;
 ---
@@ -12,4 +10,3 @@ const { title } = Astro.props;
 <Base title={title} >
   <slot />
 </Base>
-

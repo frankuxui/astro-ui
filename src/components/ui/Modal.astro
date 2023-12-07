@@ -100,13 +100,12 @@ const {
   </article>
 </div>
 
-
 <script define:vars={{ id, initialOpen, staticBackdrop }}>
 
   const trigger = document.querySelectorAll(`[data-toggle="${id}"]`)
   const buttonClose = document.querySelectorAll(`#${id} [data-dismiss="modal"]`)
   const modal = document.querySelectorAll(`#${id}`)
-  
+
   // Static backdrop
 
   function getStaticClass (modal) {
@@ -159,20 +158,19 @@ const {
       getDismiss(buttonClose, modal)
     })
   })
-    
-  
+
   // Event listeners
-  
+
   trigger.forEach((trigger) => {
     const modal = document.querySelector(`#${trigger.dataset.toggle}`)
     const backdrop = document.querySelector(`#${trigger.dataset.toggle} .astroui-modal-backdrop`)
 
     // Initial open modal
-  
+
     if (initialOpen) {
       showModal(modal)
     }
-    
+
     // Open modal
 
     trigger.addEventListener('click', () => {
@@ -188,11 +186,11 @@ const {
         dismissModal(modal)
       }
     })
-    
+
     // Close modal with press escape
 
     document.addEventListener('keydown', (event) => {
-      if (staticBackdrop ) {
+      if (staticBackdrop) {
         if (event.key === 'Escape' && modal.classList.contains('show')) {
           getStaticClass(modal)
         }
@@ -200,10 +198,7 @@ const {
         dismissModal(modal)
       }
     })
-
   })
-
-
 </script>
 
 <style
@@ -409,5 +404,5 @@ const {
   .dark .astroui-modal .astroui-modal-content {
     @apply bg-white text-black;
   }
-  
+
 </style>

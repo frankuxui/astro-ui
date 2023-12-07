@@ -7,18 +7,17 @@ interface Props extends HTMLAttributes<'button'> {
 }
 
 const {
-  style,
   ...attrs
 } = Astro.props
 ---
 
-<button 
-  class="astroui-dropdown-item"
+<button
+  class='astroui-dropdown-item'
   class:list={[
-    attrs.class,
+    attrs.class
   ]}
   {...attrs}
-  >
+>
   <slot />
 </button>
 
