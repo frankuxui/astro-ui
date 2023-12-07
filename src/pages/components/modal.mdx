@@ -33,10 +33,10 @@ import Modal from '../../components/ui/Modal.astro'
 
 ## Usage
 
-Para dar funcionalidad a los modales, se debe usar el atributo `data-modal-toggle` en un elemento que desencadene el modal. El valor del atributo `data-modal-toggle` debe ser el `id` del modal que se quiere mostrar.
+Para dar funcionalidad a los modales, se debe usar el atributo `data-toggle` en un elemento que desencadene el modal. El valor del atributo `data-toggle` debe ser el `id` del modal que se quiere mostrar.
 
 <Example>
-  <Button data-modal-toggle='modal-example'>Example</Button>
+  <Button data-toggle='modal-example'>Example</Button>
   <Modal id='modal-example'>
     <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
     <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
@@ -46,7 +46,7 @@ Para dar funcionalidad a los modales, se debe usar el atributo `data-modal-toggl
 </Example>
 
 ```astro
-<Button data-modal-toggle='modal-example'>Example</Button>
+<Button data-toggle='modal-example'>Example</Button>
 <Modal id='modal-example'>
   <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
   <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
@@ -78,20 +78,20 @@ Los modales suelen ofrecer diferentes tamaños para adaptarse a diversos conteni
 
 <Example>
   <div class="flex items-center gap-4 flex-wrap">
-    <Button data-modal-toggle='modal-xs'>Extra small</Button>
-    <Button data-modal-toggle='modal-sm'>Small</Button>
-    <Button data-modal-toggle='modal-md'>Medium</Button>
-    <Button data-modal-toggle='modal-lg'>Large</Button>
-    <Button data-modal-toggle='modal-xl'>Extra large</Button>
-    <Button data-modal-toggle='modal-2xl'>2xl</Button>
-    <Button data-modal-toggle='modal-3xl'>3xl</Button>
-    <Button data-modal-toggle='modal-4xl'>4xl</Button>
-    <Button data-modal-toggle='modal-5xl'>5xl</Button>
-    <Button data-modal-toggle='modal-6xl'>6xl</Button>
-    <Button data-modal-toggle='modal-7xl'>7xl</Button>
-    <Button data-modal-toggle='modal-8xl'>8xl</Button>
-    <Button data-modal-toggle='modal-9xl'>9xl</Button>
-    <Button data-modal-toggle='modal-full'>Full</Button>
+    <Button data-toggle='modal-xs'>Extra small</Button>
+    <Button data-toggle='modal-sm'>Small</Button>
+    <Button data-toggle='modal-md'>Medium</Button>
+    <Button data-toggle='modal-lg'>Large</Button>
+    <Button data-toggle='modal-xl'>Extra large</Button>
+    <Button data-toggle='modal-2xl'>2xl</Button>
+    <Button data-toggle='modal-3xl'>3xl</Button>
+    <Button data-toggle='modal-4xl'>4xl</Button>
+    <Button data-toggle='modal-5xl'>5xl</Button>
+    <Button data-toggle='modal-6xl'>6xl</Button>
+    <Button data-toggle='modal-7xl'>7xl</Button>
+    <Button data-toggle='modal-8xl'>8xl</Button>
+    <Button data-toggle='modal-9xl'>9xl</Button>
+    <Button data-toggle='modal-full'>Full</Button>
   </div>
 
   <Modal id='modal-xs' size='xs'>
@@ -194,7 +194,7 @@ Los modales suelen ofrecer diferentes tamaños para adaptarse a diversos conteni
 </Example>
 
 ```astro
-  <Button data-modal-toggle='modal-xs'>Extra small</Button>
+  <Button data-toggle='modal-xs'>Extra small</Button>
   <Modal id='modal-xs' size='xs'>
     <h2 slot='title' class='astroui-modal-title'>Modal extra small</h2>
     <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
@@ -222,15 +222,15 @@ Los modales se pueden mostrar en diferentes posiciones. Por defecto, la posició
 
 <Example>
   <div class="flex items-center gap-4 flex-wrap">
-    <Button data-modal-toggle='modal-top-start'>Top start</Button>
-    <Button data-modal-toggle='modal-top-center'>Top center</Button>
-    <Button data-modal-toggle='modal-top-end'>Top end</Button>
-    <Button data-modal-toggle='modal-center-start'>Center start</Button>
-    <Button data-modal-toggle='modal-center'>Center</Button>
-    <Button data-modal-toggle='modal-center-end'>Center end</Button>
-    <Button data-modal-toggle='modal-bottom-start'>Bottom start</Button>
-    <Button data-modal-toggle='modal-bottom-center'>Bottom center</Button>
-    <Button data-modal-toggle='modal-bottom-end'>Bottom end</Button>
+    <Button data-toggle='modal-top-start'>Top start</Button>
+    <Button data-toggle='modal-top-center'>Top center</Button>
+    <Button data-toggle='modal-top-end'>Top end</Button>
+    <Button data-toggle='modal-center-start'>Center start</Button>
+    <Button data-toggle='modal-center'>Center</Button>
+    <Button data-toggle='modal-center-end'>Center end</Button>
+    <Button data-toggle='modal-bottom-start'>Bottom start</Button>
+    <Button data-toggle='modal-bottom-center'>Bottom center</Button>
+    <Button data-toggle='modal-bottom-end'>Bottom end</Button>
   </div>
 
 
@@ -300,7 +300,7 @@ Los modales se pueden mostrar en diferentes posiciones. Por defecto, la posició
 </Example>
 
 ```astro
-<Button data-modal-toggle='modal-example-positions'>Buttom start</Button>
+<Button data-toggle='modal-example-positions'>Buttom start</Button>
 <Modal id='modal-example-positions' placement='bottom-start'>
   <h2 slot='title' class='astroui-modal-title'>Modal bottom start</h2>
   <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
@@ -314,7 +314,7 @@ Los modales se pueden mostrar en diferentes posiciones. Por defecto, la posició
 Los modales se pueden mostrar con un fondo estático. Para cambiar el modo, se debe usar la propiedad `staticBackdrop`.
 
 <Example>
-  <Button data-modal-toggle='modal-example-static'>Static backdrop</Button>
+  <Button data-toggle='modal-example-static'>Static backdrop</Button>
   <Modal id='modal-example-static' staticBackdrop>
     <h2 slot='title' class='astroui-modal-title'>Modal static backdrop</h2>
     <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
@@ -324,7 +324,7 @@ Los modales se pueden mostrar con un fondo estático. Para cambiar el modo, se d
 </Example>
   
 ```astro
-<Button data-modal-toggle='modal-example-static'>Static backdrop</Button>
+<Button data-toggle='modal-example-static'>Static backdrop</Button>
 <Modal id='modal-example-static' staticBackdrop>
   <h2 slot='title' class='astroui-modal-title'>Modal static backdrop</h2>
   <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
@@ -388,7 +388,7 @@ Personalizando el modal con usando [Tailwind CSS](https://tailwindcss.com/).
 </Example>
 
 <Example>
-  <Button data-modal-toggle='custom-modal'>Open custom modal</Button>
+  <Button data-toggle='custom-modal'>Open custom modal</Button>
   <Modal id='custom-modal'>
     <div slot='content' class='flex flex-col gap-4'>
       <div class='w-full flex justify-between items-center p-4'>
@@ -410,7 +410,7 @@ Personalizando el modal con usando [Tailwind CSS](https://tailwindcss.com/).
 </Example>
 
 ```astro
-<Button data-modal-toggle='custom-modal'>Open custom modal</Button>
+<Button data-toggle='custom-modal'>Open custom modal</Button>
 <Modal id='custom-modal'>
   <div slot='content' class='flex flex-col gap-4'>
     <div class='w-full flex justify-between items-center p-4'>
@@ -438,7 +438,7 @@ Los modales se pueden mostrar con un scroll interno o externo. Para cambiar el m
 ### Inside scroll
 
 <Example>
-  <Button data-modal-toggle='modal-example-inside-scroll'>Inside scroll</Button>
+  <Button data-toggle='modal-example-inside-scroll'>Inside scroll</Button>
   <Modal scrollBehavior='inside' id='modal-example-inside-scroll'>
     <h2 slot='title' class='astroui-modal-title'>Modal inside scroll</h2>
     <div slot='body'>
@@ -455,7 +455,7 @@ Los modales se pueden mostrar con un scroll interno o externo. Para cambiar el m
 </Example>
 
 ```astro	
-<Button data-modal-toggle='modal-example-inside-scroll'>Inside scroll</Button>
+<Button data-toggle='modal-example-inside-scroll'>Inside scroll</Button>
 <Modal scrollBehavior='inside' id='modal-example-inside-scroll'>
   <h2 slot='title' class='astroui-modal-title'>Modal inside scroll</h2>
   <div slot='body' class='h-64 overflow-y-auto'>
@@ -469,7 +469,7 @@ Los modales se pueden mostrar con un scroll interno o externo. Para cambiar el m
 ### Outside scroll
 
 <Example>
-  <Button data-modal-toggle='modal-example-outside-scroll'>Outside scroll</Button>
+  <Button data-toggle='modal-example-outside-scroll'>Outside scroll</Button>
   <Modal scrollBehavior='outside' id='modal-example-outside-scroll'>
     <h2 slot='title' class='astroui-modal-title'>Modal outside scroll</h2>
     <div slot='body'>
@@ -486,7 +486,7 @@ Los modales se pueden mostrar con un scroll interno o externo. Para cambiar el m
 </Example>
 
 ```astro	
-<Button data-modal-toggle='modal-example-outside-scroll'>Outside scroll</Button>
+<Button data-toggle='modal-example-outside-scroll'>Outside scroll</Button>
 <Modal scrollBehavior='outside' id='modal-example-outside-scroll'>
   <h2 slot='title' class='astroui-modal-title'>Modal outside scroll</h2>
   <div slot='body' class='h-64 overflow-y-auto'>
@@ -500,7 +500,7 @@ Los modales se pueden mostrar con un scroll interno o externo. Para cambiar el m
 ## Hide button close
 
 <Example>
-  <Button data-modal-toggle='modal-hide-button-close'>Example</Button>
+  <Button data-toggle='modal-hide-button-close'>Example</Button>
   <Modal showButtonClose={false} id='modal-hide-button-close'>
     <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
     <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
@@ -510,7 +510,7 @@ Los modales se pueden mostrar con un scroll interno o externo. Para cambiar el m
 </Example>
 
 ```astro
-<Button data-modal-toggle='modal-example'>Example</Button>
+<Button data-toggle='modal-example'>Example</Button>
 <Modal showButtonClose={false} id='modal-example'>
   <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
   <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
@@ -524,7 +524,7 @@ Los modales se pueden mostrar con un scroll interno o externo. Para cambiar el m
 El modal por defecto contiene border para separar o delimitar el contenido. Para quitar los bordes, se debe usar la propiedad `border={false}`.
 
 <Example>
-  <Button data-modal-toggle='modal-border'>Example</Button>
+  <Button data-toggle='modal-border'>Example</Button>
   <Modal border={false} id='modal-border'>
     <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
     <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
@@ -534,7 +534,7 @@ El modal por defecto contiene border para separar o delimitar el contenido. Para
 </Example>
 
 ```astro
-<Button data-modal-toggle='modal-example'>Example</Button>
+<Button data-toggle='modal-example'>Example</Button>
 <Modal border={false} id='modal-example'>
   <h2 slot='title' class='astroui-modal-title'>Modal title</h2>
   <p slot='body'>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>

@@ -103,7 +103,7 @@ const {
 
 <script define:vars={{ id, initialOpen, staticBackdrop }}>
 
-  const trigger = document.querySelectorAll(`[data-modal-toggle="${id}"]`)
+  const trigger = document.querySelectorAll(`[data-toggle="${id}"]`)
   const buttonClose = document.querySelectorAll(`#${id} [data-dismiss="modal"]`)
   const modal = document.querySelectorAll(`#${id}`)
   
@@ -164,8 +164,8 @@ const {
   // Event listeners
   
   trigger.forEach((trigger) => {
-    const modal = document.querySelector(`#${trigger.dataset.modalToggle}`)
-    const backdrop = document.querySelector(`#${trigger.dataset.modalToggle} .astroui-modal-backdrop`)
+    const modal = document.querySelector(`#${trigger.dataset.toggle}`)
+    const backdrop = document.querySelector(`#${trigger.dataset.toggle} .astroui-modal-backdrop`)
 
     // Initial open modal
   

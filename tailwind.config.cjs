@@ -11,7 +11,9 @@ module.exports = {
 
       animation: {
         popover: 'popover 0.2s linear',
-        growing: 'growing .75s linear infinite'
+        growing: 'growing .75s linear infinite',
+        drawer: 'drawer 0.2s linear',
+        'drawer-reverse': 'drawer-reverse 0.2s linear'
       },
       
 
@@ -54,6 +56,22 @@ module.exports = {
           '100%': {
             transform: 'none',
             opacity: 1
+          }
+        },
+        drawer: {
+          '0%': {
+            transform: 'translateX(-100%)'
+          },
+          '100%': {
+            transform: 'translateX(0)'
+          }
+        },
+        'drawer-reverse': {
+          '0%': {
+            transform: 'translateX(100%)'
+          },
+          '100%': {
+            transform: 'translateX(0)'
           }
         }
       },
