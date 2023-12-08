@@ -29,16 +29,16 @@ import Drawer from '../../components/ui/Drawer.astro'
 
 ```astro
 <Button data-toggle='drawer-example'>Drawer</Button>
-  <Drawer id='drawer-example'>
-    <h2 slot='title' class='font-medium text-xl'>Title here</h2>
-    <div slot='body'>
-      <p>Drawer body text goes here.</p>
-    </div>
-    <div slot='footer' class='flex items-center justify-end gap-2'>
-      <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
-      <Button type='button' variant='primary'>Save changes</Button>
-    </div>
-  </Drawer>
+<Drawer id='drawer-example'>
+  <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+  <div slot='body'>
+    <p>Drawer body text goes here.</p>
+  </div>
+  <div slot='footer' class='flex items-center justify-end gap-2'>
+    <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+    <Button type='button' variant='primary'>Save changes</Button>
+  </div>
+</Drawer>
 ```
 
 ## Placement
