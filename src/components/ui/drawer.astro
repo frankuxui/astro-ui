@@ -2,6 +2,7 @@
 
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full'
 type Placement = 'left' | 'right'
+
 interface Props {
   id: string
   initialOpen?: boolean
@@ -69,51 +70,7 @@ const {
   </div>
 </aside>
 
-<script define:vars={{ id, initialOpen }}>
-
-  const trigger = document.querySelectorAll(`[data-toggle="${id}"]`)
-  const buttonClose = document.querySelectorAll(`#${id} [data-dismiss="drawer"]`)
-
-  // Open drawer
-
-  function openDrawer (drawer) {
-    drawer.classList.add('open')
-    drawer.style.display = 'block'
-  }
-
-  // Close drawer
-
-  function closeDrawer (drawer) {
-    drawer.classList.remove('open')
-    setTimeout(() => {
-      drawer.style.display = 'none'
-    }, 200)
-  }
-
-  // Toggle drawer
-
-  trigger.forEach((trigger) => {
-    const drawer = document.querySelector(`#${trigger.dataset.toggle}`)
-    const backdrop = document.querySelector(`#${trigger.dataset.toggle} .astroui-drawer-backdrop`)
-
-    if (initialOpen) {
-      openDrawer(drawer)
-    }
-
-    trigger.addEventListener('click', () => {
-      openDrawer(drawer)
-    })
-
-    backdrop.addEventListener('click', () => {
-      closeDrawer(drawer)
-    })
-
-    buttonClose.forEach((button) => {
-      button.addEventListener('click', () => {
-        closeDrawer(drawer)
-      })
-    })
-  })
+<script define:vars={{ }}>
 </script>
 
 <style is:global>
