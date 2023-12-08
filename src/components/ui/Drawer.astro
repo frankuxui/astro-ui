@@ -15,7 +15,7 @@ const {
   id,
   initialOpen = false,
   placement = 'left',
-  size = 'xs'
+  size
 } = Astro.props
 
 ---
@@ -92,6 +92,15 @@ const {
     }, 200)
   }
 
+  // Close drawer by escape key
+
+  function closeDrawerByEscapeKey (event) {
+    if (event.key === 'Escape') {
+      const drawer = document.querySelector(`#${id}`) || null
+      closeDrawer(drawer)
+    }
+  }
+
   // Toggle drawer
 
   trigger.forEach((trigger) => {
@@ -115,6 +124,8 @@ const {
         closeDrawer(drawer)
       })
     })
+
+    document.addEventListener('keydown', closeDrawerByEscapeKey)
   })
 </script>
 
@@ -140,6 +151,9 @@ const {
 
   /** Sizes */
 
+  .astroui-drawer .astroui-drawer-content {
+    @apply w-full max-w-[18rem];
+  }
   .astroui-drawer.astroui-drawer-xs .astroui-drawer-content {
     @apply w-full max-w-xs;
   }

@@ -86,6 +86,142 @@ Para cambiar la posición del drawer, use el atributo `placement` con los valore
 
 ## Sizes
 
-Los tamaños disponibles para los drawers son `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`, `7xl`, y `full`. Por defecto, el tamaño es `xs`. Para cambiar el tamaño, use el atributo `size` con el valor deseado.
+Los tamaños disponibles para los drawers son `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`, `7xl`, y `full`. Por defecto, el tamaño es de `18rem`. Para cambiar el tamaño, use el atributo `size` con el valor deseado.
 
 
+<Example>
+  <div class='flex items-center justify-start gap-4 flex-wrap'>
+    <Button data-toggle='drawer-xs' size='sm'>Drawer xs</Button>
+    <Drawer id='drawer-xs' size='xs'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+      <div slot='body'>
+        <p>Drawer body text goes here.</p>
+      </div>
+      <div slot='footer' class='flex items-center justify-end gap-2'>
+        <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+        <Button type='button' variant='primary'>Save changes</Button>
+      </div>
+    </Drawer>
+    <Button data-toggle='drawer-sm' size='sm'>Drawer sm</Button>
+    <Drawer id='drawer-sm' size='sm'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+      <div slot='body'>
+        <p>Drawer body text goes here.</p>
+      </div>
+      <div slot='footer' class='flex items-center justify-end gap-2'>
+        <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+        <Button type='button' variant='primary'>Save changes</Button>
+      </div>
+    </Drawer>
+    <Button data-toggle='drawer-md' size='sm'>Drawer md</Button>
+    <Drawer id='drawer-md' size='md'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+      <div slot='body'>
+        <p>Drawer body text goes here.</p>
+      </div>
+      <div slot='footer' class='flex items-center justify-end gap-2'>
+        <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+        <Button type='button' variant='primary'>Save changes</Button>
+      </div>
+    </Drawer>
+    <Button data-toggle='drawer-lg' size='sm'>Drawer lg</Button>
+    <Drawer id='drawer-lg' size='lg'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+      <div slot='body'>
+        <p>Drawer body text goes here.</p>
+      </div>
+      <div slot='footer' class='flex items-center justify-end gap-2'>
+        <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+        <Button type='button' variant='primary'>Save changes</Button>
+      </div>
+    </Drawer>
+    <Button data-toggle='drawer-xl' size='sm'>Drawer xl</Button>
+    <Drawer id='drawer-xl' size='xl'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+      <div slot='body'>
+        <p>Drawer body text goes here.</p>
+      </div>
+      <div slot='footer' class='flex items-center justify-end gap-2'>
+        <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+        <Button type='button' variant='primary'>Save changes</Button>
+      </div>
+    </Drawer>
+    <Button data-toggle='drawer-2xl' size='sm'>Drawer 2xl</Button>
+    <Drawer id='drawer-2xl' size='2xl'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+      <div slot='body'>
+        <p>Drawer body text goes here.</p>
+      </div>
+      <div slot='footer' class='flex items-center justify-end gap-2'>
+        <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+        <Button type='button' variant='primary'>Save changes</Button>
+      </div>
+    </Drawer>
+    <Button data-toggle='drawer-3xl' size='sm'>Drawer 3xl</Button>
+    <Drawer id='drawer-3xl' size='3xl'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+      <div slot='body'>
+        <p>Drawer body text goes here.</p>
+      </div>
+      <div slot='footer' class='flex items-center justify-end gap-2'>
+        <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+        <Button type='button' variant='primary'>Save changes</Button>
+      </div>
+    </Drawer>
+    <Button data-toggle='drawer-4xl' size='sm'>Drawer 4xl</Button>
+    <Drawer id='drawer-4xl' size='4xl'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+      <div slot='body'>
+        <p>Drawer body text goes here.</p>
+      </div>
+      <div slot='footer' class='flex items-center justify-end gap-2'>
+        <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+        <Button type='button' variant='primary'>Save changes</Button>
+      </div>
+    </Drawer>
+    <Button data-toggle='drawer-5xl' size='sm'>Drawer 5xl</Button>
+    <Drawer id='drawer-5xl' size='5xl'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+      <div slot='body' class='flex flex-col gap-4'>
+        <p>Drawer body text goes here.</p>
+      </div>
+      <div slot='footer' class='flex items-center justify-end gap-4'>
+        <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+        <Button type='button' variant='primary' size='sm'>Save changes</Button>
+      </div>
+    </Drawer>
+    <Button data-toggle='drawer-6xl' size='sm'>Drawer 6xl</Button>
+    <Drawer id='drawer-6xl' size='6xl'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+      <div slot='body' class='flex flex-col gap-4'>
+        <p>Drawer body text goes here.</p>
+      </div>
+      <div slot='footer' class='flex items-center justify-end gap-4'>
+        <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+        <Button type='button' variant='primary' size='sm'>Save changes</Button>
+      </div>
+    </Drawer>
+    <Button data-toggle='drawer-7xl' size='sm'>Drawer 7xl</Button>
+    <Drawer id='drawer-7xl' size='7xl'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+      <div slot='body' class='flex flex-col gap-4'>
+        <p>Drawer body text goes here.</p>
+      </div>
+      <div slot='footer' class='flex items-center justify-end gap-4'>
+        <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+        <Button type='button' variant='primary' size='sm'>Save changes</Button>
+      </div>
+    </Drawer>
+    <Button data-toggle='drawer-full' size='sm'>Drawer full</Button>
+    <Drawer id='drawer-full' size='full'>
+      <h2 slot='title' class='font-medium text-xl'>Title here</h2>
+      <div slot='body' class='flex flex-col gap-4'>
+        <p>Drawer body text goes here.</p>
+      </div>
+      <div slot='footer' class='flex items-center justify-end gap-4'>
+        <Button type='button' data-dismiss='drawer' variant='secondary'>Close</Button>
+        <Button type='button' variant='primary' size='sm'>Save changes</Button>
+      </div>
+    </Drawer>
+  </div>
+</Example>
