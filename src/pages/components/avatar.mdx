@@ -4,14 +4,55 @@ title: "Avatar"
 description: "Avatar component"
 slug: "avatar"
 toc: true
-soon: true
+soon: false
 image: "avatar"
 ---
 import Example from '../../components/Example.astro'
+import Avatar from '../../components/ui/Avatar.astro'
 
 ## Usage
 
+Para obtener un avatar, solo debes pasarle el nombre de la persona y el componente se encargará de generar las iniciales.
 
 <Example>
-  <Avatar />
+  <Avatar name="Frank"/>
+</Example>
+
+## With image
+
+Si deseas mostrar una imagen en el avatar, solo debes pasarle la url de la imagen. El componente se encargará de mostrar la imagen, en caso de no tener la prop `src` mostrará las iniciales.
+
+<Example>
+  <Avatar name="Frank" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+</Example>
+
+
+## Sizes
+
+<Example>
+  <div class="flex items-center flex-wrap gap-4">
+    <Avatar name="Frank Esteban" size="xs" />
+    <Avatar name="Frank Esteban" size="sm" />
+    <Avatar name="Frank Esteban" size="md" />
+    <Avatar name="Frank Esteban" size="lg" />
+    <Avatar name="Frank Esteban" size="xl" />
+    <Avatar name="Frank Esteban" size="2xl" />
+    <Avatar name="Frank Esteban" size="3xl" />
+    <Avatar name="Frank Esteban" size="4xl" />
+    <Avatar name="Frank Esteban" size="5xl" />
+  </div>
+</Example>
+
+<Example>
+  <div class="flex items-center flex-wrap gap-4">
+    <Avatar name="Frank Esteban" size="xs" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+    <Avatar name="Frank Esteban" size="sm" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+    <Avatar name="Frank Esteban" size="md" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+    <Avatar name="Frank Esteban" size="lg" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+    <Avatar name="Frank Esteban" size="xl" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+    <Avatar name="Frank Esteban" size="2xl" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+    <Avatar name="Frank Esteban" size="3xl" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+    <Avatar name="Frank Esteban" size="4xl" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+    <Avatar name="Frank Esteban" size="5xl" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+  </div>
 </Example>

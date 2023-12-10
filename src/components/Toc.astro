@@ -195,7 +195,7 @@ const h = headings.map(heading => {
           heading.tag === 'h6' && 'ml-16'
         ]}
       >
-        <a href={`#${heading.slug}`}>
+        <a href={`#${heading.slug}`} >
           {heading.text}
         </a>
       </li>
@@ -225,6 +225,9 @@ const h = headings.map(heading => {
     outline-offset: 2px;
     opacity: 0;
     margin-left: 0.375rem;
+  }
+  .dark .toc-heading-anchor {
+    color: #fff;
   }
 
   /** Toc */

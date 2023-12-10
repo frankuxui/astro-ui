@@ -1,6 +1,114 @@
 ---
+type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
+type Shape = 'circle' | 'square'
+type Status = 'online' | 'offline' | 'busy' | 'away' | 'invisible' | null
+
+interface Props {
+  size?: Size
+  shape?: Shape
+  status?: Status
+  src?: string
+  alt?: string
+  name?: string
+}
+
+const {
+  size = 'md',
+  shape = 'circle',
+  status = 'online',
+  src,
+  name,
+  alt = 'avatar',
+  ...rest
+} = Astro.props
+
+function getName (name: string) {
+  if (name.length > 0) {
+    const arrayName = name.split(' ')
+    if (arrayName.length > 1) {
+      return `${arrayName[0][0]}${arrayName[1][0]}`
+    }
+    return `${arrayName[0][0]}`
+  } else {
+    return ''
+  }
+}
 ---
 
-<div>
-  Avatar
+<div
+  class:list={[
+    'astroui-avatar',
+    `astroui-avatar-${size}`,
+    `astroui-avatar-image-${shape}`,
+    `astroui-avatar-image-${status}`
+  ]}
+>
+  {
+    src === undefined
+      ? (
+        <div
+          class:list={[
+            'astroui-avatar-cover'
+          ]}
+          {...rest}
+        >
+          <span>
+            {getName(name as string)}
+          </span>
+        </div>
+      )
+      : (
+        <img
+          class:list={[
+            'astroui-avatar-image'
+          ]}
+          src={src}
+          alt={alt}
+          {...rest}
+        />
+      )
+  }
+
 </div>
+
+<style is:global>
+  .astroui-avatar {
+    @apply flex items-center justify-center flex-none;
+  }
+
+  .astroui-avatar-image {
+    @apply block w-full rounded-full;
+  }
+  .astroui-avatar-cover {
+    @apply flex items-center justify-center w-full h-full font-medium rounded-full bg-primary text-white;
+  }
+
+  .astroui-avatar.astroui-avatar-xs {
+    @apply w-6 h-6 text-xs;
+  }
+  .astroui-avatar.astroui-avatar-sm {
+    @apply w-7 h-7 text-sm;
+  }
+  .astroui-avatar.astroui-avatar-md {
+    @apply w-8 h-8 text-sm;
+  }
+  .astroui-avatar.astroui-avatar-lg {
+    @apply w-10 h-10 text-base;
+  }
+  .astroui-avatar.astroui-avatar-xl {
+    @apply w-12 h-12 text-lg;
+  }
+  .astroui-avatar.astroui-avatar-2xl {
+    @apply w-14 h-14 text-xl;
+  }
+  .astroui-avatar.astroui-avatar-3xl {
+    @apply w-16 h-16 text-2xl;
+  }
+  .astroui-avatar.astroui-avatar-4xl {
+    @apply w-20 h-20 text-3xl;
+  }
+  .astroui-avatar.astroui-avatar-5xl {
+    @apply w-24 h-24 text-4xl;
+  }
+
+</style>

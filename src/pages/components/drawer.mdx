@@ -13,6 +13,8 @@ import Drawer from '../../components/ui/Drawer.astro'
 
 ## Usage
 
+Para usar un drawer, agregue el atributo `data-toggle` y el valor correspondiente al atributo `id` del drawer. Para cerrar el drawer, agregue el atributo `data-dismiss` y el valor `drawer` al elemento que cerrará el drawer.
+
 <Example>
   <Button data-toggle='drawer-example'>Drawer</Button>
   <Drawer id='drawer-example'>
@@ -225,3 +227,10 @@ Los tamaños disponibles para los drawers son `sm`, `md`, `lg`, `xl`, `2xl`, `3x
     </Drawer>
   </div>
 </Example>
+
+```astro
+<Button data-toggle='drawer-example'>Drawer xs</Button>
+<Drawer id='drawer-example' size='xs'>
+  ...
+</Drawer>
+```

@@ -200,13 +200,13 @@ const {
   /** Content */
 
   .astroui-drawer-content {
-    @apply absolute top-0 h-full flex flex-col transition-transform duration-200 ease-in-out bg-white;
+    @apply absolute top-0 h-full flex flex-col transition-transform duration-200 ease-in-out bg-white dark:bg-gray-800;
   }
 
   /** Header */
 
   .astroui-drawer-header {
-    @apply flex-none flex w-full items-center justify-between p-4 border-b border-gray-200;
+    @apply flex-none flex w-full items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700;
   }
 
   .astroui-drawer-title {
@@ -216,7 +216,7 @@ const {
   /** Close */
 
   .astroui-drawer-close {
-    @apply flex items-center justify-center flex-none w-8 h-8 rounded-full transition-colors duration-200 hover:bg-gray-200 focus:bg-gray-300;
+    @apply flex items-center justify-center flex-none w-8 h-8 rounded-full transition-colors duration-200 hover:bg-gray-200 focus:bg-gray-300 dark:hover:bg-gray-700 dark:focus:bg-gray-600;
   }
 
   /** Body */
@@ -240,7 +240,7 @@ const {
   /** Footer */
 
   .astroui-drawer-footer {
-    @apply flex-none p-4 border-t border-gray-200;
+    @apply flex-none p-4 border-t border-gray-200 dark:border-gray-700;
   }
 
 </style>
