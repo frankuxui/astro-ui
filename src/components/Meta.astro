@@ -18,9 +18,9 @@ const { title, description, image, canonicalUrl, type, publishedTime } = Astro.p
 <meta property='og:title' content={title} />
 <meta property='og:description' content={description} />
 <meta property='og:url' content={canonicalUrl || 'https://astro-ui-three.vercel.app'} />
-<meta property='og:image' content={image ?? 'https://images.pexels.com/photos/8040961/pexels-photo-8040961.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'} />
+<meta property='og:image' content={image || 'blob:https://vercel.com/14a4b35c-351c-4cbe-bed3-0e8f4d2a3050'} />
 <meta property='og:type' content={type || 'website'} />
 <meta name='twitter:card' content='summary_large_image' />
 <meta name='twitter:title' content={title} />
 <meta property='twitter:description' content={description} />
-<meta name='twitter:image' content={image ?? 'https://images.pexels.com/photos/8040961/pexels-photo-8040961.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'} />
+<meta name='twitter:image' content={image || 'blob:https://vercel.com/14a4b35c-351c-4cbe-bed3-0e8f4d2a3050'} />

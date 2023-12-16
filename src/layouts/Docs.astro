@@ -15,6 +15,7 @@ interface Props {
       headers: {
         slug: string;
         text: string;
+        image: string;
       }[]
     }
   }
@@ -57,9 +58,9 @@ const { previous, next } = pagination as Pagination
 ---
 
 <Base 
-  title={frontmatter.title} 
+  title={`Astro UI - ${frontmatter.title}`} 
   description={frontmatter.description} 
-  image={`../${frontmatter.image}.png`}
+  image={`https://astro-ui-three.vercel.app/${frontmatter.image}.png`}
   >
 
   <nav class='sticky top-0 z-40 w-full flex h-16 items-center justify-end gap-2 px-6 bg-white/30 dark:bg-gray-950/90 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
