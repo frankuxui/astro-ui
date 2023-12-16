@@ -2,11 +2,19 @@
 import Base from './Base.astro'
 interface Props {
   title: string;
+  description: string;
+  image?: string;
+  canonicalUrl?: string;
+  type?: string;
+  publishedTime?: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
-<Base title={title} >
+<Base 
+  title={title}
+  description={description}
+  >
   <slot />
 </Base>

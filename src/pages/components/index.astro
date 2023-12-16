@@ -6,9 +6,17 @@ function truncate (str, n) {
   return (str.length > n) ? str.substr(0, n - 1) + '...' : str
 }
 
+const {
+  title,
+  description,
+} = Astro.props
+
 ---
 
-<Layout title='Components' >
+<Layout 
+  title='Components'
+  description='Listado de componentes de interfaz de usuario para el desarrollo de aplicaciones web.'
+  >
   <nav class='sticky top-0 z-[120] w-full flex h-16 items-center justify-end gap-2 px-6 bg-white/30 dark:bg-gray-950/90 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
     <div class='flex w-full items-center justify-between max-w-[90rem] mx-auto'>
       <a href='/' class='flex items-center hover:opacity-75'>

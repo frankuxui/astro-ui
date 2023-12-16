@@ -1,9 +1,22 @@
 ---
+import Meta from '@components/Meta.astro';
 interface Props {
-  title: string;
+  title: string
+  description: string
+  image?: string
+  canonicalUrl?: string
+  type?: 'website' | 'article'
+  publishedTime?: string
 }
 
-const { title } = Astro.props;
+const { 
+  title = 'Astro ui',
+  description = 'Astro description',
+  image = 'blob:https://vercel.com/14a4b35c-351c-4cbe-bed3-0e8f4d2a3050',
+  canonicalUrl = 'https://astro-ui-three.vercel.app',
+  type = 'website',
+  publishedTime
+  } = Astro.props;
 ---
 
 <!doctype html>
@@ -16,7 +29,16 @@ const { title } = Astro.props;
     <link rel='preconnect' href='https://fonts.googleapis.com'>
     <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
     <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap' rel='stylesheet'>
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name='generator' content={Astro.generator} />
+    <Meta 
+      title={title}
+      description={description}
+      image={image}
+      canonicalUrl={canonicalUrl} 
+      type={type}
+      publishedTime={publishedTime}
+    />
     <title>{title ? `Astro ui - ${title}` : 'Astro ui'}</title>
     <script src='../script/theme.js'></script>
     <script src='../components/ui/tooltip.js'></script>

@@ -8,6 +8,7 @@ interface Props {
     title: string;
     description: string;
     toc: boolean;
+    image: string;
   }
   content: {
     astro: {
@@ -54,7 +55,11 @@ const { previous, next } = pagination as Pagination
 
 ---
 
-<Base title={frontmatter.title}>
+<Base 
+  title={frontmatter.title} 
+  description={frontmatter.description} 
+  image={`../../components/${frontmatter?.image}.png`}
+  >
 
   <nav class='sticky top-0 z-40 w-full flex h-16 items-center justify-end gap-2 px-6 bg-white/30 dark:bg-gray-950/90 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
     <div class='flex w-full items-center justify-between max-w-[90rem] mx-auto'>
@@ -67,6 +72,7 @@ const { previous, next } = pagination as Pagination
         <button
           id='theme-toggle'
           type='button'
+          aria-label='Toggle Dark Mode'
           class='flex items-center justify-center w-10 h-10 text-gray-500 dark:text-gray-200 transition focus:outline-none focus:ring-4 rounded-full text-sm'>
 
           <svg id='icon-dark' class='hidden' xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'></path></svg>
@@ -78,7 +84,6 @@ const { previous, next } = pagination as Pagination
   </nav>
 
   <div class='mx-auto flex max-w-[90rem]'>
-
     <aside class='hidden md:flex flex-col md:top-16 md:shrink-0 md:w-52 md:sticky md:self-start h-screen'>
       <div class='overflow-y-auto overflow-x-hidden grow'>
         <div class='transform-gpu overflow-hidden transition-all ease-in-out motion-reduce:transition-none'>
