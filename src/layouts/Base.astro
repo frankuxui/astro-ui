@@ -20,7 +20,10 @@ const { title } = Astro.props;
     <title>{title ? `Astro ui - ${title}` : 'Astro ui'}</title>
     <script src='../script/theme.js'></script>
     <script src='../components/ui/tooltip.js'></script>
-
+    <script defer src='/_vercel/speed-insights/script.js'></script>
+    <script>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments) }
+    </script>
   </head>
 
   <script>
