@@ -25,7 +25,7 @@ const {
   pill = false,
   isLoading = false,
   inline = false,
-  ...attrs
+  ...rest
 } = Astro.props
 
 ---
@@ -52,9 +52,9 @@ const {
     !inline && isLoading && 'pointer-events-none opacity-75',
     disabled && 'opacity-40 pointer-events-none',
 
-    attrs.class
+    rest.class
   ]}
-  {...attrs}
+  {...rest}
 >
   <span class='flex items-center justify-center space-x-2'>
     <slot />

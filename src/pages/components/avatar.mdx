@@ -56,3 +56,132 @@ Si deseas mostrar una imagen en el avatar, solo debes pasarle la url de la image
     <Avatar name="Frank Esteban" size="5xl" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
   </div>
 </Example>
+
+## Custom size
+
+<Example>
+  <div class="flex items-center flex-wrap gap-4">
+    <Avatar name="Frank Esteban" style="width: 100px; height: 100px; font-size: 40px;" />
+  </div>
+</Example>
+
+```astro
+<Avatar name="Frank Esteban" style="width: 100px; height: 100px; font-size: 40px;" />
+```
+
+## Status
+
+<Example>
+  <div class="flex items-center flex-wrap gap-4">
+    <Avatar size="xl" name="Frank Esteban" status="online" />
+    <Avatar size="xl" name="Frank Esteban" status="offline" />
+    <Avatar size="xl" name="Frank Esteban" status="busy" />
+    <Avatar size="xl" name="Frank Esteban" status="away" />
+    <Avatar size="xl" name="Frank Esteban" status="invisible" />
+  </div>
+</Example>
+
+```astro
+<Avatar size="xl" name="Frank Esteban" status="online" />
+```
+
+<Example>
+  <div class="flex items-center flex-wrap gap-4">
+    <Avatar size="xl" name="Frank Esteban" status="online" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+    <Avatar size="xl" name="Frank Esteban" status="offline" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+    <Avatar size="xl" name="Frank Esteban" status="busy" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+    <Avatar size="xl" name="Frank Esteban" status="away" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+    <Avatar size="xl" name="Frank Esteban" status="invisible" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+  </div>
+</Example>
+
+```astro
+<Avatar size="xl" name="Frank Esteban" status="online" src="https://avatars.githubusercontent.com/u/35234895?v=4"/>
+```
+
+## Group
+
+<Example>
+  <div class="flex items-center justify-start -space-x-1.5">
+    <Avatar 
+      size="md" 
+      name="Frank Esteban" 
+      src="https://avatars.githubusercontent.com/u/35234895?v=4"
+      class="ring-2 ring-white dark:ring-gray-800"
+    />
+    <Avatar 
+      size="md" 
+      name="Frank Esteban" 
+      src="https://avatars.githubusercontent.com/u/35234895?v=4"
+      class="ring-2 ring-white dark:ring-gray-800"
+    />
+    <Avatar 
+      size="md" 
+      name="Frank Esteban" 
+      src="https://avatars.githubusercontent.com/u/35234895?v=4"
+      class="ring-2 ring-white dark:ring-gray-800"
+    />
+    <Avatar 
+      size="md" 
+      name="Frank Esteban" 
+      src="https://avatars.githubusercontent.com/u/35234895?v=4"
+      class="ring-2 ring-white dark:ring-gray-800"
+    />
+  </div>
+</Example>
+
+<Example>
+  <div class="flex items-center justify-start -space-x-1.5">
+    <Avatar 
+      size="xl" 
+      name="Frank Esteban" 
+      src="https://avatars.githubusercontent.com/u/35234895?v=4"
+      class="ring-2 ring-white dark:ring-gray-800"
+    />
+    <Avatar 
+      size="xl" 
+      name="Frank Esteban" 
+      src="https://avatars.githubusercontent.com/u/35234895?v=4"
+      class="ring-2 ring-white dark:ring-gray-800"
+    />
+    <Avatar 
+      size="xl" 
+      name="Frank Esteban" 
+      src="https://avatars.githubusercontent.com/u/35234895?v=4"
+      class="ring-2 ring-white dark:ring-gray-800"
+    />
+    <Avatar 
+      size="xl" 
+      name="Frank Esteban" 
+      src="https://avatars.githubusercontent.com/u/35234895?v=4"
+      class="ring-2 ring-white dark:ring-gray-800"
+    />
+  </div>
+</Example>
+
+```astro
+<div class="flex items-center justify-start -space-x-1.5">
+  <Avatar 
+    size="md" 
+    name="Frank Esteban" 
+    src="https://avatars.githubusercontent.com/u/35234895?v=4"
+    class="ring-2 ring-white dark:ring-gray-800"
+  />
+  <Avatar 
+    size="md" 
+    name="Frank Esteban" 
+    src="https://avatars.githubusercontent.com/u/35234895?v=4"
+    class="ring-2 ring-white dark:ring-gray-800"
+  />
+</div>
+```
+
+## Props
+
+| Prop    | Type      | default  | Description           |
+| ------- | --------- |--------- |---------------------- |
+| name    | String    | -        | Nombre de la persona  |
+| src     | String    | -        | Url de la imagen      |
+| size    | String    | md       | Tamaño del avatar. Los tamaños disponibles son: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl` y `5xl`. |
+| status  | String    | -        | Estado del avatar. Los estados disponibles son: `online`, `offline`, `busy`, `away` e `invisible`. |
+| class   | String    | -        | Clases personalizadas |
