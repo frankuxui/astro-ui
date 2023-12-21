@@ -64,7 +64,73 @@ Los tamaño disponibles son: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, 
   </div>
 </Example>
 
+```astro
+<Go text='Go up!' size="xs" />
+<Go text='Go up!' size="sm" />
+<Go text='Go up!' size="md" />
+<Go text='Go up!' size="lg" />
+<Go text='Go up!' size="xl" />
+<Go text='Go up!' size="2xl" />
+<Go text='Go up!' size="3xl" />
+<Go text='Go up!' size="4xl" />
+<Go text='Go up!' size="5xl" />
+```
+
+## Reverse
+
+Si queremos que la flecha apunte hacia la izquierda, podemos usar la propiedad `reverse`. Esto es ideal para usar en botones de navegación que indiquen que se puede volver a la página anterior.
+
+<Example>
+  <div class="flex flex-col items-start gap-4">
+    <Go reverse direction="left" text='Back' size="xs" />
+    <Go reverse direction="left" text='Back' size="sm" />
+    <Go reverse direction="left" text='Back' size="md" />
+    <Go reverse direction="left" text='Back' size="lg" />
+    <Go reverse direction="left" text='Back' size="xl" />
+    <Go reverse direction="left" text='Back' size="2xl" />
+    <Go reverse direction="left" text='Back' size="3xl" />
+    <Go reverse direction="left" text='Back' size="4xl" />
+    <Go reverse direction="left" text='Back' size="5xl" />
+  </div>
+</Example>
+
+```astro
+<Go reverse direction="left" text='Back' size="xs" />
+<Go reverse direction="left" text='Back' size="sm" />
+<Go reverse direction="left" text='Back' size="md" />
+<Go reverse direction="left" text='Back' size="lg" />
+<Go reverse direction="left" text='Back' size="xl" />
+<Go reverse direction="left" text='Back' size="2xl" />
+<Go reverse direction="left" text='Back' size="3xl" />
+<Go reverse direction="left" text='Back' size="4xl" />
+<Go reverse direction="left" text='Back' size="5xl" />
+```
+
+## Variants
+
+Los variantes disponibles son: `primary`, `secondary`, `success`, `error`, `light` y `dark`. Por defecto es `primary`.
+
+<Example>
+  <div class="flex flex-col items-start gap-4">
+    <Go text='Next steep' size="xl" variant="primary" />
+    <Go text='Next steep' size="xl" variant="secondary" />
+    <Go text='Next steep' size="xl" variant="success" />
+    <Go text='Next steep' size="xl" variant="error" />
+    <Go text='Next steep' size="xl" variant="dark" />
+  </div>
+</Example>
+
+## Light
+
+Esta variante es para usar en fondos oscuros. 
+
+<Example isDark>
+  <Go text='Next steep' size="xl" variant="light" />
+</Example>
+
 ## Directions
+
+Las direcciones de la flecha las podemos modificar con la propiedad `direction`. Las direcciones disponibles son: `up`, `up-right`, `up-left`, `down`, `down-right`, `down-left`, `left` y `right`. Por defecto es `up`.
 
 <Example>
   <div class="flex items-start gap-4 flex-wrap">

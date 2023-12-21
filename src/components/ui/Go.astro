@@ -1,17 +1,28 @@
 ---
+import type { HTMLAttributes, CSSProperty } from 'astro/types'
+
+type Variants = 'primary' | 'secondary' | 'error' | 'light' | 'dark' | 'success'
 type Direction = 'up' | 'up-right' | 'right' | 'down-right' | 'down' | 'down-left' | 'left' | 'up-left'
 type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
 
-interface Props {
+interface Props extends HTMLAttributes<'a'> {
   direction?: Direction;
+  reverse?: boolean;
   text?: string;
   size?: Sizes;
+  variant?: Variants;
+  href?: string;
+  style?: CSSProperty
 }
 
 const {
   direction = 'right',
+  reverse = false,
+  variant = 'primary',
   text,
-  size = 'md'
+  size = 'md',
+  href,
+  ...rest
 } = Astro.props
 
 const circleSizes = {
@@ -39,8 +50,15 @@ const arrowSizes = {
 }
 ---
 
-<button
-  class='astroui-circle-animation'
+<a
+  href={href}
+  class='astroui-go'
+  class:list={[
+    reverse && 'astroui-go-reverse',
+    `astroui-go-${variant}`,
+    rest.class
+  ]}
+  {...rest}
 >
   {text && (
     <span
@@ -67,7 +85,7 @@ const arrowSizes = {
       circleSizes[size]
     ]}
   >
-    <div class='absolute text-gray-200 dark:text-gray-600'>
+    <div class='astroui-go-circle-content'>
       <svg
         class:list={[
           circleSizes[size]
@@ -82,7 +100,7 @@ const arrowSizes = {
       <svg
         class='transform'
         class:list={[
-          'astroui-circle-animation-text',
+          'astroui-go-text',
           direction === 'up' && 'rotate-180',
           direction === 'up-right' && 'rotate-[225deg]',
           direction === 'up-left' && 'rotate-[-225deg]',
@@ -103,35 +121,94 @@ const arrowSizes = {
       </svg>
     </span>
   </div>
-</button>
+</a>
 
 <style is:global>
 
-  .astroui-circle-animation {
-    --astroui-circle-animation-color: theme(colors.primary);
-    --astroui-circle-animation-color-hover: theme(colors.primary);
-    --astroui-circle-animation-color-hover-text: theme(colors.primary);
+  .astroui-go {
+    --astroui-go-color: theme(colors.primary);
+    --astroui-go-color-hover: theme(colors.primary);
+    --astroui-go-color-hover-text: theme(colors.primary);
+    --astroui-go-circle-color: theme(colors.gray[200]);
 
     @apply text-gray-800 hover:text-primary inline-flex items-center text-left font-medium focus:outline-none cursor-pointer transition gap-4 dark:text-gray-200;
   }
-
-  .astroui-circle-animation:hover .astroui-circle {
+  .astroui-go:hover .astroui-circle {
     stroke-dashoffset: 0;
   }
 
-  .astroui-circle-animation:hover .astroui-circle {
-    @apply stroke-[var(--astroui-circle-animation-color-hover)] dark:stroke-white;
+  /** Circle content */
+
+  .astroui-go .astroui-go-circle-content {
+    @apply absolute text-[var(--astroui-go-circle-color)] dark:text-gray-600;
   }
 
-  .astroui-circle-animation:hover .astroui-circle-animation-text {
-    @apply text-[var(--astroui-circle-animation-color-hover-text)] dark:text-white;
+  /** Reverse */
+
+  .astroui-go.astroui-go-reverse {
+    @apply flex-row-reverse;
   }
 
-  .astroui-circle-animation .astroui-circle {
+  .astroui-go {
+    @apply dark:hover:text-white
+  }
+  .astroui-go:hover .astroui-circle {
+    @apply stroke-[var(--astroui-go-color-hover)] dark:stroke-white;
+  }
+
+  .astroui-go:hover .astroui-go-text {
+    @apply text-[var(--astroui-go-color-hover-text)] dark:text-white;
+  }
+
+  .astroui-go .astroui-circle {
     @apply stroke-current;
     stroke-dasharray: 175.929, 175.929;
     stroke-dashoffset: 175.92918860102841;
     transition: stroke-dashoffset 0.3s ease 0s, stroke 0.3s ease 0s;
+  }
+
+  /** Variants */
+
+  .astroui-go.astroui-go-primary {
+    --astroui-go-color: theme(colors.primary);
+    --astroui-go-color-hover: theme(colors.primary);
+    --astroui-go-color-hover-text: theme(colors.primary);
+    @apply hover:text-primary;
+  }
+
+  .astroui-go.astroui-go-secondary {
+    --astroui-go-color: theme(colors.gray[500]);
+    --astroui-go-color-hover: theme(colors.gray[500]);
+    --astroui-go-color-hover-text: theme(colors.gray[500]);
+    @apply hover:text-gray-500;
+  }
+
+  .astroui-go.astroui-go-error {
+    --astroui-go-color: theme(colors.error);
+    --astroui-go-color-hover: theme(colors.error);
+    --astroui-go-color-hover-text: theme(colors.error);
+    @apply hover:text-error;
+  }
+
+  .astroui-go.astroui-go-light {
+    --astroui-go-color-hover: theme(colors.white);
+    --astroui-go-color-hover-text: theme(colors.white);
+    --astroui-go-circle-color: theme(colors.gray[600]);
+    @apply text-gray-500 hover:text-white;
+  }
+
+  .astroui-go.astroui-go-dark {
+    --astroui-go-color: theme(colors.black);
+    --astroui-go-color-hover: theme(colors.black);
+    --astroui-go-color-hover-text: theme(colors.black);
+    @apply hover:text-black;
+  }
+
+  .astroui-go.astroui-go-success {
+    --astroui-go-color: theme(colors.success);
+    --astroui-go-color-hover: theme(colors.success);
+    --astroui-go-color-hover-text: theme(colors.success);
+    @apply hover:text-success;
   }
 
 </style>

@@ -31,14 +31,27 @@ Los radio se pueden mostrar en diferentes tamaños. Por defecto, el tamaño es `
   </div>
 </Example>
 
-## With label
+## Variants
+
+Los radios se pueden mostrar en diferentes variantes. Por defecto, la variante es `primary`. Las variantes disponibles son `primary`, `secondary`, `success`, `error`, `light` y `dark`. Para cambiar la variante, se debe usar la prop `variant`.
 
 <Example>
-  <label class='flex items-center gap-1 cursor-pointer'>
-    <Radio />
-    <span class="ml-2">Label</span>
-  </label>
+  <div class="flex items-center gap-6">
+    <Radio name='variant' variant="primary" />
+    <Radio name='variant' variant="secondary" />
+    <Radio name='variant' variant="success" />
+    <Radio name='variant' variant="error" />
+    <Radio name='variant' variant="dark" />
+  </div>
 </Example>
+
+```astro
+<Radio name='variant' variant="primary" />
+<Radio name='variant' variant="secondary" />
+<Radio name='variant' variant="success" />
+<Radio name='variant' variant="error" />
+<Radio name='variant' variant="dark" />
+```
 
 ## Light
 
@@ -51,6 +64,15 @@ Los radio se pueden mostrar en modo `light`. Para cambiar el modo, se debe usar 
 ```astro
 <Radio light />
 ```
+
+## With label
+
+<Example>
+  <label class='flex items-center gap-1 cursor-pointer'>
+    <Radio />
+    <span class="ml-2">Label</span>
+  </label>
+</Example>
 
 ## Checked
 

@@ -31,14 +31,27 @@ Los checkbox se pueden mostrar en diferentes tamaños. Por defecto, el tamaño e
   </div>
 </Example>
 
-## With label
+## Variants
+
+Los checkbox se pueden mostrar en diferentes variantes. Por defecto, la variante es `primary`. Las variantes disponibles son `primary`, `secondary`, `success`, `error`, `light` y `dark`. Para cambiar la variante, se debe usar la prop `variant`.
 
 <Example>
-  <label class='flex items-center gap-1 cursor-pointer'>
-    <Checkbox />
-    <span class="ml-2">Label</span>
-  </label>
+  <div class="flex items-center gap-6">
+    <Checkbox variant="primary" />
+    <Checkbox variant="secondary" />
+    <Checkbox variant="success" />
+    <Checkbox variant="error" />
+    <Checkbox variant="dark" />
+  </div>
 </Example>
+
+```astro
+<Checkbox variant="primary" />
+<Checkbox variant="secondary" />
+<Checkbox variant="success" />
+<Checkbox variant="error" />
+<Checkbox variant="dark" />
+```
 
 ## Light
 
@@ -51,6 +64,15 @@ Los checkbox se pueden mostrar en modo `light`. Para cambiar el modo, se debe us
 ```astro
 <Checkbox light />
 ```
+
+## With label
+
+<Example>
+  <label class='flex items-center gap-1 cursor-pointer'>
+    <Checkbox />
+    <span class="ml-2">Label</span>
+  </label>
+</Example>
 
 ## Checked
 
@@ -75,3 +97,13 @@ Los checkbox se pueden mostrar como `disabled`. Para cambiar el modo, se debe us
 ```astro
 <Checkbox disabled />
 ```
+
+## Props
+
+| Prop | Type | default | Description |
+| ---- | ---- | ------- | ----------- |
+| size | String | md | Esta prop permite cambiar el tamaño del checkbox. Los tamaños disponibles son `sm`, `md`, `lg` y `xl`. |
+| variant | String | primary | Esta prop permite cambiar la variante del checkbox. Las variantes disponibles son `primary`, `secondary`, `success`, `error`, `light` y `dark`. |
+| light | Boolean | false | Esta prop permite cambiar el modo del checkbox a `light`. |
+| checked | Boolean | false | Esta prop permite cambiar el modo del checkbox a `checked`. |
+| disabled | Boolean | false | Esta prop permite cambiar el modo del checkbox a `disabled`. |

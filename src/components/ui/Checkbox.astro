@@ -1,13 +1,16 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 
+type Variants = 'primary' | 'secondary' | 'error' | 'light' | 'dark' | 'success'
+type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 interface Props extends HTMLAttributes<'input'> {
   id?: string
   name?: string
   value?: string
   disabled?: boolean
   checked?: boolean
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  size?: Sizes
+  variant?: Variants
   light?: boolean
 }
 
@@ -17,6 +20,7 @@ const {
   value,
   disabled,
   checked,
+  variant = 'primary',
   size = 'md',
   light = false,
   ...attrs
@@ -33,6 +37,7 @@ const {
   class:list={[
     'astroui-checkbox',
     size && `astroui-checkbox-${size}`,
+    variant && `astroui-checkbox-${variant}`,
     light && 'astroui-checkbox-light',
     disabled && 'disabled'
   ]}
@@ -63,30 +68,6 @@ const {
   }
   .astroui-checkbox:checked:before{
     @apply bg-opacity-90;
-  }
-
-  /** light **/
-
-  .astroui-checkbox.astroui-checkbox-light {
-    @apply border-white;
-  }
-  .astroui-checkbox.astroui-checkbox-light:checked{
-    @apply border-white bg-white;
-  }
-  .astroui-checkbox.astroui-checkbox-light:checked:after{
-    @apply border-black;
-  }
-  .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-xs:focus:before, .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-xs:checked:focus:before {
-    @apply shadow-[0px_0px_0px_10px_#ffffff37];
-  }
-  .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-sm:focus:before, .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-sm:checked:focus:before {
-    @apply shadow-[0px_0px_0px_10px_#ffffff37];
-  }
-  .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-md:focus:before, .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-md:checked:focus:before {
-    @apply shadow-[0px_0px_0px_12px_#ffffff37];
-  }
-  .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-xl:focus:before, .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-xl:checked:focus:before {
-    @apply shadow-[0px_0px_0px_12px_#ffffff37];
   }
 
   /* Checkbox xs */
@@ -184,7 +165,74 @@ const {
     @apply absolute border-l-0 border-[2px] border-t-0 border-solid rotate-45 bg-transparent top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-b-[3px] border-r-[3px] -mt-[2px];
   }
 
-  /* Checkbox disabled */
+  /** Variants */
+
+  /* Checkbox primary */
+  .astroui-checkbox.astroui-checkbox-primary {
+    @apply border-primary;
+  }
+  .astroui-checkbox.astroui-checkbox-primary:checked{
+    @apply border-primary bg-primary;
+  }
+
+  /* Checkbox secondary */
+  .astroui-checkbox.astroui-checkbox-secondary {
+    @apply border-gray-500;
+  }
+  .astroui-checkbox.astroui-checkbox-secondary:checked{
+    @apply border-gray-500 bg-gray-500;
+  }
+
+  /* Checkbox error */
+  .astroui-checkbox.astroui-checkbox-error {
+    @apply border-error;
+  }
+  .astroui-checkbox.astroui-checkbox-error:checked{
+    @apply border-error bg-error;
+  }
+
+  /* Checkbox success */
+  .astroui-checkbox.astroui-checkbox-success {
+    @apply border-success;
+  }
+  .astroui-checkbox.astroui-checkbox-success:checked{
+    @apply border-success bg-success;
+  }
+
+  /** light **/
+
+  .astroui-checkbox.astroui-checkbox-light {
+    @apply border-white;
+  }
+  .astroui-checkbox.astroui-checkbox-light:checked{
+    @apply border-white bg-white;
+  }
+  .astroui-checkbox.astroui-checkbox-light:checked:after{
+    @apply border-black;
+  }
+  .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-xs:focus:before, .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-xs:checked:focus:before {
+    @apply shadow-[0px_0px_0px_10px_#ffffff37];
+  }
+  .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-sm:focus:before, .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-sm:checked:focus:before {
+    @apply shadow-[0px_0px_0px_10px_#ffffff37];
+  }
+  .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-md:focus:before, .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-md:checked:focus:before {
+    @apply shadow-[0px_0px_0px_12px_#ffffff37];
+  }
+  .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-xl:focus:before, .astroui-checkbox.astroui-checkbox-light.astroui-checkbox-xl:checked:focus:before {
+    @apply shadow-[0px_0px_0px_12px_#ffffff37];
+  }
+
+  /** Dark */
+
+  .astroui-checkbox.astroui-checkbox-dark {
+    @apply border-black;
+  }
+  .astroui-checkbox.astroui-checkbox-dark:checked{
+    @apply border-black bg-black;
+  }
+
+  /** Checkbox disabled */
   .astroui-checkbox:disabled, .astroui-checkbox[disabled], .astroui-checkbox:disabled:checked {
     @apply cursor-default opacity-30;
   }

@@ -28,7 +28,6 @@ const { isDark = false, ...attrs } = Astro.props
     padding-bottom: 1.25rem;
     padding-top: 4rem;
     border-width: 1px;
-    background-color: white;
     border-radius: 0.5rem;
     margin-top: 1.5rem;
     position: relative;
@@ -49,15 +48,17 @@ const { isDark = false, ...attrs } = Astro.props
 
   /** Modal example */
   .example-docs.example-modal-docs {
-    @apply bg-gray-200
+    @apply bg-gray-200 dark:bg-[#ffffff1a];
   }
   .example-docs.example-modal-docs .astroui-modal {
     position: inherit !important;
-    display: block !important;
     width: 100% !important;
     height: 100% !important;
     background-color: transparent !important;
     z-index: 1 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
   .example-docs.example-modal-docs .astroui-modal .astroui-modal-backdrop {
     position: inherit !important;

@@ -117,6 +117,42 @@ const {
       }
     })
   })
+
+  //
+  // Open selected item with the `isOpen` prop
+
+  items.forEach((item, index) => {
+    const isOpen = item.dataset.open === 'true'
+    const panel = document.querySelector(`#${id} .astroui-accordion-panel[data-index="${index}"]`)
+    const trigger = document.querySelector(`#${id} .astroui-accordion-button[data-index="${index}"]`)
+    console.log(panel)
+    if (isOpen) {
+      trigger.setAttribute('aria-expanded', true)
+      panel.setAttribute('aria-hidden', false)
+      panel.classList.add('show')
+      panel.style.height = `${panel.scrollHeight}px`
+    }
+  })
+
+  //
+  // Close items with pressing the escape key
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      accordion.items.forEach((item) => {
+        const itemIndex = item.getAttribute('data-index')
+        const itemPanel = document.querySelector(`#${id} .astroui-accordion-panel[data-index="${itemIndex}"]`)
+        const itemTrigger = document.querySelector(`#${id} .astroui-accordion-button[data-index="${itemIndex}"]`)
+        const isItemHidden = itemPanel.getAttribute('aria-hidden') === 'true'
+        if (!isItemHidden) {
+          itemPanel.setAttribute('aria-hidden', true)
+          itemTrigger.setAttribute('aria-expanded', false)
+          itemPanel.classList.remove('show')
+          itemPanel.style.height = '0px'
+        }
+      })
+    }
+  })
 </script>
 
 <style is:global>
@@ -155,7 +191,7 @@ const {
   /** Button */
 
   .astroui-accordion .astroui-accordion-button {
-    @apply w-full relative flex border border-transparent items-center justify-between px-4 py-3 font-medium text-lg rounded-md transition-all duration-150 bg-gray-50 hover:bg-gray-100 focus:z-[1] focus:ring-2 focus:ring-primary dark:bg-gray-900 dark:focus:ring-gray-600 dark:text-gray-100;
+    @apply w-full relative flex border border-transparent items-center justify-between px-4 py-3 font-medium text-lg rounded-md transition-all duration-150 bg-gray-50 hover:bg-gray-100 focus:z-[1] focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600 dark:text-gray-100;
   }
 
   /** Icon */
