@@ -2,12 +2,14 @@
 
 import Base from './Base.astro'
 import Toc from '../components/Toc.astro'
+import Go from '@components/ui/Go.astro'
 
 interface Props {
   frontmatter: {
     title: string;
     description: string;
     toc: boolean;
+    slug: string;
     image: string;
   }
   content: {
@@ -57,11 +59,11 @@ const { previous, next } = pagination as Pagination
 
 ---
 
-<Base 
-  title={`Astro UI - ${frontmatter.title}`} 
-  description={frontmatter.description} 
+<Base
+  title={`Astro UI - ${frontmatter.title}`}
+  description={frontmatter.description}
   image={`https://astro-ui-three.vercel.app/${frontmatter.image}.png`}
-  >
+>
 
   <nav class='sticky top-0 z-40 w-full flex h-16 items-center justify-end gap-2 px-6 bg-white/30 dark:bg-gray-950/90 shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] backdrop-blur-sm'>
     <div class='flex w-full items-center justify-between max-w-[90rem] mx-auto'>
@@ -150,41 +152,76 @@ const { previous, next } = pagination as Pagination
           </div>
         </div>
 
-        <div
-          class='mx-6 md:mx-12 grid mt-16 rounded-lg border divide-x dark:divide-gray-800 overflow-hidden shadow-sm border-gray-200 dark:border-gray-800'
-          class:list={[
-            previous === undefined || next === undefined ? 'grid-cols-1' : 'grid-cols-2'
-          ]}
-        >
-          {previous !== undefined && (
-            <a
-              href={`/components/${previous?.frontmatter?.slug}`}
-              class='flex flex-col space-y-2 transition-all duration-200 items-start p-8 hover:bg-gray-50 dark:hover:bg-white/5'
-            >
-              <span class='pl-2 text-gray-600 dark:text-gray-500'>Previous</span>
-              <span class='flex items-center font-medium text-primary text-lg dark:text-white'>
-                <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'>
-                  <path d='M15 18l-6-6 6-6'/>
-                </svg>
-                <span>{previous?.frontmatter?.title}</span>
-              </span>
-            </a>
-          )}
+        {
+          frontmatter?.slug === 'go'
+            ? (
+              <div
+                class='mx-6 md:mx-12 grid mt-16 rounded-lg border divide-x dark:divide-gray-800 overflow-hidden shadow-sm border-gray-200 dark:border-gray-800'
+                class:list={[
+                  previous === undefined || next === undefined ? 'grid-cols-1' : 'grid-cols-2'
+                ]}
+              >
+                {previous !== undefined && (
+                  <Go
+                    class='p-8 w-full justify-end'
+                    href={`/components/${previous?.frontmatter?.slug}`}
+                    reverse
+                    direction='left'
+                    text={previous?.frontmatter?.title}
+                    size='2xl'
+                  />
+                )}
 
-          {next !== undefined && (
-            <a
-              href={`/components/${next?.frontmatter.slug}`}
-              class='flex flex-col space-y-2 transition-all duration-200 items-end p-8 hover:bg-gray-50 dark:hover:bg-white/5'
-            >
-              <span class='pr-2 text-gray-600 dark:text-gray-500'> Next </span>
-              <span class='flex items-center font-medium text-primary text-lg dark:text-white'>
-                <span>{next?.frontmatter?.title}</span>
-                <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M9 18l6-6-6-6'/></svg>
-              </span>
-            </a>
-          )}
+                {next !== undefined && (
+                  <Go
+                    class='p-8 w-full justify-end'
+                    href={`/components/${next?.frontmatter?.slug}`}
+                    text={next?.frontmatter?.title}
+                    size='2xl'
+                  />
+                )}
 
-        </div>
+              </div>
+
+            )
+            : (
+              <div
+                class='mx-6 md:mx-12 grid mt-16 rounded-lg border divide-x dark:divide-gray-800 overflow-hidden shadow-sm border-gray-200 dark:border-gray-800'
+                class:list={[
+                  previous === undefined || next === undefined ? 'grid-cols-1' : 'grid-cols-2'
+                ]}
+              >
+                {previous !== undefined && (
+                  <a
+                    href={`/components/${previous?.frontmatter?.slug}`}
+                    class='flex flex-col space-y-2 transition-all duration-200 items-start p-8 hover:bg-gray-50 dark:hover:bg-white/5'
+                  >
+                    <span class='pl-2 text-gray-600 dark:text-gray-500'>Previous</span>
+                    <span class='flex items-center font-medium text-primary text-lg dark:text-white'>
+                      <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'>
+                        <path d='M15 18l-6-6 6-6'/>
+                      </svg>
+                      <span>{previous?.frontmatter?.title}</span>
+                    </span>
+                  </a>
+                )}
+
+                {next !== undefined && (
+                  <a
+                    href={`/components/${next?.frontmatter.slug}`}
+                    class='flex flex-col space-y-2 transition-all duration-200 items-end p-8 hover:bg-gray-50 dark:hover:bg-white/5'
+                  >
+                    <span class='pr-2 text-gray-600 dark:text-gray-500'> Next </span>
+                    <span class='flex items-center font-medium text-primary text-lg dark:text-white'>
+                      <span>{next?.frontmatter?.title}</span>
+                      <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M9 18l6-6-6-6'/></svg>
+                    </span>
+                  </a>
+                )}
+
+              </div>
+            )
+        }
 
         <div class='py-20 mx-6 md:mx-12'>
           <a href='/' class='flex items-center hover:opacity-75 '>

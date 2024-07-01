@@ -1,13 +1,17 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 
+type Variants = 'primary' | 'secondary' | 'error' | 'light' | 'dark' | 'success'
+type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+
 interface Props extends HTMLAttributes<'input'> {
   id?: string
   name?: string
   value?: string
   disabled?: boolean
   checked?: boolean
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  size?: Sizes
+  variant?: Variants
   light?: boolean
 }
 
@@ -18,6 +22,7 @@ const {
   disabled,
   checked,
   size = 'md',
+  variant = 'primary',
   light = false,
   ...attrs
 } = Astro.props
@@ -33,6 +38,7 @@ const {
   class:list={[
     'astroui-radio',
     size && `astroui-radio-${size}`,
+    variant && `astroui-radio-${variant}`,
     light && 'astroui-radio-light',
     disabled && 'disabled'
   ]}
@@ -151,8 +157,99 @@ const {
     @apply shadow-[0px_0px_0px_16px_rgba(0,0,0,0.6)];
   }
 
-  /* Disabled */
+  /** Variants */
 
+  /** Primary */
+
+  .astroui-radio.astroui-radio-primary {
+    @apply border-primary;
+  }
+  .astroui-radio.astroui-radio-primary:checked {
+    @apply border-primary;
+  }
+  .astroui-radio.astroui-radio-primary:checked:after {
+    @apply border-primary bg-primary;
+  }
+  .astroui-radio.astroui-radio-primary:checked:focus {
+    @apply border-primary;
+  }
+
+  /** Secondary */
+
+  .astroui-radio.astroui-radio-secondary {
+    @apply border-gray-500;
+  }
+  .astroui-radio.astroui-radio-secondary:checked {
+    @apply border-gray-500;
+  }
+  .astroui-radio.astroui-radio-secondary:checked:after {
+    @apply border-gray-500 bg-gray-500;
+  }
+  .astroui-radio.astroui-radio-secondary:checked:focus {
+    @apply border-gray-500;
+  }
+
+  /** Error */
+
+  .astroui-radio.astroui-radio-error {
+    @apply border-error;
+  }
+  .astroui-radio.astroui-radio-error:checked {
+    @apply border-error;
+  }
+  .astroui-radio.astroui-radio-error:checked:after {
+    @apply border-error bg-error;
+  }
+  .astroui-radio.astroui-radio-error:checked:focus {
+    @apply border-error;
+  }
+
+  /** Success */
+
+  .astroui-radio.astroui-radio-success {
+    @apply border-success;
+  }
+  .astroui-radio.astroui-radio-success:checked {
+    @apply border-success;
+  }
+  .astroui-radio.astroui-radio-success:checked:after {
+    @apply border-success bg-success;
+  }
+  .astroui-radio.astroui-radio-success:checked:focus {
+    @apply border-success;
+  }
+
+  /** Light */
+
+  .astroui-radio.astroui-radio-light {
+    @apply border-gray-50;
+  }
+  .astroui-radio.astroui-radio-light:checked {
+    @apply border-gray-50;
+  }
+  .astroui-radio.astroui-radio-light:checked:after {
+    @apply border-gray-50 bg-gray-50;
+  }
+  .astroui-radio.astroui-radio-light:checked:focus {
+    @apply border-gray-50;
+  }
+
+  /** Dark */
+
+  .astroui-radio.astroui-radio-dark {
+    @apply border-black;
+  }
+  .astroui-radio.astroui-radio-dark:checked {
+    @apply border-black;
+  }
+  .astroui-radio.astroui-radio-dark:checked:after {
+    @apply border-black bg-black;
+  }
+  .astroui-radio.astroui-radio-dark:checked:focus {
+    @apply border-black;
+  }
+
+  /** Disabled */
   .astroui-radio:disabled, .astroui-radio[disabled], .astroui-radio:disabled:checked {
     @apply cursor-default opacity-30;
   }

@@ -90,6 +90,27 @@ import AccordionItem from '../components/ui/AccordionItem.astro'
 </Accordion>
 ```
 
+## Expand
+
+Si se quiere abrir un item del accordion por defecto, se debe agregar el atributo `isOpen` al componente `AccordionItem`. Con esta opción estamos indicando de manera manual que el item debe estar abierto.
+
+<Example>
+  <Accordion id='accordion-example-item-open'>
+    <AccordionItem >
+      <h2 slot="title">Accordion title 1</h2>
+      <p slot="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget ultricies aliquam, nunc sapien aliquet nunc, vitae a </p>
+    </AccordionItem>
+    <AccordionItem isOpen>
+      <h2 slot="title">Accordion title 2</h2>
+      <p slot="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget ultricies aliquam, nunc sapien aliquet nunc, vitae a </p>
+    </AccordionItem>
+    <AccordionItem>
+      <h2 slot="title">Accordion title 3</h2>
+      <p slot="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget ultricies aliquam, nunc sapien aliquet nunc, vitae a </p>
+    </AccordionItem>
+  </Accordion>
+</Example>
+
 ## Border
 
 <Example>
@@ -125,3 +146,12 @@ import AccordionItem from '../components/ui/AccordionItem.astro'
   </AccordionItem>
 </Accordion>
 ```
+
+## Props
+
+| Prop | Type | default | Description |
+| ---- | ---- | ------- | ----------- |
+| id | String | null | Esta prop es obligatoria y debe ser única para cada accordion en la página. Se utiliza para identificar el accordion y sus items. |
+| alwaysOpen | Boolean | false | Esta prop permite que todos los items permanezcan abiertos mientras se abre uno nuevo. |
+| isOpen | Boolean | false | Esta prop permite que un item se abra por defecto. |
+| border | Boolean | false | Agrega un borde a cada item del accordion. |

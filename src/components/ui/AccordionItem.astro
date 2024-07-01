@@ -1,8 +1,19 @@
 ---
 
+interface Props {
+  isOpen?: boolean
+}
+
+const {
+  isOpen = false
+} = Astro.props
 ---
 
-<div class='astroui-accordion-item' data-accordion-item>
+<div
+  class='astroui-accordion-item'
+  data-accordion-item
+  data-open={isOpen.toString()}
+>
   <header class='astroui-accordion-header'>
     <button
       type='button'

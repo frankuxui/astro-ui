@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes, CSSProperty } from 'astro/types'
 
-type Variants = 'primary' | 'secondary' | 'error' | 'light' | 'dark'
+type Variants = 'primary' | 'secondary' | 'error' | 'light' | 'dark' | 'success'
 type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 interface Props extends HTMLAttributes<'button'> {
@@ -29,19 +29,20 @@ const {
   class:list={[
     'astroui-icon-button',
 
-    !inline && variant === 'primary' && 'astroui-icon-button--primary',
-    !inline && variant === 'secondary' && 'astroui-icon-button--secondary',
-    !inline && variant === 'error' && 'astroui-icon-button--error',
-    !inline && variant === 'light' && 'astroui-icon-button--light',
-    !inline && variant === 'dark' && 'astroui-icon-button--dark',
+    !inline && variant === 'primary' && 'astroui-icon-button-primary',
+    !inline && variant === 'secondary' && 'astroui-icon-button-secondary',
+    !inline && variant === 'error' && 'astroui-icon-button-error',
+    !inline && variant === 'success' && 'astroui-icon-button-success',
+    !inline && variant === 'light' && 'astroui-icon-button-light',
+    !inline && variant === 'dark' && 'astroui-icon-button-dark',
 
-    !inline && size === 'xs' && 'astroui-icon-button--xs',
-    !inline && size === 'sm' && 'astroui-icon-button--sm',
-    !inline && size === 'md' && 'astroui-icon-button--md',
-    !inline && size === 'lg' && 'astroui-icon-button--lg',
-    !inline && size === 'xl' && 'astroui-icon-button--xl',
+    !inline && size === 'xs' && 'astroui-icon-button-xs',
+    !inline && size === 'sm' && 'astroui-icon-button-sm',
+    !inline && size === 'md' && 'astroui-icon-button-md',
+    !inline && size === 'lg' && 'astroui-icon-button-lg',
+    !inline && size === 'xl' && 'astroui-icon-button-xl',
 
-    !inline && rounded && 'astroui-icon-button--rounded'
+    !inline && rounded && 'astroui-icon-button-rounded'
   ]}
 >
   <slot />
@@ -55,43 +56,46 @@ const {
 
   /** Variants */
 
-  .astroui-icon-button.astroui-icon-button--primary {
+  .astroui-icon-button.astroui-icon-button-primary {
     @apply text-white bg-primary hover:bg-primary-dark focus:ring-primary;
   }
-  .astroui-icon-button.astroui-icon-button--secondary {
+  .astroui-icon-button.astroui-icon-button-secondary {
     @apply text-black bg-secondary hover:bg-secondary-dark focus:ring-gray-400;
   }
-  .astroui-icon-button.astroui-icon-button--error {
+  .astroui-icon-button.astroui-icon-button-error {
     @apply text-white bg-error hover:bg-error-dark focus:ring-error;
   }
-  .astroui-icon-button.astroui-icon-button--light {
+  .astroui-icon-button.astroui-icon-button-success {
+    @apply text-white bg-success hover:bg-success-dark focus:ring-success;
+  }
+  .astroui-icon-button.astroui-icon-button-light {
     @apply bg-gray-50 hover:bg-gray-100 focus:ring-white text-black;
   }
-  .astroui-icon-button.astroui-icon-button--dark {
+  .astroui-icon-button.astroui-icon-button-dark {
     @apply bg-black text-white hover:bg-gray-900 focus:ring-dark dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-400;
   }
 
   /** Sizes */
 
-  .astroui-icon-button.astroui-icon-button--xs {
+  .astroui-icon-button.astroui-icon-button-xs {
     @apply h-6 w-6;
   }
-  .astroui-icon-button.astroui-icon-button--sm {
+  .astroui-icon-button.astroui-icon-button-sm {
     @apply h-8 w-8;
   }
-  .astroui-icon-button.astroui-icon-button--md {
+  .astroui-icon-button.astroui-icon-button-md {
     @apply h-10 w-10;
   }
-  .astroui-icon-button.astroui-icon-button--lg {
+  .astroui-icon-button.astroui-icon-button-lg {
     @apply h-11 w-11;
   }
-  .astroui-icon-button.astroui-icon-button--xl {
+  .astroui-icon-button.astroui-icon-button-xl {
     @apply h-14 w-14;
   }
 
   /** Rounded */
 
-  .astroui-icon-button.astroui-icon-button--rounded {
+  .astroui-icon-button.astroui-icon-button-rounded {
     @apply rounded-full;
   }
 
