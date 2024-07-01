@@ -9,14 +9,9 @@ interface Props {
   publishedTime?: string
 }
 
-const { 
-  title,
-  description,
-  image,
-  canonicalUrl,
-  type,
-  publishedTime
-  } = Astro.props;
+const { title, description, image, canonicalUrl, type, publishedTime } = Astro.props;
+
+
 ---
 
 <!doctype html>
@@ -57,11 +52,12 @@ const {
 
 <style is:global>
 
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
   @tailwind base;
   @tailwind components;
   @tailwind utilities;
 
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
   :root {
     --font-family: 'Inter', sans-serif;

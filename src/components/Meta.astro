@@ -9,18 +9,33 @@ interface Props {
 }
 
 const { title, description, image, canonicalUrl, type, publishedTime } = Astro.props;
+
+const permalink = Astro.url.href ?? 'https://astro-ui-three.vercel.app';
+const ogImage = "https://astro-ui-three.vercel.app/og-image.jpg"
+
 ---
 
 <title>{title || 'Astro UI'}</title>
 <meta name='description' content={description} />
 { publishedTime && (<meta property='article:published_time' content={publishedTime} />) }
 <link rel='canonical' href={canonicalUrl || 'https://astro-ui-three.vercel.app'} />
-<meta property='og:title' content={title} />
-<meta property='og:description' content={description} />
-<meta property='og:url' content={canonicalUrl || 'https://astro-ui-three.vercel.app'} />
-<meta property='og:image' content={image || 'blob:https://vercel.com/14a4b35c-351c-4cbe-bed3-0e8f4d2a3050'} />
-<meta property='og:type' content={type || 'website'} />
-<meta name='twitter:card' content='summary_large_image' />
-<meta name='twitter:title' content={title} />
-<meta property='twitter:description' content={description} />
-<meta name='twitter:image' content={image || 'blob:https://vercel.com/14a4b35c-351c-4cbe-bed3-0e8f4d2a3050'} />
+
+<!-- Open Graph -->
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+
+<!-- The rest of your head content -->
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={permalink} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={permalink} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={ogImage} />
