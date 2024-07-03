@@ -9,9 +9,9 @@ Este proyecto incluye un listado de componentes de interfaz de usuario desarroll
 ### Argumentación
 
 1. **Uso de Tecnologías Modernas**:
-   - **Astro.js** y **Tailwind CSS** son tecnologías de vanguardia que permiten construir interfaces de usuario de manera rápida y eficiente.
-   - Astro.js facilita la creación de sitios web estáticos y dinámicos.
-   - Tailwind CSS proporciona utilidades CSS predefinidas que aceleran el diseño sin sacrificar la personalización.
+   - [**Astro.js**](https://astro.build/) y [**Tailwind CSS**](https://tailwindcss.com/) son tecnologías de vanguardia que permiten construir interfaces de usuario de manera rápida y eficiente.
+   - [Astro.js](https://astro.build/) facilita la creación de sitios web estáticos y dinámicos.
+   - [Tailwind CSS](https://tailwindcss.com/) proporciona utilidades CSS predefinidas que aceleran el diseño sin sacrificar la personalización.
 
 2. **Agilización del Proceso de Desarrollo**:
    - Integrar estos componentes en una aplicación tiene el propósito de simplificar y acelerar el proceso de desarrollo.
